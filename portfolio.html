@@ -1,18 +1,60 @@
-<!DOCTYPE html><html><head><title>Портфолио</title></head><body><h1>Шаблоны</h1><div id='template-gallery'><section class="py-12 bg-white">
-  <div class="container mx-auto px-4">
-    <h2 class="text-3xl font-bold mb-6 text-center">Портфолио шаблонов</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      <div class="bg-gray-100 p-4 rounded shadow">
-        <img src="blocks/pro/modern-shop.png" alt="Modern Shop" class="rounded mb-2">
-        <h3 class="font-semibold">Modern Shop</h3>
-        <p class="text-sm text-gray-600">Современный магазин</p>
-      </div>
-      <div class="bg-gray-100 p-4 rounded shadow">
-        <img src="blocks/vip/landing-nicepage.png" alt="Landing" class="rounded mb-2">
-        <h3 class="font-semibold">Nicepage Landing</h3>
-        <p class="text-sm text-gray-600">Премиум лендинг</p>
-      </div>
-      <!-- Добавь остальные шаблоны -->
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Портфолио шаблонов — ProThemesRU</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+  <header class="bg-white shadow">
+    <div class="container mx-auto flex justify-between items-center py-4 px-6">
+      <a href="/" class="text-2xl font-bold text-yellow-600">ProThemesRU</a>
+      <nav class="space-x-6">
+        <a href="index.html" class="hover:text-blue-600">Главная</a>
+        <a href="constructor.html" class="hover:text-blue-600">Конструктор</a>
+        <a href="tariffs.html" class="hover:text-blue-600">Тарифы</a>
+      </nav>
     </div>
-  </div>
-</section>
+  </header>
+
+  <main class="py-12">
+    <div class="container mx-auto px-6">
+      <h1 class="text-3xl font-bold text-center mb-10">Портфолио шаблонов</h1>
+      <div class="grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+
+        <!-- Шаблон 1 -->
+        <div class="bg-white rounded-lg shadow p-4 text-center">
+          <img src="blocks/pro/modern-shop.png" alt="Modern Shop" class="rounded mb-4 mx-auto">
+          <h3 class="text-xl font-semibold">Modern Shop</h3>
+          <p class="text-gray-600 mb-2">Современный магазин</p>
+          <span class="inline-block bg-yellow-200 text-yellow-800 px-3 py-1 rounded">990 ₽</span>
+        </div>
+
+        <!-- Шаблон 2 -->
+        <div class="bg-white rounded-lg shadow p-4 text-center">
+          <img src="blocks/vip/landing-nicepage.png" alt="Nicepage Landing" class="rounded mb-4 mx-auto">
+          <h3 class="text-xl font-semibold">Nicepage Landing</h3>
+          <p class="text-gray-600 mb-2">Премиум лендинг</p>
+          <span class="inline-block bg-red-200 text-red-800 px-3 py-1 rounded">1990 ₽</span>
+        </div>
+
+        <!-- Шаблон 3 -->
+        <div class="bg-white rounded-lg shadow p-4 text-center">
+          <img src="blocks/free/hero-basic.png" alt="Hero Basic" class="rounded mb-4 mx-auto">
+          <h3 class="text-xl font-semibold">Hero Basic</h3>
+          <p class="text-gray-600 mb-2">Базовый хедер</p>
+          <span class="inline-block bg-green-200 text-green-800 px-3 py-1 rounded">Free</span>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <footer class="bg-white text-center text-sm py-6 mt-12 text-gray-500">
+    &copy; 2025 ProThemesRU
+  </footer>
+
+</body>
+</html>
