@@ -1,0 +1,33 @@
+# Исключаем чувствительные файлы
+.env
+.env_new
+.env.example
+.config.env
+*.db
+*.sqlite3
+
+# Исключаем виртуальное окружение
+.venv/
+venv/
+
+# Исключаем временные файлы
+__pycache__/
+*.pyc
+.DS_Store
+
+# Исключаем логи и метрики
+logs/
+metrics.py
+
+# Исключаем конфигурационные файлы с реальными данными
+config.py
+config_telegram.py
+
+# Исключаем временные файлы сборки
+node_modules/
+.build/
+
+# Исключаем файлы окружения
+.env_new
+.env.example
+config.env

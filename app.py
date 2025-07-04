@@ -1,116 +1,168 @@
-from flask import Flask, render_template, request, redirect, url_for, session, send_file, flash
-from flask_talisman import Talisman
-from flask_limiter import Limiter
-from flask_cors import CORS
-from metrics import init_metrics
+from flask import Flask, render_template, request, redirect, url_for, flash
+from flask_sqlalchemy import SQLAlchemy
+from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
+from werkzeug.security import generate_password_hash, check_password_hash
 import os
-from io import BytesIO
-from functools import wraps
+from datetime import datetime
 
-# Создаем приложение
 app = Flask(__name__)
+app.config['SECRET_KEY'] = os.urandom(24)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
+db = SQLAlchemy(app)
+login_manager = LoginManager(app)
+login_manager.login_view = 'login'
 
-# Настройка безопасности
-Talisman(app)
-CORS(app)
+# Регистрируем все блюпринты
+from app.constructor import constructor_bp
+from app.main import main_bp
+from app.auth import auth_bp
+from app.api.blocks import blocks_bp
+from app.api.projects import projects_bp
+from app.api.templates import templates_bp
+from app.api.users import users_bp
 
-# Настройка лимитов
-limiter = Limiter(
-    app=app,
-    key_func=lambda: request.remote_addr,
-    default_limits=["200 per day", "50 per hour"]
-)
+# Регистрируем блюпринты
+app.register_blueprint(constructor_bp, url_prefix='/constructor')
+app.register_blueprint(main_bp)
+app.register_blueprint(auth_bp, url_prefix='/auth')
+app.register_blueprint(blocks_bp, url_prefix='/api/blocks')
+app.register_blueprint(projects_bp, url_prefix='/api/projects')
+app.register_blueprint(templates_bp, url_prefix='/api/templates')
+app.register_blueprint(users_bp, url_prefix='/api/users')
 
-# Инициализируем метрики
-metrics, timeit = init_metrics(app)
+# Модели базы данных
 
-# Настройка секретного ключа из переменных окружения
-app.secret_key = os.environ.get('SECRET_KEY', 'supersecretkey')
+class User(UserMixin, db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(80), unique=True, nullable=False)
+    email = db.Column(db.String(120), unique=True, nullable=False)
+    password_hash = db.Column(db.String(128))
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    projects = db.relationship('Project', backref='author', lazy=True)
+    templates = db.relationship('Template', backref='creator', lazy=True)
 
-DB_PATH = 'database.db'
+    def set_password(self, password):
+        self.password_hash = generate_password_hash(password)
 
-def init_db():
-    with sqlite3.connect(DB_PATH) as conn:
-        cursor = conn.cursor()
-        cursor.execute('''CREATE TABLE IF NOT EXISTS users (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            username TEXT UNIQUE,
-            email TEXT UNIQUE,
-            password TEXT,
-            telegram_id TEXT,
-            ref TEXT
-        )''')
-        conn.commit()
-        print("✅ База данных успешно инициализирована.")
+    def check_password(self, password):
+        return check_password_hash(self.password_hash, password)
 
-init_db()
+class Project(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    description = db.Column(db.Text)
+    content = db.Column(db.Text, nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    status = db.Column(db.String(20), default='draft')
+    template_id = db.Column(db.Integer, db.ForeignKey('template.id'))
+    blocks = db.relationship('ProjectBlock', backref='project', lazy=True)
+    settings = db.Column(db.JSON)
+
+class Template(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    description = db.Column(db.Text)
+    preview_image = db.Column(db.String(200))
+    category = db.Column(db.String(50))
+    features = db.Column(db.JSON)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    projects = db.relationship('Project', backref='template', lazy=True)
+    creator_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    blocks = db.relationship('TemplateBlock', backref='template', lazy=True)
+
+class Block(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    type = db.Column(db.String(50), nullable=False)
+    name = db.Column(db.String(100), nullable=False)
+    html = db.Column(db.Text, nullable=False)
+    styles = db.Column(db.JSON)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    
+    # Связи с проектами и шаблонами
+    project_blocks = db.relationship('ProjectBlock', backref='block', lazy=True)
+    template_blocks = db.relationship('TemplateBlock', backref='block', lazy=True)
+
+class ProjectBlock(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    project_id = db.Column(db.Integer, db.ForeignKey('project.id'), nullable=False)
+    block_id = db.Column(db.Integer, db.ForeignKey('block.id'), nullable=False)
+    order = db.Column(db.Integer, nullable=False)
+    settings = db.Column(db.JSON)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+class TemplateBlock(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    template_id = db.Column(db.Integer, db.ForeignKey('template.id'), nullable=False)
+    block_id = db.Column(db.Integer, db.ForeignKey('block.id'), nullable=False)
+    order = db.Column(db.Integer, nullable=False)
+    settings = db.Column(db.JSON)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
+
+# Маршруты
 
 @app.route('/')
 def index():
     return render_template('index.html')
 
-@app.route('/register', methods=['GET', 'POST'])
-def register():
-    if request.method == 'POST':
-        username = request.form['username']
-        email = request.form['email']
-        password = request.form['password']
-        ref = request.args.get('ref', None)
-        with sqlite3.connect(DB_PATH) as conn:
-            cursor = conn.cursor()
-            cursor.execute("SELECT * FROM users WHERE username = ? OR email = ?", (username, email))
-            if cursor.fetchone():
-                flash("Пользователь уже зарегистрирован!", "danger")
-                return redirect(url_for('register'))
-            hashed_password = generate_password_hash(password)
-            cursor.execute("INSERT INTO users (username, email, password, ref) VALUES (?, ?, ?, ?)",
-                           (username, email, hashed_password, ref))
-            conn.commit()
-            flash("Регистрация успешна! Выполните вход.", "success")
-            return redirect(url_for('login'))
-    return render_template('register.html')
-
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
-        with sqlite3.connect(DB_PATH) as conn:
-            cursor = conn.cursor()
-            cursor.execute("SELECT * FROM users WHERE username = ?", (username,))
-            user = cursor.fetchone()
-            if user and check_password_hash(user[3], password):
-                session['user_id'] = user[0]
-                session['username'] = user[1]
-                return redirect(url_for('dashboard'))
-            else:
-                flash("Неверные данные!", "danger")
+        user = User.query.filter_by(email=request.form.get('email')).first()
+        if user and user.check_password(request.form.get('password')):
+            login_user(user)
+            return redirect(url_for('dashboard'))
+        flash('Invalid email or password')
     return render_template('login.html')
 
-@app.route('/dashboard')
-def dashboard():
-    if 'user_id' not in session:
-        return redirect(url_for('login'))
-    return render_template('dashboard.html', username=session['username'])
-
-@app.route('/constructor', methods=['GET', 'POST'])
-def constructor():
-    if 'user_id' not in session:
-        return redirect(url_for('login'))
+@app.route('/register', methods=['GET', 'POST'])
+def register():
     if request.method == 'POST':
-        selected_blocks = request.form.getlist('blocks')
-        return generate_site(selected_blocks)
-    return render_template('constructor.html', blocks=blocks)
+        user = User(
+            username=request.form.get('username'),
+            email=request.form.get('email')
+        )
+        user.set_password(request.form.get('password'))
+        db.session.add(user)
+        db.session.commit()
+        flash('Registration successful')
+        return redirect(url_for('login'))
+    return render_template('register.html')
 
-def generate_site(selected_blocks):
-    html = "<html><head><title>Сайт</title></head><body>"
-    for block in selected_blocks:
-        html += blocks.get(block, '')
-    html += "</body></html>"
-    zip_stream = BytesIO()
-    with zipfile.ZipFile(zip_stream, 'w') as zipf:
-        zipf.writestr("index.html", html)
-    zip_stream.seek(0)
+@app.route('/dashboard')
+@login_required
+def dashboard():
+    projects = Project.query.filter_by(user_id=current_user.id).all()
+    templates = Template.query.filter_by(creator_id=current_user.id).all()
+    return render_template('dashboard.html', projects=projects, templates=templates)
+
+@app.route('/constructor')
+@login_required
+def constructor():
+    return render_template('constructor.html')
+
+@app.route('/templates')
+@login_required
+def templates():
+    templates = Template.query.all()
+    return render_template('templates.html', templates=templates)
+
+@app.route('/projects')
+@login_required
+def projects():
+    projects = Project.query.filter_by(user_id=current_user.id).all()
+    return render_template('projects.html', projects=projects)
+
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('index'))
     return send_file(zip_stream, as_attachment=True, download_name="site.zip", mimetype='application/zip')
 
 @app.route('/portfolio')

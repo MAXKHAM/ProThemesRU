@@ -24,54 +24,88 @@ class User(db.Model, UserMixin):
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
 
-    def __repr__(self):
-        return f"<User {self.username}>"
-
-class Order(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
-    template_name = db.Column(db.String(150), nullable=False)
-    site_html = db.Column(db.Text, nullable=False)
-    status = db.Column(db.String(50), default='pending')
-    price = db.Column(db.Float, nullable=False, default=0.0)
-
-    def __repr__(self):
-        return f'<Order {self.id} - {self.template_name}>'
 
 class Template(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(150), unique=True, nullable=False)
-    description = db.Column(db.Text, nullable=True)
-    image_url = db.Column(db.String(255), nullable=True)
-    price = db.Column(db.Float, nullable=False, default=0.0)
-    is_active = db.Column(db.Boolean, default=True)
+    name = db.Column(db.String(100), nullable=False)
+    description = db.Column(db.Text)
+    preview_image = db.Column(db.String(200))
+    category = db.Column(db.String(50))
+    features = db.Column(db.JSON)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
-
-    def __repr__(self):
-        return f'<Template {self.name}>'
+    projects = db.relationship('Project', backref='template', lazy=True)
+    creator_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    blocks = db.relationship('TemplateBlock', backref='template', lazy=True)
 
 class Block(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100), nullable=False)
     type = db.Column(db.String(50), nullable=False)
-    html_content = db.Column(db.Text, nullable=True)
-    css_content = db.Column(db.Text, nullable=True)
-    js_content = db.Column(db.Text, nullable=True)
-    preview_image_url = db.Column(db.String(255), nullable=True)
-    is_active = db.Column(db.Boolean, default=True)
+    name = db.Column(db.String(100), nullable=False)
+    html = db.Column(db.Text, nullable=False)
+    styles = db.Column(db.JSON)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    
+    # Связи с проектами и шаблонами
+    project_blocks = db.relationship('ProjectBlock', backref='block', lazy=True)
+    template_blocks = db.relationship('TemplateBlock', backref='block', lazy=True)
+
+class ProjectBlock(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    project_id = db.Column(db.Integer, db.ForeignKey('project.id'), nullable=False)
+    block_id = db.Column(db.Integer, db.ForeignKey('block.id'), nullable=False)
+    order = db.Column(db.Integer, nullable=False)
+    settings = db.Column(db.JSON)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
-    def __repr__(self):
-        return f'<Block {self.name} ({self.type})>'
+class TemplateBlock(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    template_id = db.Column(db.Integer, db.ForeignKey('template.id'), nullable=False)
+    block_id = db.Column(db.Integer, db.ForeignKey('block.id'), nullable=False)
+    order = db.Column(db.Integer, nullable=False)
+    settings = db.Column(db.JSON)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
 class UserSite(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    name = db.Column(db.String(150), nullable=False)
-    structure_json = db.Column(db.Text, nullable=False)
-    last_updated = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
-    is_published = db.Column(db.Boolean, default=False)
+    domain = db.Column(db.String(255), unique=True, nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    is_active = db.Column(db.Boolean, default=True)
 
     def __repr__(self):
-        return f'<UserSite {self.name} by User {self.user_id}>'
+        return f'<UserSite {self.domain}>'
+
+class Payment(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    project_id = db.Column(db.Integer, db.ForeignKey('project.id'))
+    amount = db.Column(db.Float, nullable=False)
+    currency = db.Column(db.String(3), default='USD')
+    status = db.Column(db.String(20), default='pending')
+    payment_method = db.Column(db.String(50))
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    transaction_id = db.Column(db.String(100), unique=True)
+
+class Order(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    project_id = db.Column(db.Integer, db.ForeignKey('project.id'))
+    template_id = db.Column(db.Integer, db.ForeignKey('template.id'))
+    status = db.Column(db.String(20), default='pending')
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    payment_id = db.Column(db.Integer, db.ForeignKey('payment.id'))
+    notes = db.Column(db.Text)
+
+# Связи между моделями
+db.Table('project_templates',
+    db.Column('project_id', db.Integer, db.ForeignKey('project.id')),
+    db.Column('template_id', db.Integer, db.ForeignKey('template.id'))
+)
+
+db.Table('user_templates',
+    db.Column('user_id', db.Integer, db.ForeignKey('user.id')),
+    db.Column('template_id', db.Integer, db.ForeignKey('template.id'))
+)

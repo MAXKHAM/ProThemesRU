@@ -1,27 +1,41 @@
 {% extends 'base.html' %}
 {% block title %}Конструктор сайтов{% endblock %}
 {% block content %}
-<div class="row">
-  <div class="col-md-5">
-    <div class="p-4 bg-white rounded shadow-sm mb-4">
-      <h2 class="mb-3">🧩 Библиотека блоков</h2>
-      <div class="mb-3 p-2 border rounded bg-light">
-        <strong>Hero</strong><br>
-        <button class="btn btn-primary btn-sm mt-2" onclick="addBlock('hero')">Добавить</button>
-      </div>
-      <div class="mb-3 p-2 border rounded bg-light">
-        <strong>Контакты</strong><br>
-        <button class="btn btn-primary btn-sm mt-2" onclick="addBlock('contacts')">Добавить</button>
-      </div>
-      <div class="mb-3 p-2 border rounded bg-light">
-        <strong>О компании</strong><br>
-        <button class="btn btn-primary btn-sm mt-2" onclick="addBlock('about')">Добавить</button>
-      </div>
+<div class="constructor-container">
+    <div class="sidebar">
+        <div class="blocks-section">
+            <h2>Блоки</h2>
+            <div class="blocks-container">
+                <!-- Блоки будут загружены через JavaScript -->
+                <div class="mb-3 p-2 border rounded bg-light">
+                    <strong>Hero</strong><br>
+                    <button class="btn btn-primary btn-sm mt-2" onclick="addBlock('hero')">Добавить</button>
+                </div>
+                <div class="mb-3 p-2 border rounded bg-light">
+                    <strong>Контакты</strong><br>
+                    <button class="btn btn-primary btn-sm mt-2" onclick="addBlock('contacts')">Добавить</button>
+                </div>
+                <div class="mb-3 p-2 border rounded bg-light">
+                    <strong>О компании</strong><br>
+                    <button class="btn btn-primary btn-sm mt-2" onclick="addBlock('about')">Добавить</button>
+                </div>
+            </div>
+        </div>
+        <div class="properties-section">
+            <h2>Свойства</h2>
+            <div class="properties-panel">
+                <!-- Свойства блока -->
+            </div>
+        </div>
     </div>
-  </div>
-  <div class="col-md-7">
-    <div class="p-4 bg-white rounded shadow-sm">
-      <h2 class="mb-3">📄 Предпросмотр сайта</h2>
+    <div class="editor">
+        <div class="preview">
+            <div class="preview-content">
+                <div id="sitePreview" class="editor-content">
+                    <!-- Содержимое редактора -->
+                </div>
+            </div>
+        </div>
       <div id="sitePreview"></div>
     </div>
   </div>

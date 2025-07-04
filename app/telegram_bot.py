@@ -26,15 +26,7 @@ logger = logging.getLogger(__name__)
 telegram_bp = Blueprint('telegram', __name__, url_prefix='/telegram')
 
 # --- КОНФИГУРАЦИЯ БОТА ---
-TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "YOUR_TELEGRAM_BOT_TOKEN_HERE")
-FLASK_API_BASE_URL = os.getenv("FLASK_API_BASE_URL", "http://127.0.0.1:5000/api")
-FLASK_PUBLIC_SITE_URL = os.getenv("FLASK_PUBLIC_SITE_URL", "http://127.0.0.1:5000/public")
-FLASK_EDITOR_URL = os.getenv("FLASK_EDITOR_URL", "http://localhost:3000")
-
-# Админские учетные данные (в реальном проекте используйте переменные окружения)
-ADMIN_USERNAME = os.getenv("ADMIN_USERNAME", "admin")
-ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD", "adminpassword")
-ADMIN_ACCESS_TOKEN = None
+from config_telegram import TELEGRAM_BOT_TOKEN, FLASK_API_BASE_URL, FLASK_PUBLIC_SITE_URL, FLASK_EDITOR_URL, ADMIN_USERNAME, ADMIN_PASSWORD, ADMIN_CHAT_ID
 
 # --- ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ ДЛЯ CSS ---
 def css_string_to_object(css_string):

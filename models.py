@@ -44,6 +44,18 @@ class SiteBlock(db.Model):
             'js_content': self.js_content
         }
 
+class Logo(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    image_path = db.Column(db.String(200), nullable=False)
+    uploaded_at = db.Column(db.DateTime, default=datetime.utcnow)
+    
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'image_path': self.image_path,
+            'uploaded_at': self.uploaded_at.isoformat()
+        }
+
 class Site(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)

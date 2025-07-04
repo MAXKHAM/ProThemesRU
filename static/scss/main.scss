@@ -1,0 +1,73 @@
+// Variables
+$primary-color: #0ea5e9;
+$secondary-color: #64748b;
+$background-color: #ffffff;
+$text-color: #1e293b;
+
+// Mixins
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// Base styles
+:root {
+  --primary-color: #{$primary-color};
+  --secondary-color: #{$secondary-color};
+  --background-color: #{$background-color};
+  --text-color: #{$text-color};
+}
+
+body {
+  @include flex-center;
+  min-height: 100vh;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-family: 'Inter', sans-serif;
+}
+
+// Components
+.container {
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 1rem;
+}
+
+// Block styles
+.block {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1rem;
+  padding: 1rem;
+
+  &.selected {
+    outline: 2px solid var(--primary-color);
+  }
+}
+
+// Editor styles
+.editor {
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 250px 1fr 300px;
+  gap: 1rem;
+
+  .sidebar {
+    background-color: #f8fafc;
+    padding: 1rem;
+    border-right: 1px solid #e2e8f0;
+  }
+
+  .preview {
+    overflow-y: auto;
+    padding: 1rem;
+  }
+
+  .properties {
+    background-color: #f8fafc;
+    padding: 1rem;
+    border-left: 1px solid #e2e8f0;
+  }
+}

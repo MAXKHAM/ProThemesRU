@@ -1,0 +1,69 @@
+{% if current_user.is_authenticated %}
+<div class="affiliate-banner">
+    <div class="affiliate-banner-content">
+        <div class="affiliate-icon">
+            <i class="fas fa-handshake"></i>
+        </div>
+        <div class="affiliate-banner-title">
+            🤝 Партнерская программа
+        </div>
+        <div class="affiliate-banner-subtitle">
+            Зарабатывайте до 40% с продаж
+        </div>
+        
+        <div class="affiliate-badge">
+            <i class="fas fa-star"></i>
+            Премиум партнер
+        </div>
+        
+        <div class="affiliate-stats">
+            <div class="affiliate-stat">
+                <i class="fas fa-users"></i>
+                <span>123 привлечено</span>
+            </div>
+            <div class="affiliate-stat">
+                <i class="fas fa-ruble-sign"></i>
+                <span>150 000₽ заработано</span>
+            </div>
+        </div>
+        
+        <a href="#" class="affiliate-link" onclick="showAffiliatePopup()">
+            <i class="fas fa-link"></i>
+            <span>Получить реферальную ссылку</span>
+        </a>
+    </div>
+</div>
+
+<div class="affiliate-popup" id="affiliatePopup">
+    <div class="affiliate-popup-content">
+        <span class="affiliate-popup-close" onclick="hideAffiliatePopup()">&times;</span>
+        <div class="affiliate-popup-title">
+            🤝 Ваша партнерская программа
+        </div>
+        
+        <div class="affiliate-popup-stats">
+            <div class="affiliate-popup-stat">
+                <div class="affiliate-popup-stat-value">123</div>
+                <div class="affiliate-popup-stat-label">Привлечено клиентов</div>
+            </div>
+            <div class="affiliate-popup-stat">
+                <div class="affiliate-popup-stat-value">150 000₽</div>
+                <div class="affiliate-popup-stat-label">Заработано</div>
+            </div>
+            <div class="affiliate-popup-stat">
+                <div class="affiliate-popup-stat-value">35%</div>
+                <div class="affiliate-popup-stat-label">Текущая комиссия</div>
+            </div>
+        </div>
+        
+        <div class="affiliate-link" id="affiliateLink">
+            https://prothemes.ru/?ref={{ current_user.referral_code }}
+        </div>
+        
+        <button class="affiliate-popup-link" onclick="copyAffiliateLink()">
+            <i class="fas fa-copy"></i>
+            Скопировать ссылку
+        </button>
+    </div>
+</div>
+{% endif %}

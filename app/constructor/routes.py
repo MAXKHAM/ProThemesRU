@@ -31,73 +31,76 @@ def download_zip():
 @constructor_bp.route('/generate_site', methods=['POST'])
 @login_required
 def generate_site():
-    # ... существующий код получения данных ...
-    page = WebsitePage(
-        title=site_title,
-        background_color=site_background_color,
-        background_image=site_background_image,
-        font_family=site_font_family
+    data = request.json
+    
+    # Создаем сайт
+    site = WebsitePage(
+        title=data.get('title', 'Новый сайт'),
+        background_color=data.get('background_color', '#ffffff'),
+        background_image=data.get('background_image'),
+        font_family=data.get('font_family', 'Arial')
     )
-    page.add_block(
-        HeaderBlock(
-            block_id="main-header",
-            logo_text=site_title,
-            nav_items={"Главная": "#", "О нас": "#about", "Контакты": "#contact"}
-        )
-    )
-    page.add_block(
-        HeroSectionBlock(
-            block_id="hero-section",
-            title=hero_title,
-            subtitle=hero_subtitle,
-            button_text=hero_button_text,
-            button_url=hero_button_url
-        )
-    )
-    for i, content in enumerate(text_blocks_content):
-        if content:
-            page.add_block(
-                TextBlock(
-                    block_id=f"text-block-{i+1}",
-                    content=content
+    
+    # Добавляем блоки
+    blocks = data.get('blocks', [])
+    for block_data in blocks:
+        block_type = block_data.get('type')
+        block_id = block_data.get('id')
+        
+        if block_type == 'header':
+            site.add_block(
+                HeaderBlock(
+                    block_id=block_id,
+                    logo_text=data.get('logo_text', 'Мой сайт'),
+                    nav_items=data.get('nav_items', {})
                 )
             )
-    if image_src:
-        page.add_block(
-            ImageBlock(
-                block_id="main-image",
-                src=image_src,
-                alt=image_alt
+        elif block_type == 'hero':
+            site.add_block(
+                HeroSectionBlock(
+                    block_id=block_id,
+                    title=block_data.get('title', 'Добро пожаловать'),
+                    description=block_data.get('description', ''),
+                    background_image=block_data.get('background_image')
+                )
             )
-        )
-    # Добавляем калькулятор, если выбран чекбокс
-    if request.form.get('add_calculator'):
-        page.add_block(
-            CalculatorBlock(
-                block_id="calculator-block",
-                title="Калькулятор"
+        elif block_type == 'text':
+            site.add_block(
+                TextBlock(
+                    block_id=block_id,
+                    content=block_data.get('content', '')
+                )
             )
+        elif block_type == 'image':
+            site.add_block(
+                ImageBlock(
+                    block_id=block_id,
+                    image_url=block_data.get('image_url', ''),
+                    alt_text=block_data.get('alt_text', '')
+                )
+            )
+        elif block_type == 'button':
+            site.add_block(
+                ButtonBlock(
+                    block_id=block_id,
+                    text=block_data.get('text', 'Кнопка'),
+                    link=block_data.get('link', '#')
+                )
+            )
+    
+    # Сохраняем сайт в базу данных
+    try:
+        user_site = UserSite(
+            user_id=current_user.id,
+            domain=f'site-{current_user.id}-{site.id}.prothemes.ru',
+            is_active=True
         )
-    page.add_block(
-        FooterBlock(
-            block_id="main-footer",
-            copyright_text=footer_text
-        )
-    )
-    html_content = page.render()
-    zip_buffer = BytesIO()
-    with zipfile.ZipFile(zip_buffer, 'w', zipfile.ZIP_DEFLATED) as zip_file:
-        zip_file.writestr('index.html', html_content)
-        zip_file.writestr('style.css', page._generate_dynamic_styles().replace('<style>', '').replace('</style>', ''))
-        zip_file.writestr('script.js', '// Custom scripts for your generated site\nconsole.log("Hello from your generated site!");')
-    zip_buffer.seek(0)
-    flash('Ваш сайт успешно сгенерирован и скачан!', 'success')
-    return send_file(
-        zip_buffer,
-        as_attachment=True,
-        download_name='my_generated_site.zip',
-        mimetype='application/zip'
-    )
+        from app import db
+        db.session.add(user_site)
+        db.session.commit()
+        return jsonify({"success": True, "message": "Сайт успешно создан"})
+    except Exception as e:
+        return jsonify({"success": False, "message": str(e)}), 500
 
 @constructor_bp.route('/templates')
 @login_required
