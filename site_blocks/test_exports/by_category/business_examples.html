@@ -1,0 +1,123 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Примеры блоков</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .block-example { margin: 30px 0; padding: 20px; border: 1px solid #ddd; border-radius: 5px; }
+        .block-title { font-size: 1.2em; font-weight: bold; margin-bottom: 10px; color: #333; }
+        .block-category { color: #666; margin-bottom: 15px; }
+        .block-preview { margin: 15px 0; }
+        .block-code { background: #f5f5f5; padding: 15px; border-radius: 5px; overflow-x: auto; }
+        .block-properties { margin-top: 15px; }
+        .property-tag { display: inline-block; background: #007bff; color: white; padding: 2px 8px; border-radius: 3px; margin: 2px; font-size: 0.8em; }
+    </style>
+</head>
+<body>
+    <h1>Примеры блоков</h1>
+
+    <div class="block-example">
+        <div class="block-title">Таблица цен</div>
+        <div class="block-category">Категория: business</div>
+        <div class="block-preview">
+            <div class='pricing'><div class='pricing-card'><h3>Базовый</h3><div class='price'>₽999</div><ul><li>Функция 1</li><li>Функция 2</li><li>Функция 3</li></ul><button>Выбрать</button></div><div class='pricing-card featured'><h3>Про</h3><div class='price'>₽1999</div><ul><li>Все из Базового</li><li>Функция 4</li><li>Функция 5</li></ul><button>Выбрать</button></div><div class='pricing-card'><h3>Премиум</h3><div class='price'>₽2999</div><ul><li>Все из Про</li><li>Функция 6</li><li>Функция 7</li></ul><button>Выбрать</button></div></div>
+        </div>
+        <div class="block-code">
+            <strong>HTML:</strong><br>
+            <pre><div class='pricing'><div class='pricing-card'><h3>Базовый</h3><div class='price'>₽999</div><ul><li>Функция 1</li><li>Функция 2</li><li>Функция 3</li></ul><button>Выбрать</button></div><div class='pricing-card featured'><h3>Про</h3><div class='price'>₽1999</div><ul><li>Все из Базового</li><li>Функция 4</li><li>Функция 5</li></ul><button>Выбрать</button></div><div class='pricing-card'><h3>Премиум</h3><div class='price'>₽2999</div><ul><li>Все из Про</li><li>Функция 6</li><li>Функция 7</li></ul><button>Выбрать</button></div></div></pre>
+        </div>
+        <div class="block-code">
+            <strong>CSS:</strong><br>
+            <pre>.pricing { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; padding: 40px 0; } .pricing-card { border: 1px solid #ddd; border-radius: 10px; padding: 30px; text-align: center; } .pricing-card.featured { border-color: #007bff; transform: scale(1.05); } .price { font-size: 2em; font-weight: bold; color: #007bff; margin: 20px 0; } .pricing-card ul { list-style: none; padding: 0; } .pricing-card li { padding: 10px 0; border-bottom: 1px solid #eee; } .pricing-card button { padding: 12px 30px; background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; margin-top: 20px; }</pre>
+        </div>
+        <div class="block-properties">
+            <strong>Свойства:</strong><br>
+            <span class="property-tag">plans</span><span class="property-tag">prices</span><span class="property-tag">features</span><span class="property-tag">button-text</span><span class="property-tag">highlighted-plan</span>
+        </div>
+    </div>
+
+    <div class="block-example">
+        <div class="block-title">Отзывы клиентов</div>
+        <div class="block-category">Категория: business</div>
+        <div class="block-preview">
+            <section class='testimonials'><div class='container'><h2>Что говорят наши клиенты</h2><div class='testimonial-grid'><div class='testimonial'><p>'Отличный сервис! Создал сайт за несколько часов.'</p><div class='author'>- Иван Петров</div></div><div class='testimonial'><p>'Профессиональный подход и качественный результат.'</p><div class='author'>- Мария Сидорова</div></div></div></div></section>
+        </div>
+        <div class="block-code">
+            <strong>HTML:</strong><br>
+            <pre><section class='testimonials'><div class='container'><h2>Что говорят наши клиенты</h2><div class='testimonial-grid'><div class='testimonial'><p>'Отличный сервис! Создал сайт за несколько часов.'</p><div class='author'>- Иван Петров</div></div><div class='testimonial'><p>'Профессиональный подход и качественный результат.'</p><div class='author'>- Мария Сидорова</div></div></div></div></section></pre>
+        </div>
+        <div class="block-code">
+            <strong>CSS:</strong><br>
+            <pre>.testimonials { padding: 80px 0; background: #f9f9f9; } .testimonial-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 40px; } .testimonial { background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); } .author { font-weight: bold; margin-top: 15px; color: #007bff; }</pre>
+        </div>
+        <div class="block-properties">
+            <strong>Свойства:</strong><br>
+            <span class="property-tag">title</span><span class="property-tag">testimonials</span><span class="property-tag">background</span><span class="property-tag">text-color</span><span class="property-tag">show-avatar</span>
+        </div>
+    </div>
+
+    <div class="block-example">
+        <div class="block-title">Призыв к действию</div>
+        <div class="block-category">Категория: business</div>
+        <div class="block-preview">
+            <section class='cta-section'><div class='container'><h2>Готовы начать?</h2><p>Присоединяйтесь к тысячам довольных клиентов</p><button class='cta-button'>Начать бесплатно</button></div></section>
+        </div>
+        <div class="block-code">
+            <strong>HTML:</strong><br>
+            <pre><section class='cta-section'><div class='container'><h2>Готовы начать?</h2><p>Присоединяйтесь к тысячам довольных клиентов</p><button class='cta-button'>Начать бесплатно</button></div></section></pre>
+        </div>
+        <div class="block-code">
+            <strong>CSS:</strong><br>
+            <pre>.cta-section { padding: 80px 0; background: linear-gradient(45deg, #007bff, #0056b3); color: white; text-align: center; } .cta-button { padding: 15px 40px; background: white; color: #007bff; border: none; border-radius: 5px; font-size: 18px; font-weight: bold; cursor: pointer; margin-top: 20px; }</pre>
+        </div>
+        <div class="block-properties">
+            <strong>Свойства:</strong><br>
+            <span class="property-tag">title</span><span class="property-tag">subtitle</span><span class="property-tag">button-text</span><span class="property-tag">background</span><span class="property-tag">text-color</span>
+        </div>
+    </div>
+
+    <div class="block-example">
+        <div class="block-title">Карточка товара</div>
+        <div class="block-category">Категория: business</div>
+        <div class="block-preview">
+            <div class='product-card'><img src='https://via.placeholder.com/300x200' alt='Товар' class='product-image'><div class='product-info'><h3>Название товара</h3><p class='product-description'>Описание товара</p><div class='product-price'>₽1999</div><button class='buy-button'>Купить</button></div></div>
+        </div>
+        <div class="block-code">
+            <strong>HTML:</strong><br>
+            <pre><div class='product-card'><img src='https://via.placeholder.com/300x200' alt='Товар' class='product-image'><div class='product-info'><h3>Название товара</h3><p class='product-description'>Описание товара</p><div class='product-price'>₽1999</div><button class='buy-button'>Купить</button></div></div></pre>
+        </div>
+        <div class="block-code">
+            <strong>CSS:</strong><br>
+            <pre>.product-card { border: 1px solid #ddd; border-radius: 10px; overflow: hidden; transition: transform 0.3s; } .product-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); } .product-image { width: 100%; height: 200px; object-fit: cover; } .product-info { padding: 20px; } .product-price { font-size: 1.5em; font-weight: bold; color: #007bff; margin: 10px 0; } .buy-button { width: 100%; padding: 10px; background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; }</pre>
+        </div>
+        <div class="block-properties">
+            <strong>Свойства:</strong><br>
+            <span class="property-tag">title</span><span class="property-tag">description</span><span class="property-tag">price</span><span class="property-tag">image</span><span class="property-tag">button-text</span>
+        </div>
+    </div>
+
+    <div class="block-example">
+        <div class="block-title">Подписка на рассылку</div>
+        <div class="block-category">Категория: business</div>
+        <div class="block-preview">
+            <div class='newsletter'><h3>Подпишитесь на новости</h3><p>Получайте последние обновления и специальные предложения</p><form class='newsletter-form'><input type='email' placeholder='Ваш email' required><button type='submit'>Подписаться</button></form></div>
+        </div>
+        <div class="block-code">
+            <strong>HTML:</strong><br>
+            <pre><div class='newsletter'><h3>Подпишитесь на новости</h3><p>Получайте последние обновления и специальные предложения</p><form class='newsletter-form'><input type='email' placeholder='Ваш email' required><button type='submit'>Подписаться</button></form></div></pre>
+        </div>
+        <div class="block-code">
+            <strong>CSS:</strong><br>
+            <pre>.newsletter { text-align: center; padding: 40px; background: #f8f9fa; border-radius: 10px; } .newsletter-form { display: flex; gap: 10px; max-width: 400px; margin: 20px auto 0; } .newsletter-form input { flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 5px; } .newsletter-form button { padding: 10px 20px; background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; }</pre>
+        </div>
+        <div class="block-properties">
+            <strong>Свойства:</strong><br>
+            <span class="property-tag">title</span><span class="property-tag">description</span><span class="property-tag">button-text</span><span class="property-tag">background</span><span class="property-tag">border-radius</span>
+        </div>
+    </div>
+
+</body>
+</html>

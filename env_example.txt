@@ -1,0 +1,24 @@
+# Flask Configuration
+SECRET_KEY=your-very-secret-key-change-this-in-production
+FLASK_ENV=development
+FLASK_DEBUG=1
+
+# Database
+DATABASE_URL=sqlite:///app.db
+
+# Telegram Bot
+TELEGRAM_BOT_TOKEN=YOUR_TELEGRAM_BOT_TOKEN_HERE
+
+# API URLs
+FLASK_API_BASE_URL=http://127.0.0.1:5000/api
+FLASK_PUBLIC_SITE_URL=http://127.0.0.1:5000/public
+FLASK_EDITOR_URL=http://localhost:3000
+
+# Admin credentials (change these!)
+ADMIN_USERNAME=admin
+ADMIN_PASSWORD=adminpassword
+
+# Stripe (optional)
+STRIPE_SECRET_KEY=sk_test_your_stripe_secret_key
+STRIPE_PUBLISHABLE_KEY=pk_test_your_stripe_publishable_key
+STRIPE_WEBHOOK_SECRET=whsec_your_stripe_webhook_secret 

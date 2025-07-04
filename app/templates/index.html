@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}Главная — ProThemesRU{% endblock %}
+{% block content %}
+<section class="py-5" style="background: linear-gradient(90deg, #FFD600 0%, #FF6F00 100%); color: #fff; border-radius: 24px; box-shadow: 0 8px 32px rgba(79,140,255,0.13);">
+  <div class="container text-center px-4 py-5">
+    <img src="{{ url_for('static', filename='images/logo.png') }}" alt="ProThemesRU" style="width: 110px; border-radius: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.10); background: #fff; margin-bottom: 1.5rem;">
+    <h1 class="display-4 font-weight-bold mb-3">ProThemesRU</h1>
+    <p class="lead mb-4">Готовые сайты без кода. Купил шаблон, собрал через конструктор, продал клиенту.</p>
+    <div class="d-flex flex-wrap justify-content-center gap-3 mt-4 mb-2">
+        <a href="/portfolio" class="btn btn-outline-primary btn-lg">Смотреть портфолио</a>
+        <a href="/constructor" class="btn btn-primary btn-lg">Собрать сайт</a>
+        <a href="/pricing" class="btn btn-warning btn-lg">Купить PRO</a>
+        <a href="/login" class="btn btn-outline-light btn-lg">Войти</a>
+        <a href="/register" class="btn btn-light btn-lg">Регистрация</a>
+    </div>
+  </div>
+</section>
+<section class="py-5">
+  <div class="container grid row row-cols-1 row-cols-md-3 g-4 px-2">
+    <div class="col">
+      <div class="text-center p-4 bg-white rounded shadow h-100">
+        <span class="display-4">⚡</span>
+        <h2 class="h5 font-weight-bold mt-3 mb-2">Без кода</h2>
+        <p>Никаких знаний программирования — сборщик блоков сделает всё за вас.</p>
+      </div>
+    </div>
+    <div class="col">
+      <div class="text-center p-4 bg-white rounded shadow h-100">
+        <span class="display-4">💸</span>
+        <h2 class="h5 font-weight-bold mt-3 mb-2">Перепродажа</h2>
+        <p>Лицензия позволяет продавать сайты под своим брендом.</p>
+      </div>
+    </div>
+    <div class="col">
+      <div class="text-center p-4 bg-white rounded shadow h-100">
+        <span class="display-4">🔧</span>
+        <h2 class="h5 font-weight-bold mt-3 mb-2">Конструктор</h2>
+        <p>Выбирайте блоки, следите за ценой и скачивайте готовый архив.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<footer class="text-center text-muted small py-4">
+    © 2025 ProThemesRU. <a href="/about">О проекте</a> | <a href="/telegram_bot">Telegram-бот</a>
+    <br>
+    <a href="https://skillfactory.ru/?ref=prothemesru" target="_blank" rel="noopener" style="color:#1a73e8;font-weight:bold;">Skillfactory — обучение IT с нуля (реферальная ссылка)</a>
+</footer>
+{% endblock %}

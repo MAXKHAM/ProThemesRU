@@ -1,0 +1,287 @@
+{% extends "base.html" %}
+
+{% block title %}Демонстрация конструктора - ProThemesRU{% endblock %}
+
+{% block content %}
+<div class="container-fluid mt-4">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="text-center mb-4">🔨 Конструктор сайтов ProThemesRU</h1>
+            <p class="lead text-center">Создавайте сайты с помощью готовых блоков</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Панель блоков -->
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">📦 Доступные блоки</h5>
+                </div>
+                <div class="card-body" style="max-height: 600px; overflow-y: auto;">
+                    {% for category, blocks in available_blocks.items() %}
+                    <div class="mb-3">
+                        <h6 class="text-muted">{{ category.replace('_', ' ').title() }}</h6>
+                        {% for block_id, block_data in blocks.items() %}
+                        <div class="mb-2">
+                            <button class="btn btn-sm btn-outline-primary w-100" 
+                                    onclick="addBlockToConstructor('{{ block_id }}')">
+                                {{ block_data.name }}
+                            </button>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Конструктор -->
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">🎨 Конструктор</h5>
+                    <div>
+                        <button class="btn btn-sm btn-outline-secondary" onclick="clearConstructor()">
+                            🗑️ Очистить
+                        </button>
+                        <button class="btn btn-sm btn-outline-success" onclick="savePage()">
+                            💾 Сохранить
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div id="constructorArea" class="border rounded p-3" style="min-height: 400px;">
+                        <div class="text-center text-muted py-5">
+                            <h6>Перетащите блоки сюда или нажмите "Добавить блок"</h6>
+                            <p class="small">Блоки будут отображаться здесь</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Предварительный просмотр -->
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">👁️ Предварительный просмотр</h5>
+                </div>
+                <div class="card-body" style="max-height: 600px; overflow-y: auto;">
+                    <div id="previewArea">
+                        <div class="text-center text-muted py-3">
+                            <small>Предварительный просмотр появится здесь</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Структура страницы -->
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">📋 Структура страницы</h5>
+                </div>
+                <div class="card-body">
+                    <div id="pageStructure">
+                        <div class="text-center text-muted">
+                            <small>Структура страницы будет отображаться здесь</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+let constructorBlocks = [];
+
+// Инициализация при загрузке страницы
+document.addEventListener('DOMContentLoaded', function() {
+    loadPageStructure();
+    updatePreview();
+});
+
+function addBlockToConstructor(blockId) {
+    fetch('/api/constructor/add-block', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            block_id: blockId
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            constructorBlocks = data.page_structure;
+            updateConstructorArea();
+            updatePageStructure();
+            updatePreview();
+        } else {
+            alert('Ошибка: ' + data.error);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Ошибка при добавлении блока');
+    });
+}
+
+function updateConstructorArea() {
+    const area = document.getElementById('constructorArea');
+    if (constructorBlocks.length === 0) {
+        area.innerHTML = `
+            <div class="text-center text-muted py-5">
+                <h6>Перетащите блоки сюда или нажмите "Добавить блок"</h6>
+                <p class="small">Блоки будут отображаться здесь</p>
+            </div>
+        `;
+    } else {
+        area.innerHTML = `
+            <div class="text-center mb-3">
+                <small class="text-muted">Конструктор содержит ${constructorBlocks.length} блоков</small>
+            </div>
+            <div class="d-flex flex-column gap-2">
+                ${constructorBlocks.map((block, index) => `
+                    <div class="border rounded p-2 d-flex justify-content-between align-items-center">
+                        <div>
+                            <strong>${block.name}</strong>
+                            <small class="text-muted d-block">${block.category}</small>
+                        </div>
+                        <div>
+                            <button class="btn btn-sm btn-outline-danger" onclick="removeBlock(${index})">
+                                🗑️
+                            </button>
+                        </div>
+                    </div>
+                `).join('')}
+            </div>
+        `;
+    }
+}
+
+function updatePageStructure() {
+    const structure = document.getElementById('pageStructure');
+    if (constructorBlocks.length === 0) {
+        structure.innerHTML = `
+            <div class="text-center text-muted">
+                <small>Структура страницы будет отображаться здесь</small>
+            </div>
+        `;
+    } else {
+        structure.innerHTML = `
+            <div class="row">
+                ${constructorBlocks.map((block, index) => `
+                    <div class="col-md-3 mb-2">
+                        <div class="card">
+                            <div class="card-body p-2">
+                                <h6 class="card-title small">${index + 1}. ${block.name}</h6>
+                                <p class="card-text small text-muted">${block.category}</p>
+                                <div class="d-flex gap-1">
+                                    <button class="btn btn-sm btn-outline-primary" onclick="moveBlock(${index}, ${index - 1})" ${index === 0 ? 'disabled' : ''}>
+                                        ⬆️
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-primary" onclick="moveBlock(${index}, ${index + 1})" ${index === constructorBlocks.length - 1 ? 'disabled' : ''}>
+                                        ⬇️
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `).join('')}
+            </div>
+        `;
+    }
+}
+
+function updatePreview() {
+    fetch('/api/constructor/page-html')
+    .then(response => response.json())
+    .then(data => {
+        if (data.html) {
+            const preview = document.getElementById('previewArea');
+            preview.innerHTML = `
+                <div class="mb-2">
+                    <small class="text-muted">HTML (${data.blocks_count} блоков):</small>
+                </div>
+                <div class="border rounded p-2" style="max-height: 300px; overflow-y: auto;">
+                    <pre class="small"><code>${data.html}</code></pre>
+                </div>
+            `;
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+
+function clearConstructor() {
+    if (confirm('Очистить конструктор?')) {
+        constructorBlocks = [];
+        updateConstructorArea();
+        updatePageStructure();
+        updatePreview();
+    }
+}
+
+function savePage() {
+    // Здесь будет логика сохранения страницы
+    alert('Функция сохранения будет реализована позже');
+}
+
+function removeBlock(index) {
+    if (confirm('Удалить этот блок?')) {
+        constructorBlocks.splice(index, 1);
+        updateConstructorArea();
+        updatePageStructure();
+        updatePreview();
+    }
+}
+
+function moveBlock(fromIndex, toIndex) {
+    if (toIndex >= 0 && toIndex < constructorBlocks.length) {
+        const block = constructorBlocks.splice(fromIndex, 1)[0];
+        constructorBlocks.splice(toIndex, 0, block);
+        updateConstructorArea();
+        updatePageStructure();
+        updatePreview();
+    }
+}
+
+function loadPageStructure() {
+    // Загружаем начальную структуру страницы
+    constructorBlocks = {{ page_structure|tojson }};
+    updateConstructorArea();
+    updatePageStructure();
+}
+</script>
+
+<style>
+.card {
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-1px);
+}
+
+#constructorArea {
+    background: #f8f9fa;
+    border: 2px dashed #dee2e6;
+}
+
+#constructorArea:hover {
+    border-color: #007bff;
+}
+
+.btn-sm {
+    font-size: 0.75rem;
+}
+</style>
+{% endblock %} 

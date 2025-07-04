@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Главная — ProThemesRU{% endblock %}
+{% block content %}
+<section class="py-16 bg-gradient-to-r from-yellow-400 via-red-400 to-pink-500 text-white">
+  <div class="container mx-auto text-center px-6">
+    <h1 class="text-4xl font-extrabold mb-4">ProThemesRU</h1>
+    <p class="text-lg mb-8">Готовые сайты без кода. Купил шаблон, собрал через конструктор, продал клиенту.</p>
+    <div class="flex justify-center gap-4 mt-6">
+        <a href="/portfolio" class="btn btn-outline-primary">Смотреть портфолио</a>
+        <a href="/constructor" class="btn btn-primary">Собрать сайт</a>
+    </div>
+  </div>
+</section>
+<section class="py-12">
+  <div class="container mx-auto grid md:grid-cols-3 gap-8 px-6">
+    <div class="text-center p-6 bg-white rounded shadow">
+      <span class="text-4xl">⚡</span>
+      <h2 class="text-xl font-bold mt-4 mb-2">Без кода</h2>
+      <p>Никаких знаний программирования — сборщик блоков сделает всё за вас.</p>
+    </div>
+    <div class="text-center p-6 bg-white rounded shadow">
+      <span class="text-4xl">💸</span>
+      <h2 class="text-xl font-bold mt-4 mb-2">Перепродажа</h2>
+      <p>Лицензия позволяет продавать сайты под своим брендом.</p>
+    </div>
+    <div class="text-center p-6 bg-white rounded shadow">
+      <span class="text-4xl">🔧</span>
+      <h2 class="text-xl font-bold mt-4 mb-2">Конструктор</h2>
+      <p>Выбирайте блоки, следите за ценой и скачивайте готовый архив.</p>
+    </div>
+  </div>
+</section>
+<footer class="text-center text-gray-500 text-sm py-4">
+    © 2025 ProThemesRU. <a href="/about">О проекте</a> | <a href="/telegram_bot">Telegram-бот</a>
+    <br>
+    <a href="https://skillfactory.ru/?ref=prothemesru" target="_blank" rel="noopener" style="color:#1a73e8;font-weight:bold;">Skillfactory — обучение IT с нуля (реферальная ссылка)</a>
+</footer>
+{% endblock %}

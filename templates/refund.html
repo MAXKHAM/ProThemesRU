@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Политика возвратов — ProThemesRU</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50 text-gray-900">
+  <div class="container mx-auto py-12 px-4 max-w-3xl">
+    <h1 class="text-3xl font-bold mb-6">Политика возвратов</h1>
+    <p class="mb-4">Возврат средств за цифровые продукты невозможен после предоставления доступа к ним (скачивания архива, получения шаблона).</p>
+    <ul class="list-disc pl-6 mb-4">
+      <li>Пользователь несёт ответственность за действия, совершённые с его устройства и платёжных данных.</li>
+      <li>Возврат возможен только в случае технической невозможности получить продукт или двойной оплаты (по обращению в поддержку).</li>
+      <li>Возврат по причине "ребёнок оплатил без ведома" или "ошибка пользователя" не производится.</li>
+    </ul>
+    <p>Перед оплатой внимательно ознакомьтесь с условиями оферты и политикой возвратов.</p>
+    <p class="mt-8 text-gray-500 text-sm">Последнее обновление: {{ now().strftime('%d.%m.%Y') if now else '' }}</p>
+    <a href="/" class="block mt-8 text-blue-600 hover:underline">Вернуться на главную</a>
+  </div>
+</body>
+</html> 

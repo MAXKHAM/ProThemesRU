@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Вход — ProThemesRU{% endblock %}
+{% block content %}
+<h2>Вход</h2>
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      <div class="alert alert-{{ category }}">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+<form method="post" class="space-y-4">
+    <input name="username" placeholder="Имя" required class="border px-4 py-2 w-full">
+    <input name="password" placeholder="Пароль" type="password" required class="border px-4 py-2 w-full">
+    <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded">Войти</button>
+</form>
+{% endblock %}

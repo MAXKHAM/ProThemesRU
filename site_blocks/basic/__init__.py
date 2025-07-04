@@ -1,0 +1,39 @@
+# Базовые блоки для конструктора сайтов
+
+basic_blocks = {
+    "header": {
+        "name": "Заголовок",
+        "category": "basic",
+        "html": "<header class='site-header'><h1>Заголовок сайта</h1></header>",
+        "css": ".site-header { padding: 20px; background: #f8f9fa; text-align: center; }",
+        "properties": ["text", "background", "padding", "font-size"]
+    },
+    "footer": {
+        "name": "Подвал",
+        "category": "basic",
+        "html": "<footer class='site-footer'><p>&copy; 2024 ProThemesRU. Все права защищены.</p></footer>",
+        "css": ".site-footer { padding: 20px; background: #333; color: white; text-align: center; }",
+        "properties": ["text", "background", "padding", "color"]
+    },
+    "navigation": {
+        "name": "Навигация",
+        "category": "basic",
+        "html": "<nav class='main-nav'><ul><li><a href='#home'>Главная</a></li><li><a href='#about'>О нас</a></li><li><a href='#contact'>Контакты</a></li></ul></nav>",
+        "css": ".main-nav ul { list-style: none; display: flex; gap: 20px; } .main-nav a { text-decoration: none; color: #333; }",
+        "properties": ["menu-items", "background", "color", "font-size"]
+    },
+    "container": {
+        "name": "Контейнер",
+        "category": "basic",
+        "html": "<div class='container'><p>Содержимое контейнера</p></div>",
+        "css": ".container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }",
+        "properties": ["max-width", "padding", "background", "border"]
+    },
+    "divider": {
+        "name": "Разделитель",
+        "category": "basic",
+        "html": "<hr class='divider'>",
+        "css": ".divider { border: none; height: 2px; background: linear-gradient(90deg, transparent, #007bff, transparent); margin: 40px 0; }",
+        "properties": ["color", "height", "style", "margin"]
+    }
+} 

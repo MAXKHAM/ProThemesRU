@@ -1,0 +1,123 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Примеры блоков</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .block-example { margin: 30px 0; padding: 20px; border: 1px solid #ddd; border-radius: 5px; }
+        .block-title { font-size: 1.2em; font-weight: bold; margin-bottom: 10px; color: #333; }
+        .block-category { color: #666; margin-bottom: 15px; }
+        .block-preview { margin: 15px 0; }
+        .block-code { background: #f5f5f5; padding: 15px; border-radius: 5px; overflow-x: auto; }
+        .block-properties { margin-top: 15px; }
+        .property-tag { display: inline-block; background: #007bff; color: white; padding: 2px 8px; border-radius: 3px; margin: 2px; font-size: 0.8em; }
+    </style>
+</head>
+<body>
+    <h1>Примеры блоков</h1>
+
+    <div class="block-example">
+        <div class="block-title">Заголовок</div>
+        <div class="block-category">Категория: basic</div>
+        <div class="block-preview">
+            <header class='site-header'><h1>Заголовок сайта</h1></header>
+        </div>
+        <div class="block-code">
+            <strong>HTML:</strong><br>
+            <pre><header class='site-header'><h1>Заголовок сайта</h1></header></pre>
+        </div>
+        <div class="block-code">
+            <strong>CSS:</strong><br>
+            <pre>.site-header { padding: 20px; background: #f8f9fa; text-align: center; }</pre>
+        </div>
+        <div class="block-properties">
+            <strong>Свойства:</strong><br>
+            <span class="property-tag">text</span><span class="property-tag">background</span><span class="property-tag">padding</span><span class="property-tag">font-size</span>
+        </div>
+    </div>
+
+    <div class="block-example">
+        <div class="block-title">Подвал</div>
+        <div class="block-category">Категория: basic</div>
+        <div class="block-preview">
+            <footer class='site-footer'><p>&copy; 2024 ProThemesRU. Все права защищены.</p></footer>
+        </div>
+        <div class="block-code">
+            <strong>HTML:</strong><br>
+            <pre><footer class='site-footer'><p>&copy; 2024 ProThemesRU. Все права защищены.</p></footer></pre>
+        </div>
+        <div class="block-code">
+            <strong>CSS:</strong><br>
+            <pre>.site-footer { padding: 20px; background: #333; color: white; text-align: center; }</pre>
+        </div>
+        <div class="block-properties">
+            <strong>Свойства:</strong><br>
+            <span class="property-tag">text</span><span class="property-tag">background</span><span class="property-tag">padding</span><span class="property-tag">color</span>
+        </div>
+    </div>
+
+    <div class="block-example">
+        <div class="block-title">Навигация</div>
+        <div class="block-category">Категория: basic</div>
+        <div class="block-preview">
+            <nav class='main-nav'><ul><li><a href='#home'>Главная</a></li><li><a href='#about'>О нас</a></li><li><a href='#contact'>Контакты</a></li></ul></nav>
+        </div>
+        <div class="block-code">
+            <strong>HTML:</strong><br>
+            <pre><nav class='main-nav'><ul><li><a href='#home'>Главная</a></li><li><a href='#about'>О нас</a></li><li><a href='#contact'>Контакты</a></li></ul></nav></pre>
+        </div>
+        <div class="block-code">
+            <strong>CSS:</strong><br>
+            <pre>.main-nav ul { list-style: none; display: flex; gap: 20px; } .main-nav a { text-decoration: none; color: #333; }</pre>
+        </div>
+        <div class="block-properties">
+            <strong>Свойства:</strong><br>
+            <span class="property-tag">menu-items</span><span class="property-tag">background</span><span class="property-tag">color</span><span class="property-tag">font-size</span>
+        </div>
+    </div>
+
+    <div class="block-example">
+        <div class="block-title">Контейнер</div>
+        <div class="block-category">Категория: basic</div>
+        <div class="block-preview">
+            <div class='container'><p>Содержимое контейнера</p></div>
+        </div>
+        <div class="block-code">
+            <strong>HTML:</strong><br>
+            <pre><div class='container'><p>Содержимое контейнера</p></div></pre>
+        </div>
+        <div class="block-code">
+            <strong>CSS:</strong><br>
+            <pre>.container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }</pre>
+        </div>
+        <div class="block-properties">
+            <strong>Свойства:</strong><br>
+            <span class="property-tag">max-width</span><span class="property-tag">padding</span><span class="property-tag">background</span><span class="property-tag">border</span>
+        </div>
+    </div>
+
+    <div class="block-example">
+        <div class="block-title">Разделитель</div>
+        <div class="block-category">Категория: basic</div>
+        <div class="block-preview">
+            <hr class='divider'>
+        </div>
+        <div class="block-code">
+            <strong>HTML:</strong><br>
+            <pre><hr class='divider'></pre>
+        </div>
+        <div class="block-code">
+            <strong>CSS:</strong><br>
+            <pre>.divider { border: none; height: 2px; background: linear-gradient(90deg, transparent, #007bff, transparent); margin: 40px 0; }</pre>
+        </div>
+        <div class="block-properties">
+            <strong>Свойства:</strong><br>
+            <span class="property-tag">color</span><span class="property-tag">height</span><span class="property-tag">style</span><span class="property-tag">margin</span>
+        </div>
+    </div>
+
+</body>
+</html>

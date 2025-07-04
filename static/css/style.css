@@ -1,0 +1,131 @@
+/* Основные переменные */
+:root {
+    --main-bg: #f7f8fa;
+    --main-dark: #22223B;
+    --main-accent: #4F8CFF;
+    --main-accent-hover: #2563eb;
+    --main-light: #F2E9E4;
+    --main-muted: #9A8C98;
+}
+
+body {
+    background: var(--main-bg);
+    color: var(--main-dark);
+    font-family: 'Montserrat', Arial, sans-serif;
+}
+
+.navbar {
+    border-radius: 0 0 16px 16px;
+    box-shadow: 0 2px 12px rgba(79,140,255,0.07);
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+}
+
+.btn-primary, .btn-outline-primary {
+    border-radius: 8px;
+    font-weight: 600;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    box-shadow: 0 2px 8px rgba(79,140,255,0.08);
+}
+
+.btn-primary {
+    background: var(--main-accent);
+    border-color: var(--main-accent);
+}
+.btn-primary:hover, .btn-primary:focus {
+    background: var(--main-accent-hover);
+    border-color: var(--main-accent-hover);
+    color: #fff;
+}
+
+.btn-outline-primary {
+    color: var(--main-accent);
+    border-color: var(--main-accent);
+    background: transparent;
+}
+.btn-outline-primary:hover, .btn-outline-primary:focus {
+    background: var(--main-accent);
+    color: #fff;
+}
+
+.card {
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(34,34,59,0.07);
+    border: none;
+    transition: box-shadow 0.2s;
+}
+.card:hover {
+    box-shadow: 0 8px 32px rgba(79,140,255,0.13);
+}
+
+.card-img-top {
+    border-radius: 16px 16px 0 0;
+    object-fit: cover;
+    height: 220px;
+}
+
+.footer {
+    font-size: 1rem;
+    color: var(--main-muted);
+    background: var(--main-light);
+    border-top: 1px solid #eaeaea;
+}
+
+.alert {
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(34,34,59,0.04);
+}
+
+/* Hero-блок */
+.hero {
+    background: linear-gradient(120deg, var(--main-accent) 0%, var(--main-light) 100%);
+    color: #fff;
+    border-radius: 24px;
+    box-shadow: 0 8px 32px rgba(79,140,255,0.13);
+    padding: 3rem 2rem 2rem 2rem;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+.hero h1 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+.hero p {
+    font-size: 1.3rem;
+    margin-bottom: 2rem;
+}
+.hero .btn {
+    font-size: 1.2rem;
+    padding: 0.75rem 2.5rem;
+}
+
+/* Анимация наведения */
+.btn, .card, .navbar, .alert {
+    transition: box-shadow 0.2s, background 0.2s, color 0.2s;
+}
+
+/* Форма */
+.form-control {
+    border-radius: 8px;
+    border: 1px solid #eaeaea;
+    box-shadow: none;
+    transition: border 0.2s;
+}
+.form-control:focus {
+    border-color: var(--main-accent);
+    box-shadow: 0 0 0 2px rgba(79,140,255,0.08);
+}
+
+/* Прочее */
+::-webkit-scrollbar {
+    width: 8px;
+    background: #f2e9e4;
+}
+::-webkit-scrollbar-thumb {
+    background: #c9c9c9;
+    border-radius: 8px;
+}

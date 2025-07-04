@@ -1,0 +1,116 @@
+.brand-header {
+  width: 100%;
+  background: linear-gradient(90deg, #FFD700 0%, #fff8e1 100%);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  padding: 24px 32px 16px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border-bottom: 2px solid #e0c36b;
+}
+
+.brand-logo-block {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.brand-logo {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  background: #fff8e1;
+}
+
+.brand-title-block {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.brand-title {
+  font-size: 2.2em;
+  font-weight: bold;
+  color: #b8860b;
+  margin: 0;
+  letter-spacing: 1px;
+}
+
+.brand-slogan {
+  font-size: 1.1em;
+  color: #7c5c13;
+  margin-top: 2px;
+}
+
+.brand-cta-block {
+  margin-top: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.brand-cta {
+  font-size: 1.3em;
+  color: #222;
+  margin: 0 0 4px 0;
+  font-weight: 500;
+}
+
+.brand-cta-btn {
+  display: inline-block;
+  background: linear-gradient(90deg, #FFD700 0%, #FFC300 100%);
+  color: #222;
+  font-weight: bold;
+  padding: 10px 28px;
+  border-radius: 6px;
+  font-size: 1.1em;
+  text-decoration: none;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  transition: background 0.2s, color 0.2s;
+}
+.brand-cta-btn:hover {
+  background: linear-gradient(90deg, #FFC300 0%, #FFD700 100%);
+  color: #b8860b;
+}
+
+.brand-about-btn {
+  margin-left: 18px;
+  background: #fff8e1;
+  color: #b8860b;
+  border: 1.5px solid #b8860b;
+  border-radius: 6px;
+  padding: 8px 18px;
+  font-size: 1em;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s, border-color 0.18s;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+.brand-about-btn:hover {
+  background: #ffe082;
+  color: #222;
+  border-color: #ffb300;
+}
+
+@media (max-width: 600px) {
+  .brand-header {
+    padding: 16px 8px 10px 8px;
+  }
+  .brand-logo {
+    width: 44px;
+    height: 44px;
+  }
+  .brand-title {
+    font-size: 1.3em;
+  }
+  .brand-cta {
+    font-size: 1em;
+  }
+  .brand-cta-btn {
+    font-size: 1em;
+    padding: 8px 16px;
+  }
+} 

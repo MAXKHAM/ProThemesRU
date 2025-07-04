@@ -1,0 +1,39 @@
+# Контентные блоки для конструктора сайтов
+
+content_blocks = {
+    "hero_section": {
+        "name": "Главный экран",
+        "category": "content",
+        "html": "<section class='hero'><div class='hero-content'><h1>Добро пожаловать</h1><p>Создавайте потрясающие сайты с ProThemesRU</p><button class='cta-button'>Начать</button></div></section>",
+        "css": ".hero { min-height: 80vh; display: flex; align-items: center; justify-content: center; background: linear-gradient(45deg, #667eea, #764ba2); color: white; } .hero-content { text-align: center; } .cta-button { padding: 15px 30px; background: #fff; color: #333; border: none; border-radius: 5px; font-size: 18px; cursor: pointer; }",
+        "properties": ["title", "subtitle", "button-text", "background", "text-color"]
+    },
+    "about_section": {
+        "name": "О нас",
+        "category": "content",
+        "html": "<section class='about'><div class='container'><h2>О нашей компании</h2><p>Мы создаем инновационные решения для вашего бизнеса. Наша команда экспертов поможет воплотить ваши идеи в жизнь.</p></div></section>",
+        "css": ".about { padding: 80px 0; background: #f9f9f9; } .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }",
+        "properties": ["title", "content", "background", "text-color"]
+    },
+    "contact_section": {
+        "name": "Контакты",
+        "category": "content",
+        "html": "<section class='contact'><div class='container'><h2>Свяжитесь с нами</h2><div class='contact-info'><p>Email: info@prothemesru.com</p><p>Телефон: +7 (999) 123-45-67</p><p>Адрес: Москва, Россия</p></div></div></section>",
+        "css": ".contact { padding: 80px 0; background: #333; color: white; } .contact-info { margin-top: 30px; }",
+        "properties": ["title", "email", "phone", "address", "background"]
+    },
+    "text_block": {
+        "name": "Текстовый блок",
+        "category": "content",
+        "html": "<div class='text-block'><h2>Заголовок</h2><p>Это пример текстового блока. Здесь можно разместить любой контент: параграфы, списки, цитаты и многое другое.</p></div>",
+        "css": ".text-block { padding: 40px 0; } .text-block h2 { margin-bottom: 20px; color: #333; } .text-block p { line-height: 1.6; color: #666; }",
+        "properties": ["title", "content", "font-size", "line-height", "color"]
+    },
+    "features_section": {
+        "name": "Преимущества",
+        "category": "content",
+        "html": "<section class='features'><div class='container'><h2>Наши преимущества</h2><div class='features-grid'><div class='feature'><h3>Качество</h3><p>Высокое качество всех решений</p></div><div class='feature'><h3>Скорость</h3><p>Быстрая разработка и внедрение</p></div><div class='feature'><h3>Поддержка</h3><p>24/7 техническая поддержка</p></div></div></div></section>",
+        "css": ".features { padding: 80px 0; background: #fff; } .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-top: 40px; } .feature { text-align: center; padding: 30px; } .feature h3 { color: #007bff; margin-bottom: 15px; }",
+        "properties": ["title", "features", "columns", "background", "text-color"]
+    }
+} 

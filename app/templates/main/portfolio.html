@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}Портфолио шаблонов - ProThemesRU{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="mb-4 text-center">Портфолио шаблонов</h1>
+    <div class="row">
+        {% if templates and templates|length > 0 %}
+            {% for tpl in templates %}
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">{{ tpl }}</h5>
+                        <a href="/static/templates/blocks/{{ tpl }}/index.html" target="_blank" class="btn btn-outline-primary mt-2">Открыть шаблон</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="col-12 text-center">
+                <p class="text-muted">Шаблоны не найдены.</p>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %} 

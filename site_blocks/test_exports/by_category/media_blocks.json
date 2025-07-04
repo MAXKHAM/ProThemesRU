@@ -1,0 +1,69 @@
+{
+  "video": {
+    "name": "Видео",
+    "category": "media",
+    "html": "<div class='video-container'><video controls><source src='' type='video/mp4'>Ваш браузер не поддерживает видео.</video></div>",
+    "css": ".video-container { max-width: 100%; margin: 20px 0; } .video-container video { width: 100%; height: auto; border-radius: 8px; }",
+    "properties": [
+      "video-url",
+      "autoplay",
+      "controls",
+      "width",
+      "height",
+      "poster"
+    ]
+  },
+  "image": {
+    "name": "Изображение",
+    "category": "media",
+    "html": "<div class='image-block'><img src='https://via.placeholder.com/600x400' alt='Описание изображения'></div>",
+    "css": ".image-block { text-align: center; margin: 20px 0; } .image-block img { max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }",
+    "properties": [
+      "image-url",
+      "alt-text",
+      "width",
+      "height",
+      "border-radius",
+      "shadow"
+    ]
+  },
+  "audio": {
+    "name": "Аудио",
+    "category": "media",
+    "html": "<div class='audio-container'><audio controls><source src='' type='audio/mpeg'>Ваш браузер не поддерживает аудио.</audio></div>",
+    "css": ".audio-container { margin: 20px 0; } .audio-container audio { width: 100%; }",
+    "properties": [
+      "audio-url",
+      "autoplay",
+      "controls",
+      "volume",
+      "loop"
+    ]
+  },
+  "youtube_video": {
+    "name": "YouTube видео",
+    "category": "media",
+    "html": "<div class='youtube-container'><iframe width='560' height='315' src='' frameborder='0' allowfullscreen></iframe></div>",
+    "css": ".youtube-container { position: relative; width: 100%; max-width: 560px; margin: 20px auto; } .youtube-container iframe { width: 100%; height: 315px; border-radius: 8px; }",
+    "properties": [
+      "video-id",
+      "width",
+      "height",
+      "autoplay",
+      "controls"
+    ]
+  },
+  "image_carousel": {
+    "name": "Карусель изображений",
+    "category": "media",
+    "html": "<div class='image-carousel'><div class='carousel-container'><img src='https://via.placeholder.com/800x400' alt='Изображение 1' class='carousel-image active'><img src='https://via.placeholder.com/800x400' alt='Изображение 2' class='carousel-image'><img src='https://via.placeholder.com/800x400' alt='Изображение 3' class='carousel-image'></div><div class='carousel-dots'><span class='dot active'></span><span class='dot'></span><span class='dot'></span></div></div>",
+    "css": ".image-carousel { position: relative; max-width: 800px; margin: 0 auto; } .carousel-container { position: relative; overflow: hidden; } .carousel-image { width: 100%; height: auto; display: none; } .carousel-image.active { display: block; } .carousel-dots { text-align: center; margin-top: 10px; } .dot { display: inline-block; width: 12px; height: 12px; border-radius: 50%; background: #ccc; margin: 0 5px; cursor: pointer; } .dot.active { background: #007bff; }",
+    "properties": [
+      "images",
+      "autoplay",
+      "interval",
+      "show-dots",
+      "show-arrows"
+    ]
+  }
+}

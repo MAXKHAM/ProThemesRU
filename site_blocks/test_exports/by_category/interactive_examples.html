@@ -1,0 +1,123 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Примеры блоков</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .block-example { margin: 30px 0; padding: 20px; border: 1px solid #ddd; border-radius: 5px; }
+        .block-title { font-size: 1.2em; font-weight: bold; margin-bottom: 10px; color: #333; }
+        .block-category { color: #666; margin-bottom: 15px; }
+        .block-preview { margin: 15px 0; }
+        .block-code { background: #f5f5f5; padding: 15px; border-radius: 5px; overflow-x: auto; }
+        .block-properties { margin-top: 15px; }
+        .property-tag { display: inline-block; background: #007bff; color: white; padding: 2px 8px; border-radius: 3px; margin: 2px; font-size: 0.8em; }
+    </style>
+</head>
+<body>
+    <h1>Примеры блоков</h1>
+
+    <div class="block-example">
+        <div class="block-title">Форма обратной связи</div>
+        <div class="block-category">Категория: interactive</div>
+        <div class="block-preview">
+            <form class='contact-form'><input type='text' placeholder='Ваше имя' required><input type='email' placeholder='Email' required><textarea placeholder='Сообщение' rows='5'></textarea><button type='submit'>Отправить</button></form>
+        </div>
+        <div class="block-code">
+            <strong>HTML:</strong><br>
+            <pre><form class='contact-form'><input type='text' placeholder='Ваше имя' required><input type='email' placeholder='Email' required><textarea placeholder='Сообщение' rows='5'></textarea><button type='submit'>Отправить</button></form></pre>
+        </div>
+        <div class="block-code">
+            <strong>CSS:</strong><br>
+            <pre>.contact-form { display: flex; flex-direction: column; gap: 15px; max-width: 500px; margin: 0 auto; } .contact-form input, .contact-form textarea { padding: 10px; border: 1px solid #ddd; border-radius: 5px; } .contact-form button { padding: 12px; background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; }</pre>
+        </div>
+        <div class="block-properties">
+            <strong>Свойства:</strong><br>
+            <span class="property-tag">fields</span><span class="property-tag">button-text</span><span class="property-tag">background</span><span class="property-tag">border-color</span>
+        </div>
+    </div>
+
+    <div class="block-example">
+        <div class="block-title">Галерея изображений</div>
+        <div class="block-category">Категория: interactive</div>
+        <div class="block-preview">
+            <div class='gallery'><div class='gallery-item'><img src='https://via.placeholder.com/300x200' alt='Изображение 1'></div><div class='gallery-item'><img src='https://via.placeholder.com/300x200' alt='Изображение 2'></div><div class='gallery-item'><img src='https://via.placeholder.com/300x200' alt='Изображение 3'></div></div>
+        </div>
+        <div class="block-code">
+            <strong>HTML:</strong><br>
+            <pre><div class='gallery'><div class='gallery-item'><img src='https://via.placeholder.com/300x200' alt='Изображение 1'></div><div class='gallery-item'><img src='https://via.placeholder.com/300x200' alt='Изображение 2'></div><div class='gallery-item'><img src='https://via.placeholder.com/300x200' alt='Изображение 3'></div></div></pre>
+        </div>
+        <div class="block-code">
+            <strong>CSS:</strong><br>
+            <pre>.gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; padding: 20px; } .gallery-item img { width: 100%; height: auto; border-radius: 8px; cursor: pointer; transition: transform 0.3s; } .gallery-item img:hover { transform: scale(1.05); }</pre>
+        </div>
+        <div class="block-properties">
+            <strong>Свойства:</strong><br>
+            <span class="property-tag">images</span><span class="property-tag">columns</span><span class="property-tag">gap</span><span class="property-tag">border-radius</span><span class="property-tag">lightbox</span>
+        </div>
+    </div>
+
+    <div class="block-example">
+        <div class="block-title">Слайдер</div>
+        <div class="block-category">Категория: interactive</div>
+        <div class="block-preview">
+            <div class='slider'><div class='slide active'><img src='https://via.placeholder.com/800x400' alt='Слайд 1'></div><div class='slide'><img src='https://via.placeholder.com/800x400' alt='Слайд 2'></div><div class='slide'><img src='https://via.placeholder.com/800x400' alt='Слайд 3'></div><button class='slider-btn prev'>&lt;</button><button class='slider-btn next'>&gt;</button></div>
+        </div>
+        <div class="block-code">
+            <strong>HTML:</strong><br>
+            <pre><div class='slider'><div class='slide active'><img src='https://via.placeholder.com/800x400' alt='Слайд 1'></div><div class='slide'><img src='https://via.placeholder.com/800x400' alt='Слайд 2'></div><div class='slide'><img src='https://via.placeholder.com/800x400' alt='Слайд 3'></div><button class='slider-btn prev'>&lt;</button><button class='slider-btn next'>&gt;</button></div></pre>
+        </div>
+        <div class="block-code">
+            <strong>CSS:</strong><br>
+            <pre>.slider { position: relative; overflow: hidden; } .slide { display: none; } .slide.active { display: block; } .slider-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.5); color: white; border: none; padding: 10px 15px; cursor: pointer; } .prev { left: 10px; } .next { right: 10px; }</pre>
+        </div>
+        <div class="block-properties">
+            <strong>Свойства:</strong><br>
+            <span class="property-tag">slides</span><span class="property-tag">autoplay</span><span class="property-tag">interval</span><span class="property-tag">show-arrows</span><span class="property-tag">show-dots</span>
+        </div>
+    </div>
+
+    <div class="block-example">
+        <div class="block-title">Аккордеон</div>
+        <div class="block-category">Категория: interactive</div>
+        <div class="block-preview">
+            <div class='accordion'><div class='accordion-item'><div class='accordion-header'>Заголовок 1</div><div class='accordion-content'><p>Содержимое первого элемента аккордеона.</p></div></div><div class='accordion-item'><div class='accordion-header'>Заголовок 2</div><div class='accordion-content'><p>Содержимое второго элемента аккордеона.</p></div></div></div>
+        </div>
+        <div class="block-code">
+            <strong>HTML:</strong><br>
+            <pre><div class='accordion'><div class='accordion-item'><div class='accordion-header'>Заголовок 1</div><div class='accordion-content'><p>Содержимое первого элемента аккордеона.</p></div></div><div class='accordion-item'><div class='accordion-header'>Заголовок 2</div><div class='accordion-content'><p>Содержимое второго элемента аккордеона.</p></div></div></div></pre>
+        </div>
+        <div class="block-code">
+            <strong>CSS:</strong><br>
+            <pre>.accordion { border: 1px solid #ddd; border-radius: 5px; } .accordion-item { border-bottom: 1px solid #ddd; } .accordion-header { padding: 15px; background: #f8f9fa; cursor: pointer; font-weight: bold; } .accordion-content { padding: 15px; display: none; } .accordion-content.active { display: block; }</pre>
+        </div>
+        <div class="block-properties">
+            <strong>Свойства:</strong><br>
+            <span class="property-tag">items</span><span class="property-tag">animation</span><span class="property-tag">background</span><span class="property-tag">border-color</span>
+        </div>
+    </div>
+
+    <div class="block-example">
+        <div class="block-title">Вкладки</div>
+        <div class="block-category">Категория: interactive</div>
+        <div class="block-preview">
+            <div class='tabs'><div class='tab-buttons'><button class='tab-btn active' data-tab='tab1'>Вкладка 1</button><button class='tab-btn' data-tab='tab2'>Вкладка 2</button><button class='tab-btn' data-tab='tab3'>Вкладка 3</button></div><div class='tab-content'><div class='tab-pane active' id='tab1'><p>Содержимое первой вкладки.</p></div><div class='tab-pane' id='tab2'><p>Содержимое второй вкладки.</p></div><div class='tab-pane' id='tab3'><p>Содержимое третьей вкладки.</p></div></div></div>
+        </div>
+        <div class="block-code">
+            <strong>HTML:</strong><br>
+            <pre><div class='tabs'><div class='tab-buttons'><button class='tab-btn active' data-tab='tab1'>Вкладка 1</button><button class='tab-btn' data-tab='tab2'>Вкладка 2</button><button class='tab-btn' data-tab='tab3'>Вкладка 3</button></div><div class='tab-content'><div class='tab-pane active' id='tab1'><p>Содержимое первой вкладки.</p></div><div class='tab-pane' id='tab2'><p>Содержимое второй вкладки.</p></div><div class='tab-pane' id='tab3'><p>Содержимое третьей вкладки.</p></div></div></div></pre>
+        </div>
+        <div class="block-code">
+            <strong>CSS:</strong><br>
+            <pre>.tabs { margin: 20px 0; } .tab-buttons { display: flex; border-bottom: 1px solid #ddd; } .tab-btn { padding: 10px 20px; border: none; background: none; cursor: pointer; } .tab-btn.active { background: #007bff; color: white; } .tab-pane { display: none; padding: 20px; } .tab-pane.active { display: block; }</pre>
+        </div>
+        <div class="block-properties">
+            <strong>Свойства:</strong><br>
+            <span class="property-tag">tabs</span><span class="property-tag">animation</span><span class="property-tag">background</span><span class="property-tag">border-color</span>
+        </div>
+    </div>
+
+</body>
+</html>

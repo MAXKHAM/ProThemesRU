@@ -1,0 +1,119 @@
+[
+    {
+        "name": "Корпоративный стиль",
+        "description": "Минималистичный и профессиональный дизайн для бизнес-сайтов",
+        "elements": [
+            {
+                "type": "header",
+                "position": {"x": 0.1, "y": 0.1},
+                "size": {"width": 0.8, "height": 0.1},
+                "style": {
+                    "backgroundColor": "#ffffff",
+                    "color": "#2d3436",
+                    "fontFamily": "Inter",
+                    "fontSize": "24px"
+                }
+            },
+            {
+                "type": "hero",
+                "position": {"x": 0.1, "y": 0.2},
+                "size": {"width": 0.8, "height": 0.4},
+                "style": {
+                    "backgroundColor": "#f8f9fa",
+                    "color": "#2d3436",
+                    "fontFamily": "Inter",
+                    "fontSize": "32px"
+                }
+            },
+            {
+                "type": "features",
+                "position": {"x": 0.1, "y": 0.6},
+                "size": {"width": 0.8, "height": 0.3},
+                "style": {
+                    "backgroundColor": "#ffffff",
+                    "color": "#2d3436",
+                    "fontFamily": "Inter",
+                    "fontSize": "20px"
+                }
+            }
+        ]
+    },
+    {
+        "name": "Творческий стиль",
+        "description": "Современный и креативный дизайн для портфолио и креативных сайтов",
+        "elements": [
+            {
+                "type": "header",
+                "position": {"x": 0.1, "y": 0.1},
+                "size": {"width": 0.8, "height": 0.1},
+                "style": {
+                    "backgroundColor": "#2d3436",
+                    "color": "#ffffff",
+                    "fontFamily": "Inter",
+                    "fontSize": "24px"
+                }
+            },
+            {
+                "type": "hero",
+                "position": {"x": 0.1, "y": 0.2},
+                "size": {"width": 0.8, "height": 0.4},
+                "style": {
+                    "backgroundColor": "#4ecdc4",
+                    "color": "#ffffff",
+                    "fontFamily": "Inter",
+                    "fontSize": "32px"
+                }
+            },
+            {
+                "type": "portfolio",
+                "position": {"x": 0.1, "y": 0.6},
+                "size": {"width": 0.8, "height": 0.3},
+                "style": {
+                    "backgroundColor": "#ffffff",
+                    "color": "#2d3436",
+                    "fontFamily": "Inter",
+                    "fontSize": "20px"
+                }
+            }
+        ]
+    },
+    {
+        "name": "Минималистичный стиль",
+        "description": "Чистый и лаконичный дизайн для современных сайтов",
+        "elements": [
+            {
+                "type": "header",
+                "position": {"x": 0.1, "y": 0.1},
+                "size": {"width": 0.8, "height": 0.1},
+                "style": {
+                    "backgroundColor": "#ffffff",
+                    "color": "#2d3436",
+                    "fontFamily": "Inter",
+                    "fontSize": "24px"
+                }
+            },
+            {
+                "type": "hero",
+                "position": {"x": 0.1, "y": 0.2},
+                "size": {"width": 0.8, "height": 0.4},
+                "style": {
+                    "backgroundColor": "#f8f9fa",
+                    "color": "#2d3436",
+                    "fontFamily": "Inter",
+                    "fontSize": "32px"
+                }
+            },
+            {
+                "type": "features",
+                "position": {"x": 0.1, "y": 0.6},
+                "size": {"width": 0.8, "height": 0.3},
+                "style": {
+                    "backgroundColor": "#ffffff",
+                    "color": "#2d3436",
+                    "fontFamily": "Inter",
+                    "fontSize": "20px"
+                }
+            }
+        ]
+    }
+]

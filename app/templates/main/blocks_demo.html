@@ -1,0 +1,254 @@
+{% extends "base.html" %}
+
+{% block title %}Демонстрация системы блоков - ProThemesRU{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="text-center mb-4">🎨 Система блоков ProThemesRU</h1>
+            <p class="lead text-center">Демонстрация готовых блоков для создания сайтов</p>
+        </div>
+    </div>
+
+    <!-- Статистика -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">📊 Статистика</h5>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="text-center">
+                                <h3 class="text-primary">{{ counts.total }}</h3>
+                                <p>Всего блоков</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="text-center">
+                                <h3 class="text-success">{{ categories|length }}</h3>
+                                <p>Категорий</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="text-center">
+                                <h3 class="text-info">{{ counts.basic }}</h3>
+                                <p>Базовых</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="text-center">
+                                <h3 class="text-warning">{{ counts.interactive }}</h3>
+                                <p>Интерактивных</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Блоки по категориям -->
+    {% for category in categories %}
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        {% if category == 'basic' %}🔧{% endif %}
+                        {% if category == 'content' %}📝{% endif %}
+                        {% if category == 'interactive' %}🎮{% endif %}
+                        {% if category == 'media' %}📷{% endif %}
+                        {% if category == 'business' %}💼{% endif %}
+                        {% if category == 'social' %}📱{% endif %}
+                        {{ category.replace('_', ' ').title() }}
+                        <span class="badge bg-secondary">{{ counts[category] }}</span>
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        {% for block in blocks_by_category[category] %}
+                        <div class="col-md-6 col-lg-4 mb-3">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h6 class="card-title">{{ block.name }}</h6>
+                                    <p class="card-text small text-muted">ID: {{ block.id }}</p>
+                                    
+                                    <!-- Предварительный просмотр HTML -->
+                                    <div class="mb-2">
+                                        <small class="text-muted">HTML:</small>
+                                        <div class="bg-light p-2 rounded" style="max-height: 100px; overflow: hidden;">
+                                            <code class="small">{{ block.html[:100] }}{% if block.html|length > 100 %}...{% endif %}</code>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Свойства -->
+                                    {% if block.properties %}
+                                    <div class="mb-2">
+                                        <small class="text-muted">Свойства:</small>
+                                        <div>
+                                            {% for prop in block.properties %}
+                                            <span class="badge bg-outline-secondary me-1">{{ prop }}</span>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                    
+                                    <!-- Кнопки действий -->
+                                    <div class="d-flex gap-2">
+                                        <button class="btn btn-sm btn-outline-primary" 
+                                                onclick="previewBlock('{{ block.id }}')">
+                                            👁️ Просмотр
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-success" 
+                                                onclick="addToConstructor('{{ block.id }}')">
+                                            ➕ Добавить
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+    <!-- Модальное окно для предварительного просмотра -->
+    <div class="modal fade" id="blockPreviewModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Предварительный просмотр блока</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="blockPreviewContent"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                    <button type="button" class="btn btn-primary" onclick="addCurrentBlockToConstructor()">Добавить в конструктор</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+let currentBlockId = null;
+
+function previewBlock(blockId) {
+    currentBlockId = blockId;
+    
+    // Получаем данные блока
+    const blocks = {{ blocks_by_category|tojson }};
+    let blockData = null;
+    
+    for (const category in blocks) {
+        const found = blocks[category].find(b => b.id === blockId);
+        if (found) {
+            blockData = found;
+            break;
+        }
+    }
+    
+    if (blockData) {
+        // Создаем предварительный просмотр
+        const previewContent = document.getElementById('blockPreviewContent');
+        previewContent.innerHTML = `
+            <div class="mb-3">
+                <h6>${blockData.name}</h6>
+                <p class="text-muted">ID: ${blockData.id}</p>
+            </div>
+            <div class="mb-3">
+                <h6>Предварительный просмотр:</h6>
+                <div class="border rounded p-3" style="background: white;">
+                    ${blockData.html}
+                </div>
+            </div>
+            <div class="mb-3">
+                <h6>CSS стили:</h6>
+                <pre class="bg-light p-2 rounded"><code>${blockData.css}</code></pre>
+            </div>
+        `;
+        
+        // Показываем модальное окно
+        const modal = new bootstrap.Modal(document.getElementById('blockPreviewModal'));
+        modal.show();
+    }
+}
+
+function addToConstructor(blockId) {
+    // Добавляем блок в конструктор через API
+    fetch('/api/constructor/add-block', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            block_id: blockId
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert('Блок добавлен в конструктор!');
+        } else {
+            alert('Ошибка: ' + data.error);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Ошибка при добавлении блока');
+    });
+}
+
+function addCurrentBlockToConstructor() {
+    if (currentBlockId) {
+        addToConstructor(currentBlockId);
+        // Закрываем модальное окно
+        const modal = bootstrap.Modal.getInstance(document.getElementById('blockPreviewModal'));
+        modal.hide();
+    }
+}
+
+// Добавляем CSS стили для блоков
+document.addEventListener('DOMContentLoaded', function() {
+    const blocks = {{ blocks_by_category|tojson }};
+    let cssStyles = '';
+    
+    for (const category in blocks) {
+        for (const block of blocks[category]) {
+            if (block.css) {
+                cssStyles += block.css + '\n';
+            }
+        }
+    }
+    
+    if (cssStyles) {
+        const style = document.createElement('style');
+        style.textContent = cssStyles;
+        document.head.appendChild(style);
+    }
+});
+</script>
+
+<style>
+.badge.bg-outline-secondary {
+    background-color: transparent;
+    border: 1px solid #6c757d;
+    color: #6c757d;
+}
+
+.card {
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+</style>
+{% endblock %} 
