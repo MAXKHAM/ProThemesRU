@@ -37,6 +37,20 @@ def load_templates():
                     "category": "saas",
                     "price": 15000,
                     "description": "Премиум лендинг для SaaS продуктов"
+                },
+                {
+                    "id": 2,
+                    "name": "Креативное Агентство",
+                    "category": "agency",
+                    "price": 12000,
+                    "description": "Стильный сайт для креативных агентств"
+                },
+                {
+                    "id": 3,
+                    "name": "Премиум E-commerce",
+                    "category": "ecommerce",
+                    "price": 25000,
+                    "description": "Полнофункциональный интернет-магазин"
                 }
             ]
         }

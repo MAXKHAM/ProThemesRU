@@ -3,52 +3,349 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Портфолио ProThemesRU</title>
+    <title>Портфолио ProThemesRU - Профессиональные сайты</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
         body {
-            padding: 20px;
-            background-color: #f8f9fa;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
+        
+        .header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 20px 0;
+            margin-bottom: 40px;
+        }
+        
+        .header h1 {
+            color: white;
+            font-weight: 700;
+            margin: 0;
+        }
+        
+        .header p {
+            color: rgba(255, 255, 255, 0.8);
+            margin: 10px 0 0 0;
+        }
+        
         .portfolio-item {
-            transition: transform 0.3s;
-        }
-        .portfolio-item:hover {
-            transform: translateY(-5px);
-        }
-        .portfolio-image {
-            height: 200px;
-            object-fit: cover;
-            border-radius: 8px;
-        }
-        .portfolio-info {
-            padding: 15px;
             background: white;
-            border-radius: 0 0 8px 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+        }
+        
+        .portfolio-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .portfolio-image {
+            height: 250px;
+            object-fit: cover;
+            width: 100%;
+            transition: transform 0.3s ease;
+        }
+        
+        .portfolio-item:hover .portfolio-image {
+            transform: scale(1.05);
+        }
+        
+        .portfolio-info {
+            padding: 25px;
+        }
+        
+        .portfolio-info h4 {
+            color: #333;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .portfolio-info p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .portfolio-features {
+            margin-bottom: 20px;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            color: #555;
+        }
+        
+        .feature-item i {
+            color: #667eea;
+            margin-right: 10px;
+            width: 16px;
+        }
+        
+        .portfolio-price {
+            font-size: 24px;
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+        
+        .btn-portfolio {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border: none;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-portfolio:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+            color: white;
+        }
+        
+        .stats-section {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 40px;
+            color: white;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+        
+        .contact-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 40px;
+            text-align: center;
+        }
+        
+        .contact-section h3 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            color: #667eea;
+            text-decoration: none;
+        }
+        
+        .contact-item:hover {
+            color: #764ba2;
+        }
+        
+        .contact-item i {
+            margin-right: 10px;
+            font-size: 20px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1 class="mb-4">Портфолио наших проектов</h1>
-        <div class="row g-4">
-            <!-- Пример проекта -->
-            <div class="col-md-4">
-                <div class="portfolio-item">
-                    <img src="static/images/portfolio/project1.jpg" class="portfolio-image" alt="Проект 1">
-                    <div class="portfolio-info">
-                        <h5>Сайт компании</h5>
-                        <p>Профессиональный корпоративный сайт с современным дизайном</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <span class="badge bg-primary">HTML/CSS</span>
-                            <a href="#" class="btn btn-sm btn-outline-primary">Подробнее</a>
+    <!-- Header -->
+    <div class="header">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h1><i class="fas fa-palette"></i> ProThemesRU</h1>
+                    <p>Создаем профессиональные сайты с современным дизайном</p>
+                </div>
+                <div class="col-md-6 text-end">
+                    <div class="d-flex justify-content-end align-items-center">
+                        <div class="me-4">
+                            <i class="fas fa-phone text-white me-2"></i>
+                            <span class="text-white">+7 (999) 123-45-67</span>
+                        </div>
+                        <div>
+                            <i class="fas fa-envelope text-white me-2"></i>
+                            <span class="text-white">info@prothemes.ru</span>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Statistics -->
+        <div class="stats-section">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="stat-item">
+                        <div class="stat-number">150+</div>
+                        <div class="stat-label">Реализованных проектов</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-item">
+                        <div class="stat-number">45+</div>
+                        <div class="stat-label">Готовых шаблонов</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-item">
+                        <div class="stat-number">98%</div>
+                        <div class="stat-label">Довольных клиентов</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-item">
+                        <div class="stat-number">5+</div>
+                        <div class="stat-label">Лет опыта</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Portfolio Items -->
+        <div class="row">
+            <!-- Тема 1: Современный SaaS Лендинг -->
+            <div class="col-lg-6">
+                <div class="portfolio-item">
+                    <img src="https://via.placeholder.com/600x400/6366F1/FFFFFF?text=SaaS+Landing+Page" 
+                         class="portfolio-image" 
+                         alt="Современный SaaS Лендинг - Профессиональная страница для программного обеспечения">
+                    <div class="portfolio-info">
+                        <h4><i class="fas fa-rocket text-primary me-2"></i>Современный SaaS Лендинг</h4>
+                        <p>Профессиональная landing page для SaaS продуктов с современным дизайном, анимациями и высокой конверсией. Идеально подходит для стартапов и технологических компаний.</p>
+                        
+                        <div class="portfolio-features">
+                            <div class="feature-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Адаптивный дизайн для всех устройств</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Анимации при скролле и интерактивные элементы</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Интеграция с CRM и аналитикой</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>SEO оптимизация и быстрая загрузка</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>PWA поддержка и офлайн функционал</span>
+                            </div>
+                        </div>
+                        
+                        <div class="portfolio-price">15,000 ₽</div>
+                        <a href="#" class="btn-portfolio">
+                            <i class="fas fa-eye me-2"></i>Посмотреть демо
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Тема 2: Креативное Агентство -->
+            <div class="col-lg-6">
+                <div class="portfolio-item">
+                    <img src="https://via.placeholder.com/600x400/EC4899/FFFFFF?text=Creative+Agency" 
+                         class="portfolio-image" 
+                         alt="Креативное Агентство - Стильный сайт для дизайн-студий и креативных агентств">
+                    <div class="portfolio-info">
+                        <h4><i class="fas fa-paint-brush text-primary me-2"></i>Креативное Агентство</h4>
+                        <p>Стильный и креативный сайт для дизайн-студий, рекламных агентств и творческих команд. Включает портфолио галерею, блог и современные эффекты.</p>
+                        
+                        <div class="portfolio-features">
+                            <div class="feature-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Портфолио галерея с фильтрацией</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Блог с CMS системой управления</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Страница команды и услуг</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Отзывы клиентов и кейсы</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Контактная форма и карта</span>
+                            </div>
+                        </div>
+                        
+                        <div class="portfolio-price">12,000 ₽</div>
+                        <a href="#" class="btn-portfolio">
+                            <i class="fas fa-eye me-2"></i>Посмотреть демо
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Section -->
+        <div class="contact-section">
+            <h3><i class="fas fa-envelope text-primary me-2"></i>Свяжитесь с нами</h3>
+            <p class="text-muted mb-4">Готовы создать профессиональный сайт? Оставьте заявку и мы свяжемся с вами!</p>
             
-            <!-- Добавьте больше проектов по аналогии -->
+            <div class="contact-info">
+                <a href="tel:+79991234567" class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <span>+7 (999) 123-45-67</span>
+                </a>
+                <a href="mailto:info@prothemes.ru" class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>info@prothemes.ru</span>
+                </a>
+                <a href="https://t.me/ProThemesSupport" class="contact-item">
+                    <i class="fab fa-telegram"></i>
+                    <span>@ProThemesSupport</span>
+                </a>
+                <a href="#" class="contact-item">
+                    <i class="fas fa-globe"></i>
+                    <span>prothemes.ru</span>
+                </a>
+            </div>
+            
+            <div class="mt-4">
+                <a href="#" class="btn-portfolio">
+                    <i class="fas fa-paper-plane me-2"></i>Оставить заявку
+                </a>
+            </div>
         </div>
     </div>
 
