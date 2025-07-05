@@ -19,7 +19,7 @@ from app.telegram_bot import start_telegram_bot
 if __name__ == "__main__":
     # Проверяем токен бота
     token = os.getenv("TELEGRAM_BOT_TOKEN")
-    if not token or token == "YOUR_TELEGRAM_BOT_TOKEN_HERE":
+    if not token or token == "7967424639:AAGaQBdm3_QDqvnh8K61uo8sUrVlHii7FS0":
         print("\n" + "="*80)
         print("!!! ВНИМАНИЕ: Установите переменную окружения TELEGRAM_BOT_TOKEN !!!")
         print("!!! Получите токен у @BotFather в Telegram !!!")

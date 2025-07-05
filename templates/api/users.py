@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
-from app.models import User, Template, Project, db
+from models import User, Template, Project, db
 from werkzeug.security import generate_password_hash, check_password_hash
 
 users_bp = Blueprint('users', __name__)
@@ -48,6 +48,12 @@ def login():
 
 @users_bp.route('/api/users/profile', methods=['GET'])
 @login_required
+def get_profile():
+    return jsonify({
+        'id': current_user.id,
+        'username': current_user.username,
+        'email': current_user.email
+    })
 def get_profile():
     return jsonify({
         'id': current_user.id,

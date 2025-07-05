@@ -1,38 +1,134 @@
-{% extends "base.html" %}
-{% block title %}Главная — ProThemesRU{% endblock %}
-{% block content %}
-<section class="py-16 bg-gradient-to-r from-yellow-400 via-red-400 to-pink-500 text-white">
-  <div class="container mx-auto text-center px-6">
-    <h1 class="text-4xl font-extrabold mb-4">ProThemesRU</h1>
-    <p class="text-lg mb-8">Готовые сайты без кода. Купил шаблон, собрал через конструктор, продал клиенту.</p>
-    <div class="flex justify-center gap-4 mt-6">
-        <a href="/portfolio" class="btn btn-outline-primary">Смотреть портфолио</a>
-        <a href="/constructor" class="btn btn-primary">Собрать сайт</a>
-    </div>
-  </div>
-</section>
-<section class="py-12">
-  <div class="container mx-auto grid md:grid-cols-3 gap-8 px-6">
-    <div class="text-center p-6 bg-white rounded shadow">
-      <span class="text-4xl">⚡</span>
-      <h2 class="text-xl font-bold mt-4 mb-2">Без кода</h2>
-      <p>Никаких знаний программирования — сборщик блоков сделает всё за вас.</p>
-    </div>
-    <div class="text-center p-6 bg-white rounded shadow">
-      <span class="text-4xl">💸</span>
-      <h2 class="text-xl font-bold mt-4 mb-2">Перепродажа</h2>
-      <p>Лицензия позволяет продавать сайты под своим брендом.</p>
-    </div>
-    <div class="text-center p-6 bg-white rounded shadow">
-      <span class="text-4xl">🔧</span>
-      <h2 class="text-xl font-bold mt-4 mb-2">Конструктор</h2>
-      <p>Выбирайте блоки, следите за ценой и скачивайте готовый архив.</p>
-    </div>
-  </div>
-</section>
-<footer class="text-center text-gray-500 text-sm py-4">
-    © 2025 ProThemesRU. <a href="/about">О проекте</a> | <a href="/telegram_bot">Telegram-бот</a>
-    <br>
-    <a href="https://skillfactory.ru/?ref=prothemesru" target="_blank" rel="noopener" style="color:#1a73e8;font-weight:bold;">Skillfactory — обучение IT с нуля (реферальная ссылка)</a>
-</footer>
-{% endblock %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProThemesRU - Конструктор сайтов</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../static/css/styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">ProThemesRU</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="portfolio.html">Портфолио</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="constructor.html">Конструктор</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="tariffs.html">Тарифы</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">О нас</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contacts.html">Контакты</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Создавайте сайты без кода</h1>
+            <p class="lead">Готовые сайты без знания программирования</p>
+            <div class="d-grid gap-3 d-md-flex justify-content-md-center">
+                <a href="constructor.html" class="btn btn-primary btn-lg px-4 me-md-2">Собрать сайт</a>
+                <a href="portfolio.html" class="btn btn-outline-primary btn-lg px-4">Посмотреть портфолио</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <div class="row g-4">
+                <!-- Feature 1 -->
+                <div class="col-md-4">
+                    <div class="feature-card p-4 text-center">
+                        <div class="feature-icon mb-3">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <h3>Без кода</h3>
+                        <p>Создавайте сайты, перетаскивая блоки. Никакого программирования не требуется.</p>
+                    </div>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="col-md-4">
+                    <div class="feature-card p-4 text-center">
+                        <div class="feature-icon mb-3">
+                            <i class="fas fa-paint-brush"></i>
+                        </div>
+                        <h3>Красивые шаблоны</h3>
+                        <p>Выбирайте из множества готовых шаблонов, созданных профессиональными дизайнерами.</p>
+                    </div>
+                </div>
+                
+                <!-- Feature 3 -->
+                <div class="col-md-4">
+                    <div class="feature-card p-4 text-center">
+                        <div class="feature-icon mb-3">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <h3>Быстро и просто</h3>
+                        <p>Создавайте профессиональные сайты всего за несколько минут.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2 class="mb-4">Готовы начать?</h2>
+            <p class="lead mb-4">Создайте свой профессиональный сайт уже сегодня!</p>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                <a href="https://maxkham.github.io/ProThemesRU/constructor" class="btn btn-primary btn-lg px-4 cta-button">Начать создание сайта</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- SkillFactory Section -->
+    <section class="skillfactory-section">
+        <div class="container text-center">
+            <h2 class="mb-4">🔥 Хотите создавать такие сайты?</h2>
+            <p class="lead mb-4">Начните курс в SkillFactory и создавайте профессиональные сайты как ProThemesRU!</p>
+            <p class="text-muted mb-4">Получите скидку 20% на курс при регистрации по реферальной ссылке</p>
+            <a href="https://go.2038.pro/379854dc4f1ff811" target="_blank" class="btn btn-primary btn-lg px-4 mb-3">Стать разработчиком сайтов</a>
+            <p class="text-muted">*Реферальная ссылка, поддержите нас 😊</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 ProThemesRU. Все права защищены.</p>
+            <div class="social-links">
+                <a href="https://github.com/maxkham/ProThemesRU" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://t.me/prothemesru_bot" target="_blank"><i class="fab fa-telegram"></i></a>
+                <div class="referral-container">
+                    <a href="https://go.2038.pro/379854dc4f1ff811" target="_blank" class="referral-link">
+                        <i class="fas fa-star me-2"></i>Реферальная ссылка
+                    </a>
+                    <p class="referral-slogan">Получите скидку 20% на все услуги</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+services:
+  - type: worker
+    name: prothemesru-telegram-bot
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python webhook_bot.py
+    envVars:
+      - key: TELEGRAM_BOT_TOKEN
+        sync: false
+      - key: TELEGRAM_ADMIN_CHAT_ID
+        sync: false
+      - key: API_BASE_URL
+        value: https://prothemesru.herokuapp.com
+      - key: LOG_LEVEL
+        value: INFO
+      - key: PORT
+        value: 10000 

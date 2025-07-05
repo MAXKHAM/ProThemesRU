@@ -1,43 +1,57 @@
-{% extends "base.html" %}
-{% block title %}Портфолио ProThemesRU{% endblock %}
-{% block content %}
-<h1 class="mb-4">Портфолио шаблонов</h1>
-<div class="row row-cols-1 row-cols-md-3 g-4">
-    <div class="col">
-        <div class="card h-100">
-            <img src="/static/img/preview1.png" class="card-img-top" alt="Шаблон 1">
-            <div class="card-body">
-                <h5 class="card-title">Business Landing</h5>
-                <p class="card-text">Минималистичный шаблон для бизнеса.</p>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Портфолио ProThemesRU</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        .portfolio-item {
+            transition: transform 0.3s;
+        }
+        .portfolio-item:hover {
+            transform: translateY(-5px);
+        }
+        .portfolio-image {
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+        .portfolio-info {
+            padding: 15px;
+            background: white;
+            border-radius: 0 0 8px 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mb-4">Портфолио наших проектов</h1>
+        <div class="row g-4">
+            <!-- Пример проекта -->
+            <div class="col-md-4">
+                <div class="portfolio-item">
+                    <img src="static/images/portfolio/project1.jpg" class="portfolio-image" alt="Проект 1">
+                    <div class="portfolio-info">
+                        <h5>Сайт компании</h5>
+                        <p>Профессиональный корпоративный сайт с современным дизайном</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="badge bg-primary">HTML/CSS</span>
+                            <a href="#" class="btn btn-sm btn-outline-primary">Подробнее</a>
+                        </div>
+                    </div>
+                </div>
             </div>
+            
+            <!-- Добавьте больше проектов по аналогии -->
         </div>
     </div>
-    <div class="col">
-        <div class="card h-100">
-            <img src="/static/img/preview2.png" class="card-img-top" alt="Шаблон 2">
-            <div class="card-body">
-                <h5 class="card-title">Creative Portfolio</h5>
-                <p class="card-text">Креативное портфолио для дизайнеров.</p>
-            </div>
-        </div>
-    </div>
-    <div class="col">
-        <div class="card h-100">
-            <img src="/static/img/preview3.png" class="card-img-top" alt="Шаблон 3">
-            <div class="card-body">
-                <h5 class="card-title">Online Store</h5>
-                <p class="card-text">Магазин с карточками товаров.</p>
-            </div>
-        </div>
-    </div>
-    <div class="col">
-        <div class="card h-100">
-            <img src="/static/images/preview5.jpg" class="card-img-top" alt="Шаблон 5">
-            <div class="card-body">
-                <h5 class="card-title">Video Catalog</h5>
-                <p class="card-text">Современный каталог видеороликов с фильтрами и адаптивным дизайном.</p>
-            </div>
-        </div>
-    </div>
-</div>
-{% endblock %}
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

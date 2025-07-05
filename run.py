@@ -20,10 +20,4 @@ def initdb_command():
 if __name__ == '__main__':
     # Запуск приложения в режиме отладки
     # Для продакшена используйте Gunicorn или аналогичный сервер
-    app.run(debug=True)
-
-if DEBUG:
-    app.logger.info('DEBUG            = ' + str(DEBUG)             )
-    app.logger.info('Page Compression = ' + ('FALSE' if DEBUG else 'TRUE'))
-    app.logger.info('DBMS             = ' + app_config.SQLALCHEMY_DATABASE_URI)
-    app.logger.info('ASSETS_ROOT      = ' + app_config.ASSETS_ROOT )
+    app.run(debug=True, host='0.0.0.0', port=5000) 

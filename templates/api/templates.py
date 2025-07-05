@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request
-from app.models import Template, Block, TemplateBlock, db
+from models import Template, Block, TemplateBlock, db
 from datetime import datetime
 
 templates_bp = Blueprint('templates', __name__)

@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
-from app.models import Project, Block, ProjectBlock, db
+from models import Project, Block, ProjectBlock, db
 from datetime import datetime
 
 projects_bp = Blueprint('projects', __name__)
@@ -48,11 +48,13 @@ def get_project(project_id):
         'name': project.name,
         'description': project.description,
         'blocks': [{
-            'id': block.id,
+            'id': block.block_id,
             'type': block.block.type,
             'name': block.block.name,
             'order': block.order,
             'settings': block.settings
+        } for block in blocks]
+    })
         } for block in blocks]
     })
 
