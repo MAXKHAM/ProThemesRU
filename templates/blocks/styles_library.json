@@ -1,0 +1,132 @@
+{
+  "gradients": {
+    "sunset": {
+      "name": "Закат",
+      "css": "background: linear-gradient(45deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3);"
+    },
+    "ocean": {
+      "name": "Океан",
+      "css": "background: linear-gradient(45deg, #667eea, #764ba2);"
+    },
+    "forest": {
+      "name": "Лес",
+      "css": "background: linear-gradient(45deg, #11998e, #38ef7d);"
+    },
+    "fire": {
+      "name": "Огонь",
+      "css": "background: linear-gradient(45deg, #fa709a, #fee140);"
+    },
+    "aurora": {
+      "name": "Северное сияние",
+      "css": "background: linear-gradient(45deg, #a8edea, #fed6e3);"
+    }
+  },
+  "shadows": {
+    "soft": {
+      "name": "Мягкая тень",
+      "css": "box-shadow: 0 2px 10px rgba(0,0,0,0.1);"
+    },
+    "medium": {
+      "name": "Средняя тень",
+      "css": "box-shadow: 0 4px 20px rgba(0,0,0,0.15);"
+    },
+    "strong": {
+      "name": "Сильная тень",
+      "css": "box-shadow: 0 8px 30px rgba(0,0,0,0.2);"
+    },
+    "colored": {
+      "name": "Цветная тень",
+      "css": "box-shadow: 0 4px 20px rgba(0,123,255,0.3);"
+    }
+  },
+  "borders": {
+    "rounded": {
+      "name": "Скругленные углы",
+      "css": "border-radius: 10px;"
+    },
+    "pill": {
+      "name": "Таблетка",
+      "css": "border-radius: 50px;"
+    },
+    "dashed": {
+      "name": "Пунктирная граница",
+      "css": "border: 2px dashed #ddd;"
+    },
+    "gradient": {
+      "name": "Градиентная граница",
+      "css": "border: 2px solid; border-image: linear-gradient(45deg, #ff6b6b, #4ecdc4) 1;"
+    }
+  },
+  "effects": {
+    "hover_lift": {
+      "name": "Подъем при наведении",
+      "css": "transition: transform 0.3s ease; } .hover-lift:hover { transform: translateY(-5px);"
+    },
+    "hover_scale": {
+      "name": "Масштабирование при наведении",
+      "css": "transition: transform 0.3s ease; } .hover-scale:hover { transform: scale(1.05);"
+    },
+    "hover_glow": {
+      "name": "Свечение при наведении",
+      "css": "transition: box-shadow 0.3s ease; } .hover-glow:hover { box-shadow: 0 0 20px rgba(0,123,255,0.5);"
+    },
+    "glass": {
+      "name": "Стеклянный эффект",
+      "css": "background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2);"
+    }
+  },
+  "layouts": {
+    "grid_2": {
+      "name": "Сетка 2 колонки",
+      "css": "display: grid; grid-template-columns: 1fr 1fr; gap: 20px;"
+    },
+    "grid_3": {
+      "name": "Сетка 3 колонки",
+      "css": "display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;"
+    },
+    "flex_center": {
+      "name": "Flex по центру",
+      "css": "display: flex; justify-content: center; align-items: center;"
+    },
+    "flex_between": {
+      "name": "Flex между элементами",
+      "css": "display: flex; justify-content: space-between; align-items: center;"
+    }
+  },
+  "utilities": {
+    "text_center": {
+      "name": "Текст по центру",
+      "css": "text-align: center;"
+    },
+    "text_gradient": {
+      "name": "Градиентный текст",
+      "css": "background: linear-gradient(45deg, #ff6b6b, #4ecdc4); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"
+    },
+    "hidden": {
+      "name": "Скрытый элемент",
+      "css": "display: none;"
+    },
+    "responsive": {
+      "name": "Адаптивный контейнер",
+      "css": "max-width: 1200px; margin: 0 auto; padding: 0 20px;"
+    }
+  },
+  "predefined_styles": {
+    "card_modern": {
+      "name": "Современная карточка",
+      "css": "background: white; border-radius: 15px; padding: 25px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); transition: transform 0.3s ease; } .card-modern:hover { transform: translateY(-5px);"
+    },
+    "button_modern": {
+      "name": "Современная кнопка",
+      "css": "background: linear-gradient(45deg, #667eea, #764ba2); color: white; padding: 12px 30px; border: none; border-radius: 25px; font-weight: 600; transition: all 0.3s ease; } .button-modern:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(102,126,234,0.4);"
+    },
+    "section_hero": {
+      "name": "Героическая секция",
+      "css": "min-height: 100vh; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; text-align: center;"
+    },
+    "navbar_glass": {
+      "name": "Стеклянная навигация",
+      "css": "background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255,255,255,0.2); position: fixed; top: 0; width: 100%; z-index: 1000;"
+    }
+  }
+} 

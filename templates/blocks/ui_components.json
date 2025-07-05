@@ -1,0 +1,155 @@
+{
+  "components": {
+    "buttons": {
+      "primary": {
+        "name": "Основная кнопка",
+        "html": "<button class='btn btn-primary'>Кнопка</button>",
+        "css": ".btn-primary { background: #007bff; color: white; padding: 10px 20px; border: none; border-radius: 5px; }",
+        "variants": ["small", "large", "outline", "rounded"]
+      },
+      "secondary": {
+        "name": "Вторичная кнопка",
+        "html": "<button class='btn btn-secondary'>Кнопка</button>",
+        "css": ".btn-secondary { background: #6c757d; color: white; padding: 10px 20px; border: none; border-radius: 5px; }"
+      },
+      "success": {
+        "name": "Кнопка успеха",
+        "html": "<button class='btn btn-success'>Успех</button>",
+        "css": ".btn-success { background: #28a745; color: white; padding: 10px 20px; border: none; border-radius: 5px; }"
+      },
+      "danger": {
+        "name": "Кнопка опасности",
+        "html": "<button class='btn btn-danger'>Удалить</button>",
+        "css": ".btn-danger { background: #dc3545; color: white; padding: 10px 20px; border: none; border-radius: 5px; }"
+      },
+      "gradient": {
+        "name": "Градиентная кнопка",
+        "html": "<button class='btn btn-gradient'>Градиент</button>",
+        "css": ".btn-gradient { background: linear-gradient(45deg, #ff6b6b, #4ecdc4); color: white; padding: 12px 24px; border: none; border-radius: 25px; }"
+      }
+    },
+    "forms": {
+      "contact_form": {
+        "name": "Контактная форма",
+        "html": "<form class='contact-form'><input type='text' placeholder='Имя'><input type='email' placeholder='Email'><textarea placeholder='Сообщение'></textarea><button type='submit'>Отправить</button></form>",
+        "css": ".contact-form { display: flex; flex-direction: column; gap: 15px; } .contact-form input, .contact-form textarea { padding: 10px; border: 1px solid #ddd; border-radius: 5px; }"
+      },
+      "search_form": {
+        "name": "Форма поиска",
+        "html": "<form class='search-form'><input type='search' placeholder='Поиск...'><button type='submit'>🔍</button></form>",
+        "css": ".search-form { display: flex; } .search-form input { flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 5px 0 0 5px; } .search-form button { padding: 10px 15px; border: 1px solid #ddd; border-left: none; border-radius: 0 5px 5px 0; }"
+      }
+    },
+    "cards": {
+      "product_card": {
+        "name": "Карточка товара",
+        "html": "<div class='product-card'><img src='product.jpg'><h3>Название товара</h3><p>Описание товара</p><span class='price'>1000₽</span><button>В корзину</button></div>",
+        "css": ".product-card { border: 1px solid #ddd; border-radius: 10px; padding: 15px; text-align: center; } .product-card img { width: 100%; height: 200px; object-fit: cover; border-radius: 5px; } .price { font-size: 1.2em; font-weight: bold; color: #007bff; }"
+      },
+      "testimonial_card": {
+        "name": "Карточка отзыва",
+        "html": "<div class='testimonial-card'><p>Отличный сервис!</p><div class='author'><img src='avatar.jpg'><span>Иван Иванов</span></div></div>",
+        "css": ".testimonial-card { background: #f8f9fa; padding: 20px; border-radius: 10px; } .author { display: flex; align-items: center; gap: 10px; margin-top: 15px; } .author img { width: 40px; height: 40px; border-radius: 50%; }"
+      }
+    },
+    "navigation": {
+      "navbar": {
+        "name": "Навигационная панель",
+        "html": "<nav class='navbar'><div class='logo'>Логотип</div><ul class='nav-links'><li><a href='#home'>Главная</a></li><li><a href='#about'>О нас</a></li><li><a href='#services'>Услуги</a></li><li><a href='#contact'>Контакты</a></li></ul></nav>",
+        "css": ".navbar { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; } .nav-links { display: flex; list-style: none; gap: 20px; } .nav-links a { text-decoration: none; color: #333; }"
+      },
+      "sidebar": {
+        "name": "Боковая панель",
+        "html": "<aside class='sidebar'><h3>Меню</h3><ul><li><a href='#'>Пункт 1</a></li><li><a href='#'>Пункт 2</a></li><li><a href='#'>Пункт 3</a></li></ul></aside>",
+        "css": ".sidebar { width: 250px; background: #f8f9fa; padding: 20px; } .sidebar ul { list-style: none; } .sidebar a { text-decoration: none; color: #333; }"
+      }
+    },
+    "modals": {
+      "basic_modal": {
+        "name": "Базовое модальное окно",
+        "html": "<div class='modal'><div class='modal-content'><span class='close'>&times;</span><h2>Заголовок</h2><p>Содержимое модального окна</p></div></div>",
+        "css": ".modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); } .modal-content { background-color: white; margin: 15% auto; padding: 20px; border-radius: 5px; width: 80%; max-width: 500px; } .close { float: right; font-size: 28px; font-weight: bold; cursor: pointer; }"
+      }
+    },
+    "alerts": {
+      "success_alert": {
+        "name": "Успешное уведомление",
+        "html": "<div class='alert alert-success'>Операция выполнена успешно!</div>",
+        "css": ".alert-success { background-color: #d4edda; color: #155724; padding: 15px; border-radius: 5px; border: 1px solid #c3e6cb; }"
+      },
+      "error_alert": {
+        "name": "Уведомление об ошибке",
+        "html": "<div class='alert alert-error'>Произошла ошибка!</div>",
+        "css": ".alert-error { background-color: #f8d7da; color: #721c24; padding: 15px; border-radius: 5px; border: 1px solid #f5c6cb; }"
+      }
+    }
+  },
+  "animations": {
+    "fade_in": {
+      "name": "Появление",
+      "css": "@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } } .fade-in { animation: fadeIn 0.5s ease-in; }"
+    },
+    "slide_up": {
+      "name": "Слайд снизу",
+      "css": "@keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } } .slide-up { animation: slideUp 0.6s ease-out; }"
+    },
+    "bounce": {
+      "name": "Отскок",
+      "css": "@keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateY(0); } 40% { transform: translateY(-10px); } 60% { transform: translateY(-5px); } } .bounce { animation: bounce 1s; }"
+    }
+  },
+  "color_schemes": {
+    "modern_blue": {
+      "name": "Современный синий",
+      "primary": "#007bff",
+      "secondary": "#6c757d",
+      "success": "#28a745",
+      "danger": "#dc3545",
+      "warning": "#ffc107",
+      "info": "#17a2b8"
+    },
+    "warm_orange": {
+      "name": "Теплый оранжевый",
+      "primary": "#fd7e14",
+      "secondary": "#6f42c1",
+      "success": "#20c997",
+      "danger": "#e83e8c",
+      "warning": "#ffc107",
+      "info": "#0dcaf0"
+    },
+    "elegant_dark": {
+      "name": "Элегантная темная",
+      "primary": "#343a40",
+      "secondary": "#6c757d",
+      "success": "#198754",
+      "danger": "#dc3545",
+      "warning": "#ffc107",
+      "info": "#0dcaf0"
+    }
+  },
+  "typography": {
+    "fonts": {
+      "roboto": {
+        "name": "Roboto",
+        "import": "@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');",
+        "css": "font-family: 'Roboto', sans-serif;"
+      },
+      "open_sans": {
+        "name": "Open Sans",
+        "import": "@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap');",
+        "css": "font-family: 'Open Sans', sans-serif;"
+      },
+      "montserrat": {
+        "name": "Montserrat",
+        "import": "@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');",
+        "css": "font-family: 'Montserrat', sans-serif;"
+      }
+    },
+    "headings": {
+      "h1": "font-size: 2.5rem; font-weight: 700; margin-bottom: 1rem;",
+      "h2": "font-size: 2rem; font-weight: 600; margin-bottom: 0.8rem;",
+      "h3": "font-size: 1.5rem; font-weight: 500; margin-bottom: 0.6rem;",
+      "h4": "font-size: 1.25rem; font-weight: 500; margin-bottom: 0.5rem;"
+    }
+  }
+} 
