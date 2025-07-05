@@ -1,14 +1,16 @@
 #!/usr/bin/env python3
 """
-ProThemesRU Telegram Bot - Background Worker
-Runs the bot in polling mode for Render worker dyno
+ProThemesRU Telegram Bot - Main Application
+Deployment-ready Flask application for Render
 """
 
 import os
 import logging
-import asyncio
+from flask import Flask, request, jsonify
+from telegram import Update, Bot
 from telegram.ext import Application, CommandHandler, MessageHandler, filters, ContextTypes
-from telegram import Update
+import asyncio
+from threading import Thread
 import json
 
 # Configure logging
@@ -18,9 +20,19 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
+# Initialize Flask app
+app = Flask(__name__)
+
 # Bot configuration
 BOT_TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
 ADMIN_CHAT_ID = os.getenv('TELEGRAM_ADMIN_CHAT_ID')
+WEBHOOK_URL = os.getenv('WEBHOOK_URL', '')
+
+# Initialize bot
+bot = Bot(token=BOT_TOKEN) if BOT_TOKEN else None
+
+# Store bot application globally
+bot_app = None
 
 def load_templates():
     """Load templates from JSON files"""
@@ -267,36 +279,104 @@ async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE):
     """Handle errors"""
     logger.error(f'Exception while handling an update: {context.error}')
 
-async def main():
-    """Main function"""
-    if not BOT_TOKEN:
-        logger.error("BOT_TOKEN not configured!")
-        return
+def run_bot():
+    """Run the bot in a separate thread"""
+    global bot_app
     
-    # Create application
-    application = Application.builder().token(BOT_TOKEN).build()
+    async def main():
+        # Create application
+        bot_app = Application.builder().token(BOT_TOKEN).build()
+        
+        # Add handlers
+        bot_app.add_handler(CommandHandler('start', start_command))
+        bot_app.add_handler(CommandHandler('templates', templates_command))
+        bot_app.add_handler(CommandHandler('blocks', blocks_command))
+        bot_app.add_handler(CommandHandler('styles', styles_command))
+        bot_app.add_handler(CommandHandler('constructor', constructor_command))
+        bot_app.add_handler(CommandHandler('order', order_command))
+        bot_app.add_handler(CommandHandler('pricing', pricing_command))
+        bot_app.add_handler(CommandHandler('help', help_command))
+        
+        # Add message handler
+        bot_app.add_handler(MessageHandler(filters.TEXT, handle_message))
+        
+        # Add error handler
+        bot_app.add_error_handler(error_handler)
+        
+        # Set webhook if URL is provided
+        if WEBHOOK_URL:
+            await bot_app.bot.set_webhook(url=WEBHOOK_URL)
+            logger.info(f"Webhook set to {WEBHOOK_URL}")
+        else:
+            # Start polling
+            await bot_app.initialize()
+            await bot_app.start()
+            await bot_app.run_polling(allowed_updates=Update.ALL_TYPES)
     
-    # Add handlers
-    application.add_handler(CommandHandler('start', start_command))
-    application.add_handler(CommandHandler('templates', templates_command))
-    application.add_handler(CommandHandler('blocks', blocks_command))
-    application.add_handler(CommandHandler('styles', styles_command))
-    application.add_handler(CommandHandler('constructor', constructor_command))
-    application.add_handler(CommandHandler('order', order_command))
-    application.add_handler(CommandHandler('pricing', pricing_command))
-    application.add_handler(CommandHandler('help', help_command))
+    # Run the bot
+    asyncio.run(main())
+
+# Flask routes
+@app.route('/')
+def home():
+    """Home page"""
+    return jsonify({
+        "status": "success",
+        "message": "ProThemesRU Telegram Bot is running!",
+        "version": "1.0.0",
+        "endpoints": {
+            "webhook": "/webhook",
+            "health": "/health",
+            "status": "/status"
+        }
+    })
+
+@app.route('/webhook', methods=['POST'])
+def webhook():
+    """Handle webhook from Telegram"""
+    if bot_app is None:
+        return jsonify({"error": "Bot not initialized"}), 500
     
-    # Add message handler
-    application.add_handler(MessageHandler(filters.TEXT, handle_message))
-    
-    # Add error handler
-    application.add_error_handler(error_handler)
-    
-    # Start polling
-    logger.info("Starting bot in polling mode...")
-    await application.initialize()
-    await application.start()
-    await application.run_polling(allowed_updates=Update.ALL_TYPES)
+    try:
+        # Process the update
+        update = Update.de_json(request.get_json(), bot_app.bot)
+        
+        # Handle the update
+        asyncio.create_task(bot_app.process_update(update))
+        
+        return jsonify({"status": "ok"})
+    except Exception as e:
+        logger.error(f"Error processing webhook: {e}")
+        return jsonify({"error": str(e)}), 500
+
+@app.route('/health')
+def health():
+    """Health check endpoint"""
+    return jsonify({
+        "status": "healthy",
+        "bot_token": "configured" if BOT_TOKEN else "missing",
+        "admin_chat_id": "configured" if ADMIN_CHAT_ID else "missing"
+    })
+
+@app.route('/status')
+def status():
+    """Status endpoint"""
+    return jsonify({
+        "status": "running",
+        "bot": "active" if bot_app else "inactive",
+        "webhook": "configured" if WEBHOOK_URL else "polling"
+    })
 
 if __name__ == '__main__':
-    asyncio.run(main()) 
+    # Start bot in a separate thread
+    if BOT_TOKEN:
+        bot_thread = Thread(target=run_bot)
+        bot_thread.daemon = True
+        bot_thread.start()
+        logger.info("Bot started in background thread")
+    else:
+        logger.error("BOT_TOKEN not configured!")
+    
+    # Run Flask app
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port, debug=False) 

@@ -1,2 +1,2 @@
-web: python webhook_bot.py
+web: gunicorn --bind 0.0.0.0:$PORT --workers 1 --threads 8 --timeout 0 app:app
 worker: python run_bot.py 

@@ -1,17 +1,30 @@
 services:
-  - type: worker
-    name: prothemesru-telegram-bot
+  - type: web
+    name: prothemesru-bot
     env: python
+    plan: free
     buildCommand: pip install -r requirements.txt
-    startCommand: python webhook_bot.py
+    startCommand: gunicorn --bind 0.0.0.0:$PORT --workers 1 --threads 8 --timeout 0 app:app
     envVars:
       - key: TELEGRAM_BOT_TOKEN
         sync: false
       - key: TELEGRAM_ADMIN_CHAT_ID
         sync: false
-      - key: API_BASE_URL
-        value: https://prothemesru.herokuapp.com
-      - key: LOG_LEVEL
-        value: INFO
-      - key: PORT
-        value: 10000 
+      - key: RENDER_EXTERNAL_URL
+        value: https://prothemesru-bot.onrender.com
+      - key: PYTHON_VERSION
+        value: 3.11.7
+
+  - type: worker
+    name: prothemesru-bot-worker
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: python run_bot.py
+    envVars:
+      - key: TELEGRAM_BOT_TOKEN
+        sync: false
+      - key: TELEGRAM_ADMIN_CHAT_ID
+        sync: false
+      - key: PYTHON_VERSION
+        value: 3.11.7 
