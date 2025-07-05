@@ -1,0 +1,37 @@
+{
+  "css_frameworks": [
+    "Bootstrap 5.3.0",
+    "Tailwind CSS 3.3.0",
+    "Bulma 0.9.4"
+  ],
+  "icon_libraries": [
+    "Font Awesome 6.4.0",
+    "Material Icons",
+    "Feather Icons"
+  ],
+  "javascript_libraries": [
+    "jQuery 3.7.0",
+    "Alpine.js 3.12.0",
+    "AOS (Animate On Scroll) 2.3.4"
+  ],
+  "color_palettes": [
+    "Material Design Colors",
+    "Tailwind CSS Colors",
+    "Bootstrap Theme Colors"
+  ],
+  "fonts": [
+    "Google Fonts (Roboto, Open Sans, Montserrat, Poppins, Inter)",
+    "System Fonts",
+    "Custom Web Fonts"
+  ],
+  "templates": [
+    "Business Landing Pages",
+    "Portfolio Galleries",
+    "E-commerce Stores",
+    "Corporate Websites",
+    "Blog Platforms",
+    "Restaurant Sites",
+    "Real Estate Agencies",
+    "Medical Centers"
+  ]
+}

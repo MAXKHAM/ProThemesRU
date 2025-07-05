@@ -1,0 +1,26 @@
+/* Font Awesome Icons */
+.fa {
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    line-height: 1;
+}
+
+.fa-home::before { content: "🏠"; }
+.fa-user::before { content: "👤"; }
+.fa-envelope::before { content: "✉️"; }
+.fa-phone::before { content: "📞"; }
+.fa-map-marker::before { content: "📍"; }
+.fa-calendar::before { content: "📅"; }
+.fa-clock::before { content: "🕐"; }
+.fa-star::before { content: "⭐"; }
+.fa-heart::before { content: "❤️"; }
+.fa-shopping-cart::before { content: "🛒"; }
+.fa-search::before { content: "🔍"; }
+.fa-bars::before { content: "☰"; }
+.fa-times::before { content: "✕"; }
+.fa-arrow-right::before { content: "→"; }
+.fa-arrow-left::before { content: "←"; }
+.fa-arrow-up::before { content: "↑"; }
+.fa-arrow-down::before { content: "↓"; }
