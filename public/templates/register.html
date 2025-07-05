@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}Регистрация — ProThemesRU{% endblock %}
+{% block content %}
+<h2>Регистрация</h2>
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      <div class="alert alert-{{ category }}">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+<form method="post" class="space-y-4" id="registerForm">
+    <input name="username" placeholder="Имя" required class="border px-4 py-2 w-full">
+    <input name="email" placeholder="Email" type="email" required class="border px-4 py-2 w-full">
+    <input name="password" placeholder="Пароль" type="password" required class="border px-4 py-2 w-full">
+    <div class="flex items-center">
+      <input type="checkbox" id="ageConfirm" required>
+      <label for="ageConfirm" class="ml-2 text-sm">
+        Мне исполнилось 18 лет, я ознакомлен и согласен с
+        <a href="/privacy" target="_blank">Политикой конфиденциальности</a>,
+        <a href="/terms" target="_blank">Пользовательским соглашением</a> и
+        <a href="/cookie" target="_blank">Cookie Policy</a>.
+      </label>
+    </div>
+    <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded" id="regBtn" disabled>Зарегистрироваться</button>
+</form>
+<script>
+  const ageConfirm = document.getElementById('ageConfirm');
+  const regBtn = document.getElementById('regBtn');
+  ageConfirm.addEventListener('change', function() {
+    regBtn.disabled = !this.checked;
+  });
+</script>
+{% endblock %}

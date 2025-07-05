@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}Оплата отменена{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card border-warning">
+                <div class="card-header bg-warning text-dark">
+                    <h3 class="mb-0">
+                        <i class="fas fa-times-circle me-2"></i>
+                        Оплата отменена
+                    </h3>
+                </div>
+                <div class="card-body text-center">
+                    <div class="mb-4">
+                        <i class="fas fa-times-circle text-warning" style="font-size: 4rem;"></i>
+                    </div>
+                    
+                    <h4 class="card-title mb-3">Оплата не была завершена</h4>
+                    
+                    {% if order %}
+                    <div class="alert alert-warning">
+                        <strong>Детали заказа:</strong><br>
+                        Шаблон: {{ order.template_name }}<br>
+                        Сумма: {{ order.price }} ₽<br>
+                        Статус: <span class="badge bg-secondary">Отменен</span>
+                    </div>
+                    {% endif %}
+                    
+                    <p class="card-text">
+                        Вы можете попробовать оплатить заказ снова или выбрать другой способ оплаты.
+                    </p>
+                    
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                        <a href="{{ url_for('constructor.templates') }}" class="btn btn-primary btn-lg">
+                            <i class="fas fa-shopping-cart me-2"></i>
+                            Выбрать шаблон
+                        </a>
+                        <a href="{{ url_for('main.index') }}" class="btn btn-outline-secondary btn-lg">
+                            <i class="fas fa-home me-2"></i>
+                            На главную
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

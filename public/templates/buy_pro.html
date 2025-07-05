@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Купить PRO — ProThemesRU{% endblock %}
+{% block content %}
+<h1 class="text-2xl font-bold mb-4">Купить PRO-доступ</h1>
+<p class="mb-4">Разблокируйте скачивание сайтов и шаблонов. Цена: <b>299 ₽</b></p>
+<form method="post" class="space-y-4" id="buyProForm">
+  <input name="name" placeholder="Ваше имя (или ник)" required class="border px-4 py-2 w-full">
+  <div class="flex items-center">
+    <input type="checkbox" id="ageConfirm" required>
+    <label for="ageConfirm" class="ml-2 text-sm">
+      Мне исполнилось 18 лет, я ознакомлен и согласен с
+      <a href="/privacy" target="_blank">Политикой конфиденциальности</a>,
+      <a href="/terms" target="_blank">Пользовательским соглашением</a> и
+      <a href="/cookie" target="_blank">Cookie Policy</a>.
+    </label>
+  </div>
+  <button type="submit" class="bg-green-600 text-white px-6 py-2 rounded" id="payBtn" disabled>Оплатить</button>
+</form>
+<p class="text-sm text-gray-500 mt-4">Это MVP: реальный платёж можно подключить через YooKassa</p>
+<script>
+  const ageConfirm = document.getElementById('ageConfirm');
+  const payBtn = document.getElementById('payBtn');
+  ageConfirm.addEventListener('change', function() {
+    payBtn.disabled = !this.checked;
+  });
+</script>
+{% endblock %}

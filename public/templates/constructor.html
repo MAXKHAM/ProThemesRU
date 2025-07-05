@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block title %}Конструктор сайтов{% endblock %}
+{% block content %}
+<div class="constructor-container">
+    <div class="sidebar">
+        <div class="blocks-section">
+            <h2>Блоки</h2>
+            <div class="blocks-container">
+                <!-- Блоки будут загружены через JavaScript -->
+                <div class="mb-3 p-2 border rounded bg-light">
+                    <strong>Hero</strong><br>
+                    <button class="btn btn-primary btn-sm mt-2" onclick="addBlock('hero')">Добавить</button>
+                </div>
+                <div class="mb-3 p-2 border rounded bg-light">
+                    <strong>Контакты</strong><br>
+                    <button class="btn btn-primary btn-sm mt-2" onclick="addBlock('contacts')">Добавить</button>
+                </div>
+                <div class="mb-3 p-2 border rounded bg-light">
+                    <strong>О компании</strong><br>
+                    <button class="btn btn-primary btn-sm mt-2" onclick="addBlock('about')">Добавить</button>
+                </div>
+            </div>
+        </div>
+        <div class="properties-section">
+            <h2>Свойства</h2>
+            <div class="properties-panel">
+                <!-- Свойства блока -->
+            </div>
+        </div>
+    </div>
+    <div class="editor">
+        <div class="preview">
+            <div class="preview-content">
+                <div id="sitePreview" class="editor-content">
+                    <!-- Содержимое редактора -->
+                </div>
+            </div>
+        </div>
+      <div id="sitePreview"></div>
+    </div>
+  </div>
+</div>
+<script>
+    const blocks = {
+        hero: `<section style="padding:40px;background:linear-gradient(to right,orange,pink);color:#fff;">
+                   <h1>ProThemesRU</h1>
+                   <p>Готовые сайты без кода. Купил шаблон — собрал — продал.</p>
+               </section>`,
+        contacts: `<section style="padding:20px;">
+                       <h3>Контакты</h3>
+                       <p>Email: yourmail@domain.com</p>
+                   </section>`,
+        about: `<section style="padding:20px;">
+                    <h3>О нас</h3>
+                    <p>Мы создаем сайты под ключ без знания кода.</p>
+                </section>`
+    };
+    function addBlock(type) {
+        document.getElementById("sitePreview").innerHTML += blocks[type];
+    }
+</script>
+{% endblock %}

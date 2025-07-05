@@ -1,0 +1,256 @@
+/* Modern Fonts Library for ProThemesRU */
+
+/* ===== GOOGLE FONTS IMPORTS ===== */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;300;400;600;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap');
+
+/* ===== FONT VARIABLES ===== */
+:root {
+    /* Modern Sans-Serif Fonts */
+    --font-inter: 'Inter', sans-serif;
+    --font-poppins: 'Poppins', sans-serif;
+    --font-montserrat: 'Montserrat', sans-serif;
+    --font-roboto: 'Roboto', sans-serif;
+    --font-open-sans: 'Open Sans', sans-serif;
+    --font-nunito: 'Nunito', sans-serif;
+    --font-quicksand: 'Quicksand', sans-serif;
+    --font-source-sans: 'Source Sans Pro', sans-serif;
+    --font-ubuntu: 'Ubuntu', sans-serif;
+    --font-noto-sans: 'Noto Sans', sans-serif;
+    --font-work-sans: 'Work Sans', sans-serif;
+    --font-dm-sans: 'DM Sans', sans-serif;
+    
+    /* Serif Fonts */
+    --font-playfair: 'Playfair Display', serif;
+    --font-merriweather: 'Merriweather', serif;
+    --font-lora: 'Lora', serif;
+    
+    /* Font Weights */
+    --font-thin: 100;
+    --font-extralight: 200;
+    --font-light: 300;
+    --font-normal: 400;
+    --font-medium: 500;
+    --font-semibold: 600;
+    --font-bold: 700;
+    --font-extrabold: 800;
+    --font-black: 900;
+}
+
+/* ===== FONT CLASSES ===== */
+
+/* Inter - Modern, Clean */
+.font-inter { font-family: var(--font-inter); }
+.font-inter-thin { font-family: var(--font-inter); font-weight: var(--font-thin); }
+.font-inter-light { font-family: var(--font-inter); font-weight: var(--font-light); }
+.font-inter-normal { font-family: var(--font-inter); font-weight: var(--font-normal); }
+.font-inter-medium { font-family: var(--font-inter); font-weight: var(--font-medium); }
+.font-inter-semibold { font-family: var(--font-inter); font-weight: var(--font-semibold); }
+.font-inter-bold { font-family: var(--font-inter); font-weight: var(--font-bold); }
+
+/* Poppins - Modern, Geometric */
+.font-poppins { font-family: var(--font-poppins); }
+.font-poppins-thin { font-family: var(--font-poppins); font-weight: var(--font-thin); }
+.font-poppins-light { font-family: var(--font-poppins); font-weight: var(--font-light); }
+.font-poppins-normal { font-family: var(--font-poppins); font-weight: var(--font-normal); }
+.font-poppins-medium { font-family: var(--font-poppins); font-weight: var(--font-medium); }
+.font-poppins-semibold { font-family: var(--font-poppins); font-weight: var(--font-semibold); }
+.font-poppins-bold { font-family: var(--font-poppins); font-weight: var(--font-bold); }
+
+/* Montserrat - Clean, Professional */
+.font-montserrat { font-family: var(--font-montserrat); }
+.font-montserrat-thin { font-family: var(--font-montserrat); font-weight: var(--font-thin); }
+.font-montserrat-light { font-family: var(--font-montserrat); font-weight: var(--font-light); }
+.font-montserrat-normal { font-family: var(--font-montserrat); font-weight: var(--font-normal); }
+.font-montserrat-medium { font-family: var(--font-montserrat); font-weight: var(--font-medium); }
+.font-montserrat-semibold { font-family: var(--font-montserrat); font-weight: var(--font-semibold); }
+.font-montserrat-bold { font-family: var(--font-montserrat); font-weight: var(--font-bold); }
+
+/* Roboto - Google's Default */
+.font-roboto { font-family: var(--font-roboto); }
+.font-roboto-light { font-family: var(--font-roboto); font-weight: var(--font-light); }
+.font-roboto-normal { font-family: var(--font-roboto); font-weight: var(--font-normal); }
+.font-roboto-medium { font-family: var(--font-roboto); font-weight: var(--font-medium); }
+.font-roboto-bold { font-family: var(--font-roboto); font-weight: var(--font-bold); }
+
+/* Open Sans - Readable, Friendly */
+.font-open-sans { font-family: var(--font-open-sans); }
+.font-open-sans-light { font-family: var(--font-open-sans); font-weight: var(--font-light); }
+.font-open-sans-normal { font-family: var(--font-open-sans); font-weight: var(--font-normal); }
+.font-open-sans-semibold { font-family: var(--font-open-sans); font-weight: var(--font-semibold); }
+.font-open-sans-bold { font-family: var(--font-open-sans); font-weight: var(--font-bold); }
+
+/* Nunito - Rounded, Friendly */
+.font-nunito { font-family: var(--font-nunito); }
+.font-nunito-light { font-family: var(--font-nunito); font-weight: var(--font-light); }
+.font-nunito-normal { font-family: var(--font-nunito); font-weight: var(--font-normal); }
+.font-nunito-semibold { font-family: var(--font-nunito); font-weight: var(--font-semibold); }
+.font-nunito-bold { font-family: var(--font-nunito); font-weight: var(--font-bold); }
+
+/* Quicksand - Modern, Rounded */
+.font-quicksand { font-family: var(--font-quicksand); }
+.font-quicksand-light { font-family: var(--font-quicksand); font-weight: var(--font-light); }
+.font-quicksand-normal { font-family: var(--font-quicksand); font-weight: var(--font-normal); }
+.font-quicksand-medium { font-family: var(--font-quicksand); font-weight: var(--font-medium); }
+.font-quicksand-semibold { font-family: var(--font-quicksand); font-weight: var(--font-semibold); }
+.font-quicksand-bold { font-family: var(--font-quicksand); font-weight: var(--font-bold); }
+
+/* Serif Fonts */
+.font-playfair { font-family: var(--font-playfair); }
+.font-playfair-normal { font-family: var(--font-playfair); font-weight: var(--font-normal); }
+.font-playfair-medium { font-family: var(--font-playfair); font-weight: var(--font-medium); }
+.font-playfair-semibold { font-family: var(--font-playfair); font-weight: var(--font-semibold); }
+.font-playfair-bold { font-family: var(--font-playfair); font-weight: var(--font-bold); }
+
+.font-merriweather { font-family: var(--font-merriweather); }
+.font-merriweather-light { font-family: var(--font-merriweather); font-weight: var(--font-light); }
+.font-merriweather-normal { font-family: var(--font-merriweather); font-weight: var(--font-normal); }
+.font-merriweather-bold { font-family: var(--font-merriweather); font-weight: var(--font-bold); }
+
+.font-lora { font-family: var(--font-lora); }
+.font-lora-normal { font-family: var(--font-lora); font-weight: var(--font-normal); }
+.font-lora-medium { font-family: var(--font-lora); font-weight: var(--font-medium); }
+.font-lora-semibold { font-family: var(--font-lora); font-weight: var(--font-semibold); }
+.font-lora-bold { font-family: var(--font-lora); font-weight: var(--font-bold); }
+
+/* ===== TYPOGRAPHY SCALE ===== */
+.text-xs { font-size: 0.75rem; line-height: 1rem; }
+.text-sm { font-size: 0.875rem; line-height: 1.25rem; }
+.text-base { font-size: 1rem; line-height: 1.5rem; }
+.text-lg { font-size: 1.125rem; line-height: 1.75rem; }
+.text-xl { font-size: 1.25rem; line-height: 1.75rem; }
+.text-2xl { font-size: 1.5rem; line-height: 2rem; }
+.text-3xl { font-size: 1.875rem; line-height: 2.25rem; }
+.text-4xl { font-size: 2.25rem; line-height: 2.5rem; }
+.text-5xl { font-size: 3rem; line-height: 1; }
+.text-6xl { font-size: 3.75rem; line-height: 1; }
+
+/* ===== HEADING STYLES ===== */
+.heading-1 {
+    font-size: 3.5rem;
+    line-height: 1.1;
+    font-weight: var(--font-bold);
+    letter-spacing: -0.02em;
+}
+
+.heading-2 {
+    font-size: 2.5rem;
+    line-height: 1.2;
+    font-weight: var(--font-semibold);
+    letter-spacing: -0.01em;
+}
+
+.heading-3 {
+    font-size: 2rem;
+    line-height: 1.3;
+    font-weight: var(--font-semibold);
+}
+
+.heading-4 {
+    font-size: 1.5rem;
+    line-height: 1.4;
+    font-weight: var(--font-medium);
+}
+
+.heading-5 {
+    font-size: 1.25rem;
+    line-height: 1.5;
+    font-weight: var(--font-medium);
+}
+
+.heading-6 {
+    font-size: 1rem;
+    line-height: 1.6;
+    font-weight: var(--font-medium);
+}
+
+/* ===== BODY TEXT STYLES ===== */
+.body-large {
+    font-size: 1.125rem;
+    line-height: 1.7;
+    font-weight: var(--font-normal);
+}
+
+.body-normal {
+    font-size: 1rem;
+    line-height: 1.6;
+    font-weight: var(--font-normal);
+}
+
+.body-small {
+    font-size: 0.875rem;
+    line-height: 1.5;
+    font-weight: var(--font-normal);
+}
+
+.caption {
+    font-size: 0.75rem;
+    line-height: 1.4;
+    font-weight: var(--font-normal);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* ===== FONT COMBINATIONS ===== */
+.font-combo-modern {
+    font-family: var(--font-inter);
+}
+
+.font-combo-modern h1, .font-combo-modern h2, .font-combo-modern h3 {
+    font-family: var(--font-poppins);
+    font-weight: var(--font-semibold);
+}
+
+.font-combo-elegant {
+    font-family: var(--font-open-sans);
+}
+
+.font-combo-elegant h1, .font-combo-elegant h2, .font-combo-elegant h3 {
+    font-family: var(--font-playfair);
+    font-weight: var(--font-medium);
+}
+
+.font-combo-professional {
+    font-family: var(--font-roboto);
+}
+
+.font-combo-professional h1, .font-combo-professional h2, .font-combo-professional h3 {
+    font-family: var(--font-montserrat);
+    font-weight: var(--font-semibold);
+}
+
+/* ===== RESPONSIVE TYPOGRAPHY ===== */
+@media (max-width: 768px) {
+    .heading-1 { font-size: 2.5rem; }
+    .heading-2 { font-size: 2rem; }
+    .heading-3 { font-size: 1.75rem; }
+    .heading-4 { font-size: 1.5rem; }
+    .heading-5 { font-size: 1.25rem; }
+    .heading-6 { font-size: 1rem; }
+    
+    .body-large { font-size: 1rem; }
+    .body-normal { font-size: 0.875rem; }
+    .body-small { font-size: 0.75rem; }
+}
+
+@media (max-width: 480px) {
+    .heading-1 { font-size: 2rem; }
+    .heading-2 { font-size: 1.75rem; }
+    .heading-3 { font-size: 1.5rem; }
+    .heading-4 { font-size: 1.25rem; }
+    .heading-5 { font-size: 1.125rem; }
+    .heading-6 { font-size: 1rem; }
+} 

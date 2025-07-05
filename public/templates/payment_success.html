@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}Оплата успешна{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card border-success">
+                <div class="card-header bg-success text-white">
+                    <h3 class="mb-0">
+                        <i class="fas fa-check-circle me-2"></i>
+                        Оплата успешно завершена!
+                    </h3>
+                </div>
+                <div class="card-body text-center">
+                    <div class="mb-4">
+                        <i class="fas fa-check-circle text-success" style="font-size: 4rem;"></i>
+                    </div>
+                    
+                    <h4 class="card-title mb-3">Спасибо за покупку!</h4>
+                    
+                    {% if order %}
+                    <div class="alert alert-info">
+                        <strong>Детали заказа:</strong><br>
+                        Шаблон: {{ order.template_name }}<br>
+                        Сумма: {{ order.price }} ₽<br>
+                        Статус: 
+                        {% if order.status == 'completed' %}
+                            <span class="badge bg-success">Завершен</span>
+                        {% else %}
+                            <span class="badge bg-warning">В обработке</span>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+                    
+                    <p class="card-text">
+                        Ваш сайт готов к использованию. Вы можете скачать его в разделе "Мои заказы".
+                    </p>
+                    
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                        <a href="{{ url_for('orders_bp.my_orders') }}" class="btn btn-primary btn-lg">
+                            <i class="fas fa-download me-2"></i>
+                            Перейти к заказам
+                        </a>
+                        <a href="{{ url_for('constructor.constructor') }}" class="btn btn-outline-primary btn-lg">
+                            <i class="fas fa-plus me-2"></i>
+                            Создать новый сайт
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

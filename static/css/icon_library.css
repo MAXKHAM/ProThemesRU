@@ -1,0 +1,257 @@
+/* Modern Icon Library for ProThemesRU */
+
+/* ===== ICON FONT IMPORTS ===== */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
+@import url('https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css');
+
+/* ===== CUSTOM ICON CLASSES ===== */
+
+/* Business Icons */
+.icon-business { content: "💼"; }
+.icon-chart { content: "📊"; }
+.icon-growth { content: "📈"; }
+.icon-target { content: "🎯"; }
+.icon-strategy { content: "🧠"; }
+.icon-meeting { content: "🤝"; }
+.icon-presentation { content: "📋"; }
+.icon-deal { content: "🤝"; }
+
+/* Technology Icons */
+.icon-code { content: "💻"; }
+.icon-app { content: "📱"; }
+.icon-web { content: "🌐"; }
+.icon-cloud { content: "☁️"; }
+.icon-ai { content: "🤖"; }
+.icon-data { content: "📊"; }
+.icon-security { content: "🔒"; }
+.icon-api { content: "🔌"; }
+
+/* Design Icons */
+.icon-design { content: "🎨"; }
+.icon-creative { content: "✨"; }
+.icon-palette { content: "🎨"; }
+.icon-typography { content: "📝"; }
+.icon-layout { content: "📐"; }
+.icon-color { content: "🌈"; }
+.icon-illustration { content: "🖼️"; }
+.icon-branding { content: "🏷️"; }
+
+/* E-commerce Icons */
+.icon-shopping { content: "🛒"; }
+.icon-cart { content: "🛍️"; }
+.icon-payment { content: "💳"; }
+.icon-delivery { content: "🚚"; }
+.icon-discount { content: "🏷️"; }
+.icon-review { content: "⭐"; }
+.icon-wishlist { content: "❤️"; }
+.icon-inventory { content: "📦"; }
+
+/* Education Icons */
+.icon-learning { content: "📚"; }
+.icon-course { content: "🎓"; }
+.icon-video { content: "🎥"; }
+.icon-quiz { content: "❓"; }
+.icon-certificate { content: "🏆"; }
+.icon-student { content: "👨‍🎓"; }
+.icon-teacher { content: "👩‍🏫"; }
+.icon-library { content: "📖"; }
+
+/* Health & Fitness Icons */
+.icon-fitness { content: "💪"; }
+.icon-gym { content: "🏋️"; }
+.icon-yoga { content: "🧘"; }
+.icon-nutrition { content: "🥗"; }
+.icon-meditation { content: "🧘‍♀️"; }
+.icon-running { content: "🏃"; }
+.icon-swimming { content: "🏊"; }
+.icon-cycling { content: "🚴"; }
+
+/* Legal Icons */
+.icon-law { content: "⚖️"; }
+.icon-court { content: "🏛️"; }
+.icon-contract { content: "📄"; }
+.icon-justice { content: "⚖️"; }
+.icon-consultation { content: "💼"; }
+.icon-document { content: "📋"; }
+.icon-case { content: "📁"; }
+.icon-advocate { content: "👨‍💼"; }
+
+/* Construction Icons */
+.icon-construction { content: "🏗️"; }
+.icon-building { content: "🏢"; }
+.icon-tools { content: "🔧"; }
+.icon-architecture { content: "🏛️"; }
+.icon-blueprint { content: "📐"; }
+.icon-crane { content: "🏗️"; }
+.icon-worker { content: "👷"; }
+.icon-project { content: "📋"; }
+
+/* ===== ANIMATED ICONS ===== */
+.icon-bounce {
+    animation: iconBounce 2s infinite;
+}
+
+.icon-pulse {
+    animation: iconPulse 2s infinite;
+}
+
+.icon-rotate {
+    animation: iconRotate 3s linear infinite;
+}
+
+.icon-shake {
+    animation: iconShake 0.5s ease-in-out infinite;
+}
+
+.icon-glow {
+    animation: iconGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes iconBounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-10px); }
+    60% { transform: translateY(-5px); }
+}
+
+@keyframes iconPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+@keyframes iconRotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes iconShake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+@keyframes iconGlow {
+    from { filter: drop-shadow(0 0 5px currentColor); }
+    to { filter: drop-shadow(0 0 20px currentColor); }
+}
+
+/* ===== ICON SIZES ===== */
+.icon-xs { font-size: 0.75rem; }
+.icon-sm { font-size: 1rem; }
+.icon-md { font-size: 1.5rem; }
+.icon-lg { font-size: 2rem; }
+.icon-xl { font-size: 3rem; }
+.icon-2xl { font-size: 4rem; }
+
+/* ===== ICON COLORS ===== */
+.icon-primary { color: #667eea; }
+.icon-secondary { color: #764ba2; }
+.icon-success { color: #10b981; }
+.icon-danger { color: #ef4444; }
+.icon-warning { color: #f59e0b; }
+.icon-info { color: #3b82f6; }
+.icon-light { color: #6b7280; }
+.icon-dark { color: #1f2937; }
+
+/* ===== ICON BACKGROUNDS ===== */
+.icon-bg-primary { background-color: #667eea; color: white; }
+.icon-bg-secondary { background-color: #764ba2; color: white; }
+.icon-bg-success { background-color: #10b981; color: white; }
+.icon-bg-danger { background-color: #ef4444; color: white; }
+.icon-bg-warning { background-color: #f59e0b; color: white; }
+.icon-bg-info { background-color: #3b82f6; color: white; }
+
+/* ===== ICON SHAPES ===== */
+.icon-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-square {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-rounded {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ===== ICON GROUPS ===== */
+.icon-group {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.icon-group-vertical {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+/* ===== CUSTOM ICON SETS ===== */
+
+/* Social Media Icons */
+.icon-facebook::before { content: "\f39e"; font-family: "Font Awesome 6 Brands"; }
+.icon-twitter::before { content: "\f099"; font-family: "Font Awesome 6 Brands"; }
+.icon-instagram::before { content: "\f16d"; font-family: "Font Awesome 6 Brands"; }
+.icon-linkedin::before { content: "\f08c"; font-family: "Font Awesome 6 Brands"; }
+.icon-youtube::before { content: "\f167"; font-family: "Font Awesome 6 Brands"; }
+.icon-tiktok::before { content: "\f07b"; font-family: "Font Awesome 6 Brands"; }
+.icon-telegram::before { content: "\f2c6"; font-family: "Font Awesome 6 Brands"; }
+.icon-whatsapp::before { content: "\f232"; font-family: "Font Awesome 6 Brands"; }
+
+/* Payment Icons */
+.icon-visa::before { content: "\f1f0"; font-family: "Font Awesome 6 Brands"; }
+.icon-mastercard::before { content: "\f1f1"; font-family: "Font Awesome 6 Brands"; }
+.icon-paypal::before { content: "\f1ed"; font-family: "Font Awesome 6 Brands"; }
+.icon-stripe::before { content: "\f1f5"; font-family: "Font Awesome 6 Brands"; }
+.icon-bitcoin::before { content: "\f15a"; font-family: "Font Awesome 6 Brands"; }
+.icon-ethereum::before { content: "\f42e"; font-family: "Font Awesome 6 Brands"; }
+
+/* Technology Icons */
+.icon-react::before { content: "\f41b"; font-family: "Font Awesome 6 Brands"; }
+.icon-vue::before { content: "\f41f"; font-family: "Font Awesome 6 Brands"; }
+.icon-angular::before { content: "\f420"; font-family: "Font Awesome 6 Brands"; }
+.icon-node::before { content: "\f419"; font-family: "Font Awesome 6 Brands"; }
+.icon-python::before { content: "\f3e2"; font-family: "Font Awesome 6 Brands"; }
+.icon-java::before { content: "\f4e4"; font-family: "Font Awesome 6 Brands"; }
+.icon-php::before { content: "\f457"; font-family: "Font Awesome 6 Brands"; }
+.icon-wordpress::before { content: "\f19a"; font-family: "Font Awesome 6 Brands"; }
+
+/* ===== RESPONSIVE ICONS ===== */
+@media (max-width: 768px) {
+    .icon-lg { font-size: 1.5rem; }
+    .icon-xl { font-size: 2rem; }
+    .icon-2xl { font-size: 3rem; }
+    
+    .icon-circle, .icon-square, .icon-rounded {
+        width: 32px;
+        height: 32px;
+    }
+}
+
+@media (max-width: 480px) {
+    .icon-lg { font-size: 1.25rem; }
+    .icon-xl { font-size: 1.5rem; }
+    .icon-2xl { font-size: 2rem; }
+    
+    .icon-circle, .icon-square, .icon-rounded {
+        width: 28px;
+        height: 28px;
+    }
+} 
