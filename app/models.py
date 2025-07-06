@@ -17,6 +17,8 @@ class User(db.Model, UserMixin):
     # Связи с другими моделями
     orders = db.relationship('Order', backref='customer', lazy=True)
     user_sites = db.relationship('UserSite', backref='owner', lazy=True)
+    payments = db.relationship('Payment', backref='user', lazy=True)
+    generated_sites = db.relationship('GeneratedSite', backref='user', lazy=True)
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
@@ -24,6 +26,8 @@ class User(db.Model, UserMixin):
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
 
+    def __repr__(self):
+        return f'<User {self.username}>'
 
 class Template(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -37,6 +41,9 @@ class Template(db.Model):
     creator_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     blocks = db.relationship('TemplateBlock', backref='template', lazy=True)
 
+    def __repr__(self):
+        return f'<Template {self.name}>'
+
 class Block(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     type = db.Column(db.String(50), nullable=False)
@@ -48,6 +55,9 @@ class Block(db.Model):
     # Связи с проектами и шаблонами
     project_blocks = db.relationship('ProjectBlock', backref='block', lazy=True)
     template_blocks = db.relationship('TemplateBlock', backref='block', lazy=True)
+
+    def __repr__(self):
+        return f'<Block {self.name} ({self.type})>'
 
 class ProjectBlock(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -81,12 +91,17 @@ class Payment(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     project_id = db.Column(db.Integer, db.ForeignKey('project.id'))
     amount = db.Column(db.Float, nullable=False)
-    currency = db.Column(db.String(3), default='USD')
+    currency = db.Column(db.String(3), default='RUB')
     status = db.Column(db.String(20), default='pending')
     payment_method = db.Column(db.String(50))
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     transaction_id = db.Column(db.String(100), unique=True)
+    payment_id = db.Column(db.String(100), unique=True, nullable=True)
+    description = db.Column(db.String(255), nullable=True)
+
+    def __repr__(self):
+        return f'<Payment {self.id} - {self.status}>'
 
 class Order(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -109,3 +124,16 @@ db.Table('user_templates',
     db.Column('user_id', db.Integer, db.ForeignKey('user.id')),
     db.Column('template_id', db.Integer, db.ForeignKey('template.id'))
 )
+
+class GeneratedSite(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    name = db.Column(db.String(255), nullable=False)
+    html_content = db.Column(db.Text, nullable=False)
+    css_content = db.Column(db.Text, nullable=True)
+    js_content = db.Column(db.Text, nullable=True)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    is_published = db.Column(db.Boolean, default=False)
+
+    def __repr__(self):
+        return f'<GeneratedSite {self.name}>'

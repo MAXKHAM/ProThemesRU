@@ -6,12 +6,16 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager
 from flask_wtf.csrf import CSRFProtect
+from flask_cors import CORS
 from config import config_by_name
 
 db = SQLAlchemy()
 migrate = Migrate()
 login_manager = LoginManager()
+login_manager.login_view = 'auth.login'
+login_manager.login_message_category = 'info'
 csrf = CSRFProtect()
+cors = CORS()
 
 def create_app(config_name='development'):
     app = Flask(__name__)
@@ -20,23 +24,31 @@ def create_app(config_name='development'):
     db.init_app(app)
     migrate.init_app(app, db)
     login_manager.init_app(app)
-    login_manager.login_view = 'auth.login'
-    login_manager.login_message = 'Требуется вход для доступа.'
-    login_manager.login_message_category = 'warning'
     csrf.init_app(app)
+    cors.init_app(app, resources={r"/ai/*": {"origins": "*"}})
 
-    from app.auth import auth_bp
+    # Регистрируем основные blueprints
+    from app.auth.routes import auth_bp
     app.register_blueprint(auth_bp, url_prefix='/')
-    from app.main import main_bp
+    
+    from app.main.routes import main_bp
     app.register_blueprint(main_bp)
-    from app.constructor import constructor_bp
+    
+    from app.constructor_routes import constructor_bp
     app.register_blueprint(constructor_bp, url_prefix='/constructor')
+    
+    from app.payments.routes import payments_bp
+    app.register_blueprint(payments_bp, url_prefix='/payments')
+    
     from app.errors import errors_bp
     app.register_blueprint(errors_bp)
 
     # Регистрируем API Blueprint
-    from app.api.routes import api_bp
-    app.register_blueprint(api_bp)
+    try:
+        from app.api.routes import api_bp
+        app.register_blueprint(api_bp)
+    except ImportError:
+        pass
 
     # Регистрируем API блоков
     try:
@@ -45,9 +57,19 @@ def create_app(config_name='development'):
     except ImportError:
         pass
 
+    # Регистрируем AI Blueprint
+    try:
+        from app.ai_routes import ai_bp
+        app.register_blueprint(ai_bp, url_prefix='/ai')
+    except ImportError:
+        pass
+
     # Регистрируем Telegram Blueprint
-    from app.telegram_bot import telegram_bp
-    app.register_blueprint(telegram_bp)
+    try:
+        from app.telegram_bot.routes import telegram_bp
+        app.register_blueprint(telegram_bp)
+    except ImportError:
+        pass
 
     if not app.debug and not app.testing:
         if not os.path.exists('logs'):

@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block title %}Контакты - ProThemesRU{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <h1 class="text-center mb-5">
+                <i class="fas fa-envelope"></i> Контакты
+            </h1>
+            
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <i class="fab fa-telegram fa-3x text-primary mb-3"></i>
+                            <h4>Telegram</h4>
+                            <p>Наш основной канал связи</p>
+                            <a href="https://t.me/prothemesru" class="btn btn-primary" target="_blank">
+                                <i class="fab fa-telegram"></i> Написать в Telegram
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <i class="fas fa-envelope fa-3x text-primary mb-3"></i>
+                            <h4>Email</h4>
+                            <p>Для деловых предложений</p>
+                            <a href="mailto:info@prothemesru.com" class="btn btn-primary">
+                                <i class="fas fa-envelope"></i> Написать Email
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-body">
+                    <h3>Форма Обратной Связи</h3>
+                    <form method="POST" action="{{ url_for('main.contact') }}">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Имя</label>
+                            <input type="text" class="form-control" id="name" name="name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="subject" class="form-label">Тема</label>
+                            <input type="text" class="form-control" id="subject" name="subject" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="message" class="form-label">Сообщение</label>
+                            <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-paper-plane"></i> Отправить
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

@@ -1,5 +1,201 @@
 {% extends "base.html" %}
+
+{% block title %}Конструктор Сайтов{% endblock %}
+
 {% block content %}
-    <h1>Constructor</h1>
-    <a href="{{ url_for('constructor.download_zip') }}">Download ZIP</a>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Конструктор Сайтов</h2>
+                    <p class="mb-0">Соберите свою страницу из блоков и скачайте её в виде ZIP-архива.</p>
+                </div>
+                <div class="card-body">
+                    <form method="POST" action="{{ url_for('constructor.generate_site') }}">
+                        <!-- Основные настройки сайта -->
+                        <h4 class="mb-3">Настройки страницы</h4>
+                        <div class="mb-3">
+                            <label for="site_title" class="form-label">Заголовок сайта (вкладка браузера)</label>
+                            <input type="text" class="form-control" id="site_title" name="site_title" value="Мой Новый Сайт" required>
+                        </div>
+                        <hr class="my-4">
+
+                        <!-- Блок Hero Section -->
+                        <h4 class="mb-3">Блок "Первый экран" (Hero Section)</h4>
+                        <div class="mb-3">
+                            <label for="hero_title" class="form-label">Заголовок Hero Section (H1)</label>
+                            <input type="text" class="form-control" id="hero_title" name="hero_title" value="Добро пожаловать!" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="hero_subtitle" class="form-label">Подзаголовок Hero Section</label>
+                            <textarea class="form-control" id="hero_subtitle" name="hero_subtitle" rows="2" required>Это ваш новый сайт, созданный нашим конструктором. Начните свое приключение здесь!</textarea>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="hero_button_text" class="form-label">Текст кнопки Hero Section</label>
+                                <input type="text" class="form-control" id="hero_button_text" name="hero_button_text" value="Узнать больше">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="hero_button_url" class="form-label">URL кнопки Hero Section</label>
+                                <input type="text" class="form-control" id="hero_button_url" name="hero_button_url" value="#about">
+                            </div>
+                        </div>
+                        <hr class="my-4">
+
+                        <!-- Блоки Текста -->
+                        <h4 class="mb-3">Текстовые блоки</h4>
+                        <div class="mb-3">
+                            <label for="text_block_1_content" class="form-label">Текстовый блок 1</label>
+                            <textarea class="form-control" id="text_block_1_content" name="text_block_1_content" rows="4">Мы предлагаем инновационные решения для быстрого создания веб-сайтов. Наша платформа интуитивно понятна и позволяет вам сосредоточиться на контенте, а не на коде.</textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="text_block_2_content" class="form-label">Текстовый блок 2 (опционально)</label>
+                            <textarea class="form-control" id="text_block_2_content" name="text_block_2_content" rows="4" placeholder="Добавьте второй текстовый блок, если нужно."></textarea>
+                        </div>
+                        <hr class="my-4">
+
+                        <!-- Блок Изображения -->
+                        <h4 class="mb-3">Блок Изображения (опционально)</h4>
+                        <div class="mb-3">
+                            <label for="image_src" class="form-label">URL изображения</label>
+                            <input type="url" class="form-control" id="image_src" name="image_src" placeholder="https://via.placeholder.com/800x400?text=Your+Image">
+                            <small class="form-text text-muted">Используйте прямую ссылку на изображение (например, с Unsplash, Pixabay или вашего CDN).</small>
+                        </div>
+                        <div class="mb-3">
+                            <label for="image_alt" class="form-label">Альтернативный текст изображения</label>
+                            <input type="text" class="form-control" id="image_alt" name="image_alt" value="Изображение для вашего сайта">
+                        </div>
+                        <hr class="my-4">
+
+                        <!-- Блок Footer -->
+                        <h4 class="mb-3">Блок Подвала (Footer)</h4>
+                        <div class="mb-3">
+                            <label for="footer_text" class="form-label">Текст подвала</label>
+                            <input type="text" class="form-control" id="footer_text" name="footer_text" value="&copy; 2023 Мой Сайт. Все права защищены." required>
+                        </div>
+                        <hr class="my-4">
+
+                        <button type="submit" class="btn btn-primary btn-lg w-100">Сгенерировать и Скачать ZIP</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Preview Section -->
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Предварительный просмотр</h4>
+                </div>
+                <div class="card-body">
+                    <div id="preview-container" class="border rounded p-3" style="min-height: 400px;">
+                        <p class="text-muted text-center">Заполните форму выше, чтобы увидеть предварительный просмотр вашего сайта.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Font Awesome for icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+<style>
+.card {
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    border: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.card-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.form-label {
+    font-weight: 500;
+    color: #495057;
+}
+
+.btn-lg {
+    padding: 0.75rem 1.5rem;
+    font-size: 1.1rem;
+}
+
+#preview-container {
+    background-color: #f8f9fa;
+    border: 2px dashed #dee2e6;
+}
+</style>
+
+<script>
+// Live preview functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.querySelector('form');
+    const previewContainer = document.getElementById('preview-container');
+    
+    // Update preview when form fields change
+    form.addEventListener('input', updatePreview);
+    
+    function updatePreview() {
+        const siteTitle = document.getElementById('site_title').value || 'Мой Новый Сайт';
+        const heroTitle = document.getElementById('hero_title').value || 'Добро пожаловать!';
+        const heroSubtitle = document.getElementById('hero_subtitle').value || 'Это ваш новый сайт, созданный нашим конструктором.';
+        const heroButtonText = document.getElementById('hero_button_text').value || 'Начать';
+        const heroButtonUrl = document.getElementById('hero_button_url').value || '#';
+        const textBlock1 = document.getElementById('text_block_1_content').value || '';
+        const textBlock2 = document.getElementById('text_block_2_content').value || '';
+        const imageSrc = document.getElementById('image_src').value || '';
+        const footerText = document.getElementById('footer_text').value || '© 2024 Мой Сайт. Все права защищены.';
+        
+        let previewHTML = `
+            <div style="font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto;">
+                <header style="background-color: #333; color: white; padding: 1em 2em; display: flex; justify-content: space-between; align-items: center;">
+                    <div style="font-size: 1.5em; font-weight: bold;">${siteTitle}</div>
+                    <nav>
+                        <a href="#" style="color: white; margin-left: 20px; text-decoration: none;">Главная</a>
+                        <a href="#" style="color: white; margin-left: 20px; text-decoration: none;">О нас</a>
+                        <a href="#" style="color: white; margin-left: 20px; text-decoration: none;">Контакты</a>
+                    </nav>
+                </header>
+                
+                <section style="background-color: #007bff; color: white; padding: 4em 2em; text-align: center;">
+                    <div>
+                        <h1 style="font-size: 2.5em; margin-bottom: 0.5em;">${heroTitle}</h1>
+                        <p style="font-size: 1.2em; max-width: 600px; margin: 0 auto 2em;">${heroSubtitle}</p>
+                        <a href="${heroButtonUrl}" style="display: inline-block; background-color: #28a745; color: white; padding: 0.8em 1.5em; text-decoration: none; border-radius: 5px;">${heroButtonText}</a>
+                    </div>
+                </section>
+        `;
+        
+        if (textBlock1) {
+            previewHTML += `<p style="max-width: 800px; margin: 2em auto; line-height: 1.6; padding: 0 2em;">${textBlock1}</p>`;
+        }
+        
+        if (imageSrc) {
+            previewHTML += `<div style="text-align: center; padding: 2em;"><img src="${imageSrc}" alt="Preview" style="max-width: 100%; height: auto; border-radius: 8px; max-height: 300px;"></div>`;
+        }
+        
+        if (textBlock2) {
+            previewHTML += `<p style="max-width: 800px; margin: 2em auto; line-height: 1.6; padding: 0 2em;">${textBlock2}</p>`;
+        }
+        
+        previewHTML += `
+                <footer style="background-color: #333; color: white; text-align: center; padding: 1em 0; margin-top: 4em;">
+                    <p>${footerText}</p>
+                </footer>
+            </div>
+        `;
+        
+        previewContainer.innerHTML = previewHTML;
+    }
+    
+    // Initial preview
+    updatePreview();
+});
+</script>
 {% endblock %}

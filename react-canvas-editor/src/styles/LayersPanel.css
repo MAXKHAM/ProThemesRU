@@ -1,0 +1,143 @@
+.layers-panel {
+  width: 250px;
+  background-color: #ffffff;
+  border-left: 1px solid #e0e0e0;
+  padding: 15px;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow-y: auto;
+  margin-top: 10px;
+  border-radius: 8px;
+}
+
+.layers-panel h3 {
+  margin-top: 0;
+  color: #333;
+  font-size: 1.2em;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.no-layers {
+  color: #888;
+  font-style: italic;
+  text-align: center;
+  padding: 10px 0;
+}
+
+.layers-list {
+  flex-grow: 1;
+}
+
+.layer-item {
+  display: flex;
+  align-items: center;
+  padding: 8px 10px;
+  margin-bottom: 5px;
+  background-color: #f8f8f8;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9em;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+  user-select: none;
+}
+
+.layer-item:hover {
+  background-color: #f0f0f0;
+  border-color: #d0d0d0;
+}
+
+.layer-item.selected {
+  background-color: #e6f7ff;
+  border-color: #91d5ff;
+  font-weight: bold;
+  box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+}
+
+.layer-item.dragging {
+  opacity: 0.5;
+  border: 1px dashed #007bff;
+}
+
+.layer-handle {
+  cursor: grab;
+  color: #aaa;
+  margin-right: 8px;
+  padding: 0 5px;
+  font-size: 0.8em;
+}
+
+.layer-type-icon {
+  margin-right: 8px;
+  color: #007bff;
+}
+
+.layer-name {
+  flex-grow: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.layer-item input[type="text"] {
+  flex-grow: 1;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  padding: 3px 5px;
+  font-size: 0.9em;
+  box-sizing: border-box;
+}
+
+.layer-actions {
+  display: flex;
+  gap: 5px;
+  margin-left: auto;
+}
+
+.layer-action-btn {
+  background: none;
+  border: none;
+  color: #666;
+  cursor: pointer;
+  padding: 3px;
+  font-size: 0.9em;
+  transition: color 0.15s ease;
+}
+
+.layer-action-btn:hover {
+  color: #007bff;
+}
+
+/* Drag and drop visual feedback */
+.layer-item.drag-over {
+  border-color: #007bff;
+  background-color: #e3f2fd;
+}
+
+/* Animation for layer reordering */
+.layer-item {
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .layers-panel {
+    width: 100%;
+    border-left: none;
+    border-bottom: 1px solid #dee2e6;
+  }
+  
+  .layer-item {
+    padding: 6px 8px;
+  }
+  
+  .layer-name {
+    font-size: 0.85em;
+  }
+} 

@@ -1,0 +1,150 @@
+/* ProThemesRU Main Styles */
+
+:root {
+    --main-bg: #f7f8fa;
+    --main-dark: #22223B;
+    --main-accent: #4F8CFF;
+    --main-accent-hover: #2563eb;
+    --main-light: #F2E9E4;
+    --main-muted: #9A8C98;
+}
+
+body {
+    font-family: 'Montserrat', Arial, sans-serif;
+    background-color: #f8f9fa;
+    color: #343a40;
+    line-height: 1.6;
+}
+
+.navbar-brand {
+    font-weight: bold;
+}
+
+.btn-primary {
+    background-color: var(--main-accent);
+    border-color: var(--main-accent);
+}
+
+.btn-primary:hover {
+    background-color: var(--main-accent-hover);
+    border-color: var(--main-accent-hover);
+}
+
+.card {
+    border: none;
+    border-radius: 0.75rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.05);
+}
+
+.card-header {
+    background-color: #e9ecef;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+    border-top-left-radius: 0.75rem;
+    border-top-right-radius: 0.75rem;
+    padding: 1rem 1.5rem;
+}
+
+.form-control:focus {
+    border-color: #86b7fe;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+.alert {
+    margin-top: 1rem;
+}
+
+.footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 1em 0;
+    margin-top: 4em;
+}
+
+/* Constructor specific styles */
+#preview-container {
+    background-color: #f8f9fa;
+    border: 2px dashed #dee2e6;
+    border-radius: 0.5rem;
+    min-height: 400px;
+    padding: 1rem;
+}
+
+.preview-placeholder {
+    color: #6c757d;
+    text-align: center;
+    padding: 2rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    
+    .navbar-brand {
+        font-size: 1.1rem;
+    }
+
+    .jumbotron {
+        padding: 2rem;
+    }
+}
+
+/* Styles for generated site preview (if integrated or for conceptual understanding) */
+/* These styles are primarily for the generated HTML, but can be useful for preview */
+.hero-section {
+    background-color: #007bff;
+    color: white;
+    padding: 4em 2em;
+    text-align: center;
+}
+
+.hero-content h1 {
+    font-size: 3em;
+    margin-bottom: 0.5em;
+}
+
+.hero-content p {
+    font-size: 1.2em;
+    max-width: 600px;
+    margin: 0 auto 2em;
+}
+
+.button {
+    display: inline-block;
+    background-color: #28a745;
+    color: white;
+    padding: 0.8em 1.5em;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: #218838;
+}
+
+.text-block {
+    max-width: 800px;
+    margin: 2em auto;
+    line-height: 1.6;
+    padding: 0 1em;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    display: block;
+    margin: 2em auto;
+}
+
+.navbar-nav .nav-link {
+    margin-right: 0.5rem;
+}
+
+.btn + .btn {
+    margin-left: 0.5rem;
+} 

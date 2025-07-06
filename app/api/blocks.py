@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify, request
 from flask_restx import Api, Resource, fields
 import sys
 import os
+from app.models import Block
 
 # Добавляем путь к системе блоков
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..', 'site_blocks'))
@@ -28,7 +29,7 @@ except ImportError as e:
     constructor = None
 
 # Создаем Blueprint для API блоков
-blocks_bp = Blueprint('blocks_api', __name__)
+blocks_bp = Blueprint('blocks', __name__)
 api = Api(blocks_bp, title='Blocks API', description='API для работы с блоками конструктора')
 
 # Модели для документации API
@@ -47,48 +48,28 @@ category_model = api.model('Category', {
     'block_count': fields.Integer(description='Количество блоков в категории')
 })
 
-@api.route('/blocks')
-class BlocksList(Resource):
-    @api.doc('get_all_blocks')
-    @api.marshal_list_with(block_model)
-    def get(self):
-        """Получить все доступные блоки"""
-        try:
-            blocks_list = []
-            for block_id, block_data in all_blocks.items():
-                blocks_list.append({
-                    'id': block_id,
-                    'name': block_data.get('name', ''),
-                    'category': block_data.get('category', ''),
-                    'html': block_data.get('html', ''),
-                    'css': block_data.get('css', ''),
-                    'properties': block_data.get('properties', [])
-                })
-            return blocks_list
-        except Exception as e:
-            return {'error': str(e)}, 500
+@blocks_bp.route('/', methods=['GET'])
+def get_blocks():
+    """Получить все блоки"""
+    blocks = Block.query.all()
+    return jsonify([{
+        'id': block.id,
+        'type': block.type,
+        'name': block.name,
+        'html': block.html
+    } for block in blocks])
 
-@api.route('/blocks/<string:block_id>')
-class BlockDetail(Resource):
-    @api.doc('get_block')
-    @api.marshal_with(block_model)
-    def get(self, block_id):
-        """Получить конкретный блок по ID"""
-        try:
-            block_data = get_block_by_id(block_id)
-            if block_data:
-                return {
-                    'id': block_id,
-                    'name': block_data.get('name', ''),
-                    'category': block_data.get('category', ''),
-                    'html': block_data.get('html', ''),
-                    'css': block_data.get('css', ''),
-                    'properties': block_data.get('properties', [])
-                }
-            else:
-                return {'error': 'Блок не найден'}, 404
-        except Exception as e:
-            return {'error': str(e)}, 500
+@blocks_bp.route('/<int:block_id>', methods=['GET'])
+def get_block(block_id):
+    """Получить конкретный блок"""
+    block = Block.query.get_or_404(block_id)
+    return jsonify({
+        'id': block.id,
+        'type': block.type,
+        'name': block.name,
+        'html': block.html,
+        'styles': block.styles
+    })
 
 @api.route('/categories')
 class CategoriesList(Resource):

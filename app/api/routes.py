@@ -6,6 +6,7 @@ import jwt
 import datetime
 import json
 import os
+from app.models import User, Block, Template
 
 # Импортируем API блоков
 try:
@@ -183,3 +184,24 @@ class StatusAPI(Resource):
             'timestamp': datetime.datetime.utcnow().isoformat(),
             'version': '1.0'
         }
+
+@api_bp.route('/api/blocks', methods=['GET'])
+def get_blocks():
+    """Получить список всех блоков"""
+    blocks = Block.query.all()
+    return jsonify([{
+        'id': block.id,
+        'type': block.type,
+        'name': block.name
+    } for block in blocks])
+
+@api_bp.route('/api/templates', methods=['GET'])
+def get_templates():
+    """Получить список всех шаблонов"""
+    templates = Template.query.all()
+    return jsonify([{
+        'id': template.id,
+        'name': template.name,
+        'description': template.description,
+        'category': template.category
+    } for template in templates])

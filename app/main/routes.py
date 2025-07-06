@@ -1,10 +1,11 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash, jsonify
 from flask_login import login_required, current_user
 from app.main import main_bp
-from app.models import User
+from app.models import User, Block, Template, Payment, GeneratedSite
 from app import db
 import sys
 import os
+import json
 
 # Добавляем путь к системе блоков
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..', 'site_blocks'))
@@ -22,17 +23,37 @@ except ImportError:
 
 @main_bp.route('/')
 def index():
-    """Главная страница"""
+    """Главная страница ProThemesRU"""
     return render_template('main/index.html')
+
+@main_bp.route('/portfolio')
+def portfolio():
+    """Страница портфолио шаблонов"""
+    templates = Template.query.filter_by(is_active=True).all()
+    return render_template('main/portfolio.html', templates=templates)
+
+@main_bp.route('/constructor')
+@login_required
+def constructor():
+    """Страница конструктора сайтов"""
+    available_blocks = Block.query.filter_by(is_active=True).all()
+    return render_template('main/constructor.html', available_blocks=available_blocks)
+
+@main_bp.route('/profile')
+@login_required
+def profile():
+    """Профиль пользователя"""
+    user_sites = GeneratedSite.query.filter_by(user_id=current_user.id).order_by(GeneratedSite.created_at.desc()).all()
+    return render_template('main/profile.html', user=current_user, user_sites=user_sites)
 
 @main_bp.route('/about')
 def about():
-    """Страница о проекте"""
+    """О нас"""
     return render_template('main/about.html')
 
 @main_bp.route('/contact')
 def contact():
-    """Контактная информация"""
+    """Контакты"""
     return render_template('main/contact.html')
 
 @main_bp.route('/pricing')
@@ -164,16 +185,4 @@ def get_page_html():
             'blocks_count': len(constructor.current_page_blocks)
         })
     except Exception as e:
-        return jsonify({'error': str(e)}), 500
-
-@main_bp.route('/portfolio')
-def portfolio():
-    """Страница портфолио с шаблонами"""
-    # Пример: получаем список шаблонов из templates/blocks
-    import os
-    templates_dir = os.path.join(os.path.dirname(__file__), '../../templates/blocks')
-    try:
-        template_folders = [f for f in os.listdir(templates_dir) if os.path.isdir(os.path.join(templates_dir, f))]
-    except Exception:
-        template_folders = []
-    return render_template('main/portfolio.html', templates=template_folders) 
+        return jsonify({'error': str(e)}), 500 

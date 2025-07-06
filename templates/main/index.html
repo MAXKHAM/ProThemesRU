@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+
+{% block title %}ProThemesRU - Главная{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section text-center py-5 bg-primary text-white">
+    <div class="container">
+        <h1 class="display-4 mb-4">
+            <i class="fas fa-rocket"></i> ProThemesRU
+        </h1>
+        <p class="lead mb-4">Создавайте профессиональные сайты с помощью AI и визуального конструктора</p>
+        <div class="hero-buttons">
+            {% if current_user.is_authenticated %}
+            <a href="{{ url_for('main.constructor') }}" class="btn btn-light btn-lg me-3">
+                <i class="fas fa-paint-brush"></i> Открыть Конструктор
+            </a>
+            {% else %}
+            <a href="{{ url_for('auth.register') }}" class="btn btn-light btn-lg me-3">
+                <i class="fas fa-user-plus"></i> Начать Бесплатно
+            </a>
+            {% endif %}
+            <a href="{{ url_for('main.portfolio') }}" class="btn btn-outline-light btn-lg">
+                <i class="fas fa-images"></i> Посмотреть Шаблоны
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="features-section py-5">
+    <div class="container">
+        <h2 class="text-center mb-5">Почему ProThemesRU?</h2>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="feature-card text-center p-4">
+                    <i class="fas fa-magic fa-3x text-primary mb-3"></i>
+                    <h4>AI Генератор</h4>
+                    <p>Автоматическая генерация цветовых палитр и дизайна с помощью искусственного интеллекта</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="feature-card text-center p-4">
+                    <i class="fas fa-mobile-alt fa-3x text-primary mb-3"></i>
+                    <h4>Визуальный Конструктор</h4>
+                    <p>Drag & Drop редактор для создания сайтов без знания кода</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="feature-card text-center p-4">
+                    <i class="fab fa-telegram fa-3x text-primary mb-3"></i>
+                    <h4>Telegram Бот</h4>
+                    <p>Управляйте проектами и получайте уведомления прямо в Telegram</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Pricing Section -->
+<section class="pricing-section py-5 bg-light">
+    <div class="container">
+        <h2 class="text-center mb-5">Тарифы</h2>
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-header text-center">
+                        <h4>Free</h4>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-check text-success"></i> 3 сайта</li>
+                            <li><i class="fas fa-check text-success"></i> Базовые шаблоны</li>
+                            <li><i class="fas fa-check text-success"></i> AI генератор палитр</li>
+                            <li><i class="fas fa-times text-danger"></i> Брендинг ProThemesRU</li>
+                        </ul>
+                    </div>
+                    <div class="card-footer text-center">
+                        <a href="{{ url_for('auth.register') }}" class="btn btn-primary">Начать Бесплатно</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="card h-100 border-primary">
+                    <div class="card-header text-center bg-primary text-white">
+                        <h4>PRO</h4>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-check text-success"></i> Неограниченное количество сайтов</li>
+                            <li><i class="fas fa-check text-success"></i> Все шаблоны</li>
+                            <li><i class="fas fa-check text-success"></i> Расширенный AI</li>
+                            <li><i class="fas fa-check text-success"></i> Без брендинга</li>
+                            <li><i class="fas fa-check text-success"></i> Приоритетная поддержка</li>
+                        </ul>
+                    </div>
+                    <div class="card-footer text-center">
+                        <a href="{{ url_for('payments.create_pro_payment') }}" class="btn btn-primary">Купить PRO</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section py-5 text-center">
+    <div class="container">
+        <h2>Готовы создать свой сайт?</h2>
+        <p class="lead mb-4">Присоединяйтесь к тысячам пользователей, которые уже создали свои сайты с ProThemesRU</p>
+        {% if current_user.is_authenticated %}
+        <a href="{{ url_for('main.constructor') }}" class="btn btn-primary btn-lg">
+            <i class="fas fa-rocket"></i> Открыть Конструктор
+        </a>
+        {% else %}
+        <a href="{{ url_for('auth.register') }}" class="btn btn-primary btn-lg">
+            <i class="fas fa-user-plus"></i> Зарегистрироваться
+        </a>
+        {% endif %}
+    </div>
+</section>
+{% endblock %} 

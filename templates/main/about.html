@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}О нас - ProThemesRU{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <h1 class="text-center mb-5">
+                <i class="fas fa-info-circle"></i> О ProThemesRU
+            </h1>
+            
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h3>Наша Миссия</h3>
+                    <p>ProThemesRU - это инновационная платформа для создания профессиональных веб-сайтов, объединяющая мощь искусственного интеллекта с интуитивным визуальным конструктором.</p>
+                </div>
+            </div>
+            
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h3>Что Мы Предлагаем</h3>
+                    <ul>
+                        <li><strong>AI Генератор:</strong> Автоматическое создание цветовых палитр и дизайна</li>
+                        <li><strong>Визуальный Конструктор:</strong> Drag & Drop редактор без необходимости знания кода</li>
+                        <li><strong>Telegram Бот:</strong> Управление проектами прямо в мессенджере</li>
+                        <li><strong>Готовые Шаблоны:</strong> Большая коллекция профессиональных шаблонов</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h3>Наша Команда</h3>
+                    <p>Мы - команда опытных разработчиков и дизайнеров, стремящихся сделать создание сайтов доступным для всех.</p>
+                </div>
+            </div>
+            
+            <div class="text-center">
+                <a href="{{ url_for('main.contact') }}" class="btn btn-primary btn-lg">
+                    <i class="fas fa-envelope"></i> Связаться с Нами
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 
