@@ -5,19 +5,13 @@ services:
     env: python
     plan: free
     buildCommand: |
-      pip install -r requirements-working.txt
-    startCommand: gunicorn --bind 0.0.0.0:$PORT --workers 2 --timeout 120 app_working:app
+      pip install -r requirements-debug.txt
+    startCommand: gunicorn --bind 0.0.0.0:$PORT --workers 1 --timeout 30 --log-level debug app_debug:app
     envVars:
       - key: FLASK_ENV
         value: production
       - key: SECRET_KEY
         generateValue: true
-      - key: JWT_SECRET_KEY
-        generateValue: true
-      - key: DATABASE_URL
-        fromDatabase:
-          name: prothemesru-db
-          property: connectionString
 
 databases:
   - name: prothemesru-db
