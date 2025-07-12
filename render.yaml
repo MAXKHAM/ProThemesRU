@@ -5,9 +5,9 @@ services:
     env: python
     plan: free
     buildCommand: |
-      pip install -r requirements.txt
+      pip install -r requirements-render.txt
       cd frontend && npm install && npm run build
-    startCommand: gunicorn --bind 0.0.0.0:$PORT --workers 4 --timeout 120 app:app
+    startCommand: gunicorn --bind 0.0.0.0:$PORT --workers 2 --timeout 120 wsgi:application
     envVars:
       - key: FLASK_ENV
         value: production

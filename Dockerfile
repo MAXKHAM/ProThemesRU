@@ -33,15 +33,15 @@ RUN useradd -m -u 1000 appuser && chown -R appuser:appuser /app
 USER appuser
 
 # Создаем необходимые директории
-RUN mkdir -p logs uploads static
+RUN mkdir -p logs uploads static media scraped_sites
 
 # Открываем порт
 EXPOSE 5000
 
 # Устанавливаем переменные окружения
-ENV FLASK_APP=app.py
+ENV FLASK_APP=wsgi.py
 ENV FLASK_ENV=production
 ENV PYTHONPATH=/app
 
 # Запускаем приложение
-CMD ["gunicorn", "--bind", "0.0.0.0:5000", "--workers", "4", "--timeout", "120", "app:app"]
+CMD ["gunicorn", "--bind", "0.0.0.0:5000", "--workers", "4", "--timeout", "120", "wsgi:app"]
