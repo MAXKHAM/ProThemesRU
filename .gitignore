@@ -153,4 +153,3 @@ dmypy.json
 
 # Configuration files with sensitive data
 config/config.py
-config_telegram.py
