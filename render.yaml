@@ -5,12 +5,14 @@ services:
     env: python
     plan: free
     buildCommand: |
-      pip install -r requirements-debug.txt
-    startCommand: gunicorn --bind 0.0.0.0:$PORT --workers 1 --timeout 30 --log-level debug app_debug:app
+      pip install -r requirements-working.txt
+    startCommand: gunicorn --bind 0.0.0.0:$PORT --workers 1 --timeout 30 app_clean:app
     envVars:
       - key: FLASK_ENV
         value: production
       - key: SECRET_KEY
+        generateValue: true
+      - key: JWT_SECRET_KEY
         generateValue: true
 
 databases:
