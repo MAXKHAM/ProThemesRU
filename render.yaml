@@ -5,14 +5,11 @@ services:
     env: python
     plan: free
     buildCommand: |
-      pip install -r requirements-full.txt
-      cd frontend && npm install && npm run build
-    startCommand: gunicorn --bind 0.0.0.0:$PORT --workers 2 --timeout 120 app_full:app
+      pip install -r requirements-working.txt
+    startCommand: gunicorn --bind 0.0.0.0:$PORT --workers 2 --timeout 120 app_working:app
     envVars:
       - key: FLASK_ENV
         value: production
-      - key: PYTHONPATH
-        value: /opt/render/project/src
       - key: SECRET_KEY
         generateValue: true
       - key: JWT_SECRET_KEY
