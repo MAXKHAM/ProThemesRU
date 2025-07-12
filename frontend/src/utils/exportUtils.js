@@ -28,7 +28,7 @@ export function objectToCssString(cssObject) {
         .join('; ') + (Object.keys(cssObject).length > 0 ? ';' : '');
 }
 
-export function generateHtmlCss(elements) {
+export function generateHtmlCss(elements, canvasSettings = {}) {
     const elementMap = new Map(elements.map(el => [el.id, el]));
     const rootElements = elements.filter(el => !el.parentId);
 
@@ -140,8 +140,24 @@ body {
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     overflow: hidden;
-}
 `;
+
+    // NEW: Apply canvas background settings to #main-content-area
+    if (canvasSettings.backgroundColor) {
+        cssContent += `\n    background-color: ${canvasSettings.backgroundColor};`;
+    }
+    if (canvasSettings.backgroundImage) {
+        const bgImgSrc = canvasSettings.backgroundImage.startsWith('/uploads/')
+            ? canvasSettings.backgroundImage // Already relative to root, Flask serves it
+            : canvasSettings.backgroundImage; // Assume it's a full URL or relative to HTML
+
+        cssContent += `\n    background-image: url('${bgImgSrc}');`;
+        cssContent += `\n    background-repeat: ${canvasSettings.backgroundRepeat || 'no-repeat'};`;
+        cssContent += `\n    background-size: ${canvasSettings.backgroundSize || 'cover'};`;
+        cssContent += `\n    background-position: ${canvasSettings.backgroundPosition || 'center center'};`;
+    }
+    cssContent += `\n}`; // Close #main-content-area style block
+
     // Рекурсивная функция для рендеринга элементов
     function renderElementHtmlAndCss(element) {
         const children = elements.filter(el => el.parentId === element.id);
