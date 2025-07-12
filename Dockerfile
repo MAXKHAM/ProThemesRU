@@ -16,6 +16,9 @@ RUN apt-get update && apt-get install -y \
     curl \
     && rm -rf /var/lib/apt/lists/*
 
+# Обновляем pip
+RUN pip install --upgrade pip
+
 # Копируем файлы зависимостей
 COPY requirements.txt .
 
