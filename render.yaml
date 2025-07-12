@@ -4,14 +4,11 @@ services:
     name: prothemesru
     env: python
     plan: free
-    buildCommand: |
-      pip install -r requirements_simple.txt
-    startCommand: gunicorn --bind 0.0.0.0:$PORT --workers 1 --timeout 30 app_simple_deploy:app
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app
     envVars:
       - key: FLASK_ENV
         value: production
-      - key: SECRET_KEY
-        generateValue: true
 
 databases:
   - name: prothemesru-db
