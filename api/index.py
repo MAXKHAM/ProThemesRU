@@ -1,6 +1,5 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from flask_cors import CORS
-import os
 
 app = Flask(__name__)
 CORS(app)
@@ -55,5 +54,6 @@ def get_sites():
     ]
     return jsonify({'sites': sites})
 
-if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=int(os.environ.get('PORT', 5000))) 
+# Vercel serverless function handler
+def handler(request, context):
+    return app(request, context) 
