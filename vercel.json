@@ -2,14 +2,18 @@
   "version": 2,
   "builds": [
     {
-      "src": "app_simple.py",
+      "src": "app_vercel.py",
       "use": "@vercel/python"
     }
   ],
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "app_simple.py"
+      "dest": "app_vercel.py"
     }
-  ]
+  ],
+  "env": {
+    "SECRET_KEY": "prothemesru-super-secret-key-2024",
+    "JWT_SECRET_KEY": "prothemesru-jwt-secret-key-2024"
+  }
 } 

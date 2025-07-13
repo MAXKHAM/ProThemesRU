@@ -78,6 +78,10 @@ class Order(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
+# Create database tables
+with app.app_context():
+    db.create_all()
+
 # Routes
 @app.route('/')
 def home():
@@ -295,10 +299,6 @@ def not_found(error):
 def internal_error(error):
     db.session.rollback()
     return jsonify({'error': 'Internal server error'}), 500
-
-# Create database tables
-with app.app_context():
-    db.create_all()
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))

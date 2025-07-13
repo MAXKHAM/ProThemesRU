@@ -16,14 +16,14 @@
 <body>
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <div class="container">
+  <div class="container">
             <a class="navbar-brand" href="{{ url_for('main.index') }}">
                 <i class="fas fa-rocket"></i> ProThemesRU
-            </a>
+      </a>
             
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+      <span class="navbar-toggler-icon"></span>
+    </button>
             
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
@@ -65,23 +65,23 @@
                         <a class="nav-link" href="{{ url_for('auth.register') }}">Регистрация</a>
                     </li>
                     {% endif %}
-                </ul>
-            </div>
-        </div>
-    </nav>
+      </ul>
+    </div>
+  </div>
+</nav>
 
     <!-- Main Content -->
     <main class="container mt-4">
-        {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-                {% for category, message in messages %}
-                    <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
-                        {{ message }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                    </div>
-                {% endfor %}
-            {% endif %}
-        {% endwith %}
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+          {{ message }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
         
         {% block content %}{% endblock %}
         <!-- Реферальный блок SkillFactory -->
@@ -91,13 +91,13 @@
                 <h4 class="mb-2">Учись новым профессиям в IT сфере!</h4>
                 <p class="mb-2">Хотите создавать такие же современные сайты? Переходите учиться в школу SkillFactory и получите <b>+5% к любой скидке</b> на сайте по промокоду <span class="badge bg-success">STUDENT</span>.</p>
                 <a href="https://go.2038.pro/379854dc4f1ff811" target="_blank" class="btn btn-success">Перейти в SkillFactory</a>
-            </div>
+</div>
         </section>
     </main>
 
     <!-- Footer -->
     <footer class="bg-dark text-light mt-5 py-4">
-        <div class="container">
+<div class="container">
             <div class="row">
                 <div class="col-md-6">
                     <h5>ProThemesRU</h5>
@@ -112,7 +112,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+</div>
     </footer>
 
     <!-- Bootstrap JS -->
