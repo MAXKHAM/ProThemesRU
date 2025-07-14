@@ -5,391 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ProThemesRU - Конструктор сайтов</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        /* Header */
-        .header {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 20px;
-            margin-bottom: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-
-        .nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 2em;
-            font-weight: bold;
-            color: #667eea;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 20px;
-        }
-
-        .nav-link {
-            text-decoration: none;
-            color: #333;
-            padding: 10px 20px;
-            border-radius: 10px;
-            transition: all 0.3s ease;
-        }
-
-        .nav-link:hover {
-            background: #667eea;
-            color: white;
-        }
-
-        /* Main Content */
-        .main-content {
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 30px;
-            margin-bottom: 30px;
-        }
-
-        /* Sidebar */
-        .sidebar {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            height: fit-content;
-        }
-
-        .sidebar h3 {
-            color: #667eea;
-            margin-bottom: 20px;
-            font-size: 1.5em;
-        }
-
-        .template-grid {
-            display: grid;
-            gap: 15px;
-        }
-
-        .template-card {
-            background: #f8f9fa;
-            border-radius: 15px;
-            padding: 20px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-        }
-
-        .template-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            border-color: #667eea;
-        }
-
-        .template-card.selected {
-            border-color: #667eea;
-            background: #e8f4fd;
-        }
-
-        .template-name {
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 5px;
-        }
-
-        .template-category {
-            color: #666;
-            font-size: 0.9em;
-        }
-
-        /* Canvas */
-        .canvas-container {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            min-height: 600px;
-        }
-
-        .canvas-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-        }
-
-        .canvas-title {
-            font-size: 1.8em;
-            color: #333;
-        }
-
-        .canvas-actions {
-            display: flex;
-            gap: 15px;
-        }
-
-        .btn {
-            padding: 12px 24px;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 16px;
-            text-decoration: none;
-            display: inline-block;
-            transition: all 0.3s ease;
-            font-weight: 500;
-        }
-
-        .btn-primary {
-            background: #667eea;
-            color: white;
-        }
-
-        .btn-secondary {
-            background: #f8f9fa;
-            color: #667eea;
-            border: 2px solid #667eea;
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-
-        /* Canvas Area */
-        .canvas {
-            border: 2px dashed #ddd;
-            border-radius: 15px;
-            min-height: 500px;
-            padding: 20px;
-            background: #fafafa;
-            position: relative;
-        }
-
-        .canvas.empty {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #999;
-            font-size: 1.2em;
-        }
-
-        /* Elements */
-        .element {
-            background: white;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            padding: 15px;
-            margin: 10px 0;
-            cursor: move;
-            transition: all 0.3s ease;
-        }
-
-        .element:hover {
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        .element-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-
-        .element-title {
-            font-weight: bold;
-            color: #333;
-        }
-
-        .element-actions {
-            display: flex;
-            gap: 10px;
-        }
-
-        .element-action {
-            background: none;
-            border: none;
-            cursor: pointer;
-            color: #666;
-            font-size: 1.2em;
-            transition: color 0.3s ease;
-        }
-
-        .element-action:hover {
-            color: #667eea;
-        }
-
-        /* Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            z-index: 1000;
-        }
-
-        .modal-content {
-            background: white;
-            border-radius: 20px;
-            padding: 30px;
-            max-width: 500px;
-            margin: 50px auto;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .modal-title {
-            font-size: 1.5em;
-            color: #333;
-        }
-
-        .close {
-            background: none;
-            border: none;
-            font-size: 1.5em;
-            cursor: pointer;
-            color: #666;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-label {
-            display: block;
-            margin-bottom: 5px;
-            color: #333;
-            font-weight: 500;
-        }
-
-        .form-input {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #ddd;
-            border-radius: 10px;
-            font-size: 16px;
-            transition: border-color 0.3s ease;
-        }
-
-        .form-input:focus {
-            outline: none;
-            border-color: #667eea;
-        }
-
-        /* Status */
-        .status-bar {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            padding: 20px;
-            margin-bottom: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-
-        .status-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-        }
-
-        .status-item {
-            text-align: center;
-            padding: 20px;
-            background: #f8f9fa;
-            border-radius: 15px;
-        }
-
-        .status-number {
-            font-size: 2em;
-            font-weight: bold;
-            color: #667eea;
-        }
-
-        .status-label {
-            color: #666;
-            margin-top: 5px;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .main-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .nav {
-                flex-direction: column;
-                gap: 20px;
-            }
-            
-            .canvas-actions {
-                flex-direction: column;
-            }
-        }
-
-        /* Loading */
-        .loading {
-            display: none;
-            text-align: center;
-            padding: 20px;
-            color: #667eea;
-        }
-
-        .spinner {
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #667eea;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 10px;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-    </style>
+    <link href="assets/style.css" rel="stylesheet">
 </head>
 <body>
     <div class="container">
         <!-- Header -->
         <header class="header">
             <nav class="nav">
-                <div class="logo">🚀 ProThemesRU</div>
+                <div class="logo">
+                    <div class="logo-icon">🚀</div>
+                    <span>ProThemesRU</span>
+                </div>
                 <div class="nav-links">
-                    <a href="#" class="nav-link" onclick="showTemplates()">📋 Шаблоны</a>
-                    <a href="#" class="nav-link" onclick="showMySites()">👤 Мои сайты</a>
-                    <a href="#" class="nav-link" onclick="showHelp()">❓ Помощь</a>
-                    <a href="#" class="nav-link" onclick="showLogin()">🔐 Войти</a>
+                    <a href="#" class="nav-link active" onclick="showTab('templates')">
+                        <i class="fas fa-palette"></i> Шаблоны
+                    </a>
+                    <a href="#" class="nav-link" onclick="showTab('constructor')">
+                        <i class="fas fa-magic"></i> Конструктор
+                    </a>
+                    <a href="#" class="nav-link" onclick="showTab('cart')">
+                        <i class="fas fa-shopping-cart"></i> Корзина
+                        <span class="cart-count" id="cartCount">0</span>
+                    </a>
+                    <a href="#" class="nav-link" onclick="showTab('referral')">
+                        <i class="fas fa-gift"></i> Реферальная программа
+                    </a>
+                    <a href="#" class="nav-link" onclick="showTab('my-sites')">
+                        <i class="fas fa-user"></i> Мои сайты
+                    </a>
+                    <a href="#" class="nav-link" onclick="showTab('admin')" id="adminLink" style="display: none;">
+                        <i class="fas fa-crown"></i> Админ панель
+                    </a>
+                    <a href="#" class="nav-link" onclick="showLogin()">
+                        <i class="fas fa-sign-in-alt"></i> Войти
+                    </a>
                 </div>
             </nav>
         </header>
@@ -399,11 +48,11 @@
             <div class="status-grid">
                 <div class="status-item">
                     <div class="status-number" id="templates-count">5</div>
-                    <div class="status-label">Шаблонов</div>
+                    <div class="status-label">Премиум шаблонов</div>
                 </div>
                 <div class="status-item">
                     <div class="status-number" id="users-count">0</div>
-                    <div class="status-label">Пользователей</div>
+                    <div class="status-label">Активных пользователей</div>
                 </div>
                 <div class="status-item">
                     <div class="status-number" id="sites-count">0</div>
@@ -411,26 +60,29 @@
                 </div>
                 <div class="status-item">
                     <div class="status-number" id="api-status">✅</div>
-                    <div class="status-label">Статус API</div>
+                    <div class="status-label">Статус системы</div>
                 </div>
             </div>
         </div>
 
         <!-- Main Content -->
         <div class="main-content">
-            <!-- Sidebar -->
-            <aside class="sidebar">
-                <h3>🎨 Шаблоны</h3>
+            <!-- Templates Tab -->
+            <div class="tab-content active" id="templates-tab">
+                <div class="tab-header">
+                    <h2><i class="fas fa-crown"></i> Премиум шаблоны</h2>
+                    <p>Выберите эксклюзивный шаблон для вашего бизнеса</p>
+                </div>
                 <div class="template-grid" id="template-grid">
                     <!-- Templates will be loaded here -->
                 </div>
-            </aside>
+            </div>
 
-            <!-- Canvas -->
-            <main class="canvas-container">
-                <div class="canvas-header">
-                    <h2 class="canvas-title">Конструктор сайтов</h2>
-                    <div class="canvas-actions">
+            <!-- Constructor Tab -->
+            <div class="tab-content" id="constructor-tab">
+                <div class="tab-header">
+                    <h2><i class="fas fa-magic"></i> Визуальный конструктор</h2>
+                    <div class="constructor-actions">
                         <button class="btn btn-secondary" onclick="addElement()">
                             <i class="fas fa-plus"></i> Добавить элемент
                         </button>
@@ -442,22 +94,162 @@
                         </button>
                     </div>
                 </div>
-                
                 <div class="canvas" id="canvas">
-                    <div class="canvas empty">
-                        <div>
-                            <i class="fas fa-mouse-pointer" style="font-size: 3em; color: #ddd; margin-bottom: 20px;"></i>
-                            <p>Выберите шаблон или добавьте элементы для создания сайта</p>
+                    <div class="canvas-empty">
+                        <i class="fas fa-mouse-pointer"></i>
+                        <p>Выберите премиум шаблон или создайте сайт с нуля</p>
+                        <p style="font-size: 0.9em; margin-top: 10px; color: #FFA500;">
+                            <i class="fas fa-star"></i> Только лучшие шаблоны для вашего бизнеса
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cart Tab -->
+            <div class="tab-content" id="cart-tab">
+                <div class="tab-header">
+                    <h2><i class="fas fa-shopping-cart"></i> Корзина</h2>
+                    <p>Ваши выбранные шаблоны и услуги</p>
+                </div>
+                <div class="cart-content">
+                    <div class="cart-items" id="cartItems">
+                        <!-- Cart items will be loaded here -->
+                    </div>
+                    <div class="cart-summary">
+                        <div class="cart-calculator">
+                            <h3><i class="fas fa-calculator"></i> Калькулятор стоимости</h3>
+                            <div class="calculator-item">
+                                <span>Шаблоны:</span>
+                                <span id="templatesTotal">0 ₽</span>
+                            </div>
+                            <div class="calculator-item">
+                                <span>Хостинг (месяц):</span>
+                                <span id="hostingTotal">500 ₽</span>
+                            </div>
+                            <div class="calculator-item">
+                                <span>Домен (год):</span>
+                                <span id="domainTotal">1200 ₽</span>
+                            </div>
+                            <div class="calculator-item">
+                                <span>SEO оптимизация:</span>
+                                <span id="seoTotal">2000 ₽</span>
+                            </div>
+                            <div class="calculator-item total">
+                                <span><strong>Итого:</strong></span>
+                                <span id="grandTotal"><strong>3700 ₽</strong></span>
+                            </div>
+                        </div>
+                        <div class="cart-actions">
+                            <button class="btn btn-primary" onclick="checkout()">
+                                <i class="fas fa-credit-card"></i> Оформить заказ
+                            </button>
+                            <button class="btn btn-secondary" onclick="clearCart()">
+                                <i class="fas fa-trash"></i> Очистить корзину
+                            </button>
                         </div>
                     </div>
                 </div>
-            </main>
+            </div>
+
+            <!-- Referral Tab -->
+            <div class="tab-content" id="referral-tab">
+                <div class="tab-header">
+                    <h2><i class="fas fa-gift"></i> Реферальная программа</h2>
+                    <p>Приглашайте друзей и зарабатывайте</p>
+                </div>
+                <div class="referral-content">
+                    <div class="referral-card">
+                        <h3><i class="fas fa-school"></i> Реферальная ссылка на школу</h3>
+                        <div class="referral-link">
+                            <input type="text" id="referralLink" value="https://prothemesru.vercel.app/?ref=YOUR_CODE" readonly>
+                            <button class="btn btn-primary" onclick="copyReferralLink()">
+                                <i class="fas fa-copy"></i> Копировать
+                            </button>
+                        </div>
+                        <div class="referral-stats">
+                            <div class="stat-item">
+                                <div class="stat-number" id="referralsCount">0</div>
+                                <div class="stat-label">Приглашено друзей</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number" id="earningsTotal">0 ₽</div>
+                                <div class="stat-label">Заработано</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number" id="referralCode">YOUR_CODE</div>
+                                <div class="stat-label">Ваш код</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="referral-benefits">
+                        <h3>Как это работает:</h3>
+                        <ul>
+                            <li><i class="fas fa-check"></i> Получите уникальную реферальную ссылку</li>
+                            <li><i class="fas fa-check"></i> Поделитесь с друзьями в социальных сетях</li>
+                            <li><i class="fas fa-check"></i> Получите 10% от каждого заказа ваших рефералов</li>
+                            <li><i class="fas fa-check"></i> Накопите бонусы и получите премиум шаблоны бесплатно</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- My Sites Tab -->
+            <div class="tab-content" id="my-sites-tab">
+                <div class="tab-header">
+                    <h2><i class="fas fa-user"></i> Мои сайты</h2>
+                    <p>Управляйте вашими проектами</p>
+                </div>
+                <div class="my-sites-content" id="mySitesContent">
+                    <!-- User sites will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Admin Tab -->
+            <div class="tab-content" id="admin-tab">
+                <div class="tab-header">
+                    <h2><i class="fas fa-crown"></i> Админ панель</h2>
+                    <p>Управление системой</p>
+                </div>
+                <div class="admin-content">
+                    <div class="admin-stats">
+                        <div class="stat-card">
+                            <h3>Статистика</h3>
+                            <div class="stat-grid">
+                                <div class="stat-item">
+                                    <div class="stat-number" id="adminUsersCount">0</div>
+                                    <div class="stat-label">Пользователей</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-number" id="adminSitesCount">0</div>
+                                    <div class="stat-label">Сайтов</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-number" id="adminTemplatesCount">0</div>
+                                    <div class="stat-label">Шаблонов</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-number" id="adminPaymentsCount">0</div>
+                                    <div class="stat-label">Платежей</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="admin-actions">
+                        <button class="btn btn-primary" onclick="loadAdminData()">
+                            <i class="fas fa-refresh"></i> Обновить данные
+                        </button>
+                        <button class="btn btn-secondary" onclick="exportData()">
+                            <i class="fas fa-download"></i> Экспорт данных
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- Loading -->
         <div class="loading" id="loading">
             <div class="spinner"></div>
-            <p>Загрузка...</p>
+            <p>Загрузка премиум контента...</p>
         </div>
     </div>
 
@@ -465,7 +257,9 @@
     <div class="modal" id="loginModal">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title">🔐 Вход в систему</h3>
+                <h3 class="modal-title">
+                    <i class="fas fa-sign-in-alt"></i> Вход в систему
+                </h3>
                 <button class="close" onclick="closeModal('loginModal')">&times;</button>
             </div>
             <form id="loginForm">
@@ -477,7 +271,12 @@
                     <label class="form-label">Пароль</label>
                     <input type="password" class="form-input" name="password" required>
                 </div>
-                <button type="submit" class="btn btn-primary">Войти</button>
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-sign-in-alt"></i> Войти
+                </button>
+                <p style="text-align: center; margin-top: 15px;">
+                    <a href="#" onclick="showRegister()">Создать аккаунт</a>
+                </p>
             </form>
         </div>
     </div>
@@ -486,7 +285,9 @@
     <div class="modal" id="registerModal">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title">📝 Регистрация</h3>
+                <h3 class="modal-title">
+                    <i class="fas fa-user-plus"></i> Регистрация
+                </h3>
                 <button class="close" onclick="closeModal('registerModal')">&times;</button>
             </div>
             <form id="registerForm">
@@ -502,7 +303,12 @@
                     <label class="form-label">Пароль</label>
                     <input type="password" class="form-input" name="password" required>
                 </div>
-                <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-user-plus"></i> Зарегистрироваться
+                </button>
+                <p style="text-align: center; margin-top: 15px;">
+                    <a href="#" onclick="showLogin()">Уже есть аккаунт? Войти</a>
+                </p>
             </form>
         </div>
     </div>
@@ -512,7 +318,9 @@
         let currentUser = null;
         let currentSite = null;
         let templates = [];
+        let cart = [];
         let elements = [];
+        let currentTab = 'templates';
 
         // API Base URL
         const API_BASE = 'https://prothemesru.vercel.app/api';
@@ -522,6 +330,8 @@
             checkAPIHealth();
             loadTemplates();
             setupEventListeners();
+            loadCart();
+            generateReferralCode();
         });
 
         // API Health Check
@@ -530,7 +340,7 @@
                 const response = await fetch(`${API_BASE}/health`);
                 const data = await response.json();
                 
-                document.getElementById('templates-count').textContent = data.templates_count || 0;
+                document.getElementById('templates-count').textContent = data.templates_count || 5;
                 document.getElementById('users-count').textContent = data.users_count || 0;
                 document.getElementById('sites-count').textContent = data.sites_count || 0;
                 document.getElementById('api-status').textContent = '✅';
@@ -553,6 +363,55 @@
                 renderTemplates();
             } catch (error) {
                 console.error('Error loading templates:', error);
+                // Fallback templates
+                templates = [
+                    {
+                        id: 1,
+                        name: 'Королевский бизнес',
+                        category: 'business',
+                        price: 5000,
+                        downloads: 150,
+                        rating: 4.9,
+                        description: 'Элитный шаблон для премиум бизнеса'
+                    },
+                    {
+                        id: 2,
+                        name: 'Золотое портфолио',
+                        category: 'portfolio',
+                        price: 3000,
+                        downloads: 89,
+                        rating: 4.8,
+                        description: 'Стильное портфолио с золотым дизайном'
+                    },
+                    {
+                        id: 3,
+                        name: 'Премиум магазин',
+                        category: 'ecommerce',
+                        price: 8000,
+                        downloads: 234,
+                        rating: 4.7,
+                        description: 'Люксовый интернет-магазин'
+                    },
+                    {
+                        id: 4,
+                        name: 'VIP блог',
+                        category: 'blog',
+                        price: 2000,
+                        downloads: 67,
+                        rating: 4.6,
+                        description: 'Эксклюзивный блог для элиты'
+                    },
+                    {
+                        id: 5,
+                        name: 'Королевский лендинг',
+                        category: 'landing',
+                        price: 4000,
+                        downloads: 312,
+                        rating: 5.0,
+                        description: 'Максимальная конверсия'
+                    }
+                ];
+                renderTemplates();
             } finally {
                 showLoading(false);
             }
@@ -566,14 +425,29 @@
             templates.forEach(template => {
                 const card = document.createElement('div');
                 card.className = 'template-card';
-                card.onclick = () => selectTemplate(template);
                 
                 card.innerHTML = `
-                    <div class="template-name">${template.name}</div>
+                    <div class="template-header">
+                        <div class="template-name">
+                            <i class="fas fa-crown"></i> ${template.name}
+                        </div>
+                        <div class="template-price">${template.price} ₽</div>
+                    </div>
                     <div class="template-category">${template.category}</div>
-                    <div style="margin-top: 10px; color: #667eea;">
-                        <i class="fas fa-star"></i> ${template.rating} 
-                        <i class="fas fa-download" style="margin-left: 10px;"></i> ${template.downloads}
+                    <div class="template-stats">
+                        <span><i class="fas fa-star"></i> ${template.rating}</span>
+                        <span><i class="fas fa-download"></i> ${template.downloads}</span>
+                    </div>
+                    <div class="template-description">
+                        ${template.description}
+                    </div>
+                    <div class="template-actions">
+                        <button class="btn btn-secondary" onclick="previewTemplate(${template.id})">
+                            <i class="fas fa-eye"></i> Предпросмотр
+                        </button>
+                        <button class="btn btn-primary" onclick="addToCart(${template.id})">
+                            <i class="fas fa-cart-plus"></i> В корзину
+                        </button>
                     </div>
                 `;
                 
@@ -581,17 +455,190 @@
             });
         }
 
-        // Select Template
-        function selectTemplate(template) {
-            // Remove previous selection
-            document.querySelectorAll('.template-card').forEach(card => {
-                card.classList.remove('selected');
+        // Show Tab
+        function showTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
             });
             
-            // Add selection to clicked card
-            event.target.closest('.template-card').classList.add('selected');
+            // Remove active class from all nav links
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
             
-            // Load template into canvas
+            // Show selected tab
+            document.getElementById(tabName + '-tab').classList.add('active');
+            
+            // Add active class to clicked nav link
+            event.target.classList.add('active');
+            
+            currentTab = tabName;
+            
+            // Load tab-specific content
+            if (tabName === 'my-sites') {
+                loadMySites();
+            } else if (tabName === 'admin') {
+                loadAdminData();
+            }
+        }
+
+        // Add to Cart
+        function addToCart(templateId) {
+            const template = templates.find(t => t.id === templateId);
+            if (!template) return;
+            
+            const existingItem = cart.find(item => item.id === templateId);
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    ...template,
+                    quantity: 1
+                });
+            }
+            
+            updateCart();
+            alert(`👑 ${template.name} добавлен в корзину!`);
+        }
+
+        // Update Cart
+        function updateCart() {
+            const cartItems = document.getElementById('cartItems');
+            const cartCount = document.getElementById('cartCount');
+            
+            cartCount.textContent = cart.reduce((total, item) => total + item.quantity, 0);
+            
+            cartItems.innerHTML = '';
+            
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<p class="empty-cart">Корзина пуста</p>';
+                updateCalculator();
+                return;
+            }
+            
+            cart.forEach(item => {
+                const cartItem = document.createElement('div');
+                cartItem.className = 'cart-item';
+                cartItem.innerHTML = `
+                    <div class="cart-item-info">
+                        <div class="cart-item-name">
+                            <i class="fas fa-crown"></i> ${item.name}
+                        </div>
+                        <div class="cart-item-price">${item.price} ₽</div>
+                    </div>
+                    <div class="cart-item-actions">
+                        <button class="btn btn-small" onclick="updateQuantity(${item.id}, -1)">-</button>
+                        <span class="quantity">${item.quantity}</span>
+                        <button class="btn btn-small" onclick="updateQuantity(${item.id}, 1)">+</button>
+                        <button class="btn btn-small btn-danger" onclick="removeFromCart(${item.id})">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                `;
+                cartItems.appendChild(cartItem);
+            });
+            
+            updateCalculator();
+        }
+
+        // Update Quantity
+        function updateQuantity(itemId, change) {
+            const item = cart.find(item => item.id === itemId);
+            if (!item) return;
+            
+            item.quantity += change;
+            
+            if (item.quantity <= 0) {
+                removeFromCart(itemId);
+            } else {
+                updateCart();
+            }
+        }
+
+        // Remove from Cart
+        function removeFromCart(itemId) {
+            cart = cart.filter(item => item.id !== itemId);
+            updateCart();
+        }
+
+        // Update Calculator
+        function updateCalculator() {
+            const templatesTotal = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+            const hostingTotal = 500; // Monthly hosting
+            const domainTotal = 1200; // Yearly domain
+            const seoTotal = 2000; // SEO optimization
+            
+            const grandTotal = templatesTotal + hostingTotal + domainTotal + seoTotal;
+            
+            document.getElementById('templatesTotal').textContent = templatesTotal + ' ₽';
+            document.getElementById('hostingTotal').textContent = hostingTotal + ' ₽';
+            document.getElementById('domainTotal').textContent = domainTotal + ' ₽';
+            document.getElementById('seoTotal').textContent = seoTotal + ' ₽';
+            document.getElementById('grandTotal').innerHTML = '<strong>' + grandTotal + ' ₽</strong>';
+        }
+
+        // Load Cart
+        function loadCart() {
+            const savedCart = localStorage.getItem('prothemesru_cart');
+            if (savedCart) {
+                cart = JSON.parse(savedCart);
+                updateCart();
+            }
+        }
+
+        // Save Cart
+        function saveCart() {
+            localStorage.setItem('prothemesru_cart', JSON.stringify(cart));
+        }
+
+        // Clear Cart
+        function clearCart() {
+            if (confirm('Очистить корзину?')) {
+                cart = [];
+                updateCart();
+                saveCart();
+            }
+        }
+
+        // Checkout
+        function checkout() {
+            if (!currentUser) {
+                showLogin();
+                return;
+            }
+            
+            if (cart.length === 0) {
+                alert('Корзина пуста');
+                return;
+            }
+            
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0) + 3700; // + hosting, domain, seo
+            
+            alert(`💳 Оформление заказа на сумму ${total} ₽\n\nФункция оплаты будет доступна в следующей версии!`);
+        }
+
+        // Generate Referral Code
+        function generateReferralCode() {
+            const code = 'REF' + Math.random().toString(36).substr(2, 6).toUpperCase();
+            document.getElementById('referralCode').textContent = code;
+            document.getElementById('referralLink').value = `https://prothemesru.vercel.app/?ref=${code}`;
+        }
+
+        // Copy Referral Link
+        function copyReferralLink() {
+            const link = document.getElementById('referralLink');
+            link.select();
+            document.execCommand('copy');
+            alert('🔗 Реферальная ссылка скопирована!');
+        }
+
+        // Preview Template
+        function previewTemplate(templateId) {
+            const template = templates.find(t => t.id === templateId);
+            if (!template) return;
+            
+            showTab('constructor');
             loadTemplateToCanvas(template);
         }
 
@@ -613,30 +660,77 @@
             const elements = [];
             
             // Header
-            const header = createElement('header', 'Заголовок сайта', `
-                <h1 style="text-align: center; color: #667eea; margin: 20px 0;">
-                    ${template.name}
-                </h1>
-                <p style="text-align: center; color: #666; margin-bottom: 30px;">
-                    ${template.description || 'Описание сайта'}
-                </p>
+            const header = createElement('header', 'Королевский заголовок', `
+                <div style="text-align: center; padding: 40px 20px; background: linear-gradient(135deg, #FFD700, #FFA500); color: #000; border-radius: 15px;">
+                    <h1 style="font-size: 3em; margin: 0; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">
+                        <i class="fas fa-crown"></i> ${template.name}
+                    </h1>
+                    <p style="font-size: 1.2em; margin: 20px 0; opacity: 0.8;">
+                        ${template.description}
+                    </p>
+                    <div style="margin-top: 20px;">
+                        <span style="background: rgba(0,0,0,0.2); padding: 10px 20px; border-radius: 20px; margin: 0 10px;">
+                            <i class="fas fa-star"></i> ${template.rating}
+                        </span>
+                        <span style="background: rgba(0,0,0,0.2); padding: 10px 20px; border-radius: 20px; margin: 0 10px;">
+                            <i class="fas fa-download"></i> ${template.downloads}
+                        </span>
+                    </div>
+                </div>
             `);
             elements.push(header);
             
             // Content
-            const content = createElement('section', 'Основной контент', `
-                <div style="padding: 40px 20px; text-align: center;">
-                    <h2>Добро пожаловать!</h2>
-                    <p>Это ваш новый сайт, созданный на основе шаблона "${template.name}".</p>
-                    <p>Вы можете редактировать этот контент, добавлять новые элементы и настраивать дизайн.</p>
+            const content = createElement('section', 'Премиум контент', `
+                <div style="padding: 60px 40px; text-align: center; background: rgba(255,215,0,0.1); border-radius: 15px;">
+                    <h2 style="color: #FFD700; font-size: 2.5em; margin-bottom: 20px;">
+                        <i class="fas fa-gem"></i> Добро пожаловать в мир премиума!
+                    </h2>
+                    <p style="font-size: 1.3em; color: #FFA500; margin-bottom: 30px;">
+                        Это ваш эксклюзивный сайт, созданный на основе шаблона "${template.name}".
+                    </p>
+                    <p style="font-size: 1.1em; color: #fff; margin-bottom: 40px;">
+                        Золотой стандарт качества и стиля для вашего бизнеса.
+                    </p>
+                    <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+                        <div style="background: rgba(255,215,0,0.2); padding: 20px; border-radius: 10px; border: 1px solid #FFD700;">
+                            <i class="fas fa-crown" style="font-size: 2em; color: #FFD700;"></i>
+                            <p style="margin-top: 10px; color: #FFD700;">Премиум дизайн</p>
+                        </div>
+                        <div style="background: rgba(255,215,0,0.2); padding: 20px; border-radius: 10px; border: 1px solid #FFD700;">
+                            <i class="fas fa-rocket" style="font-size: 2em; color: #FFD700;"></i>
+                            <p style="margin-top: 10px; color: #FFD700;">Быстрая загрузка</p>
+                        </div>
+                        <div style="background: rgba(255,215,0,0.2); padding: 20px; border-radius: 10px; border: 1px solid #FFD700;">
+                            <i class="fas fa-mobile-alt" style="font-size: 2em; color: #FFD700;"></i>
+                            <p style="margin-top: 10px; color: #FFD700;">Адаптивность</p>
+                        </div>
+                    </div>
                 </div>
             `);
             elements.push(content);
             
             // Footer
-            const footer = createElement('footer', 'Подвал сайта', `
-                <div style="background: #f8f9fa; padding: 20px; text-align: center; margin-top: 40px;">
-                    <p>&copy; 2024 ProThemesRU. Все права защищены.</p>
+            const footer = createElement('footer', 'Королевский подвал', `
+                <div style="background: linear-gradient(135deg, #000, #333); padding: 40px 20px; text-align: center; margin-top: 40px; border-radius: 15px; border: 2px solid #FFD700;">
+                    <div style="display: flex; justify-content: space-around; align-items: center; flex-wrap: wrap; margin-bottom: 20px;">
+                        <div style="color: #FFD700;">
+                            <i class="fas fa-crown" style="font-size: 2em;"></i>
+                            <p style="margin-top: 10px; font-weight: bold;">ProThemesRU</p>
+                        </div>
+                        <div style="color: #FFA500;">
+                            <i class="fas fa-star" style="font-size: 2em;"></i>
+                            <p style="margin-top: 10px;">Премиум качество</p>
+                        </div>
+                        <div style="color: #FFD700;">
+                            <i class="fas fa-gem" style="font-size: 2em;"></i>
+                            <p style="margin-top: 10px;">Эксклюзивный дизайн</p>
+                        </div>
+                    </div>
+                    <p style="color: #FFA500; font-size: 1.1em;">
+                        &copy; 2024 ProThemesRU. Все права защищены. 
+                        <i class="fas fa-crown"></i> Королевский стандарт качества.
+                    </p>
                 </div>
             `);
             elements.push(footer);
@@ -650,12 +744,14 @@
             element.className = 'element';
             element.innerHTML = `
                 <div class="element-header">
-                    <div class="element-title">${title}</div>
+                    <div class="element-title">
+                        <i class="fas fa-crown"></i> ${title}
+                    </div>
                     <div class="element-actions">
-                        <button class="element-action" onclick="editElement(this)">
+                        <button class="element-action" onclick="editElement(this)" title="Редактировать">
                             <i class="fas fa-edit"></i>
                         </button>
-                        <button class="element-action" onclick="deleteElement(this)">
+                        <button class="element-action" onclick="deleteElement(this)" title="Удалить">
                             <i class="fas fa-trash"></i>
                         </button>
                     </div>
@@ -670,8 +766,12 @@
         // Add Element
         function addElement() {
             const canvas = document.getElementById('canvas');
-            const element = createElement('div', 'Новый элемент', `
-                <p>Это новый элемент. Вы можете редактировать его содержимое.</p>
+            const element = createElement('div', 'Премиум элемент', `
+                <div style="background: linear-gradient(135deg, #FFD700, #FFA500); padding: 30px; border-radius: 15px; text-align: center; color: #000;">
+                    <i class="fas fa-gem" style="font-size: 3em; margin-bottom: 20px;"></i>
+                    <h3 style="margin-bottom: 15px;">Новый премиум элемент</h3>
+                    <p>Это эксклюзивный элемент с золотым дизайном. Вы можете редактировать его содержимое.</p>
+                </div>
             `);
             canvas.appendChild(element);
         }
@@ -690,7 +790,7 @@
         // Delete Element
         function deleteElement(button) {
             const element = button.closest('.element');
-            if (confirm('Удалить этот элемент?')) {
+            if (confirm('Удалить этот премиум элемент?')) {
                 element.remove();
             }
         }
@@ -702,7 +802,7 @@
                 return;
             }
             
-            const siteName = prompt('Введите название сайта:');
+            const siteName = prompt('Введите название вашего премиум сайта:');
             if (!siteName) return;
             
             try {
@@ -729,14 +829,14 @@
                 const data = await response.json();
                 
                 if (response.ok) {
-                    alert('Сайт успешно сохранен!');
+                    alert('🎉 Ваш премиум сайт успешно сохранен!');
                     currentSite = data.site;
                 } else {
-                    alert('Ошибка при сохранении: ' + data.error);
+                    alert('❌ Ошибка при сохранении: ' + data.error);
                 }
             } catch (error) {
                 console.error('Error saving site:', error);
-                alert('Ошибка при сохранении сайта');
+                alert('❌ Ошибка при сохранении сайта');
             } finally {
                 showLoading(false);
             }
@@ -745,22 +845,17 @@
         // Publish Site
         function publishSite() {
             if (!currentSite) {
-                alert('Сначала сохраните сайт');
+                alert('💡 Сначала сохраните ваш премиум сайт');
                 return;
             }
             
-            alert('Функция публикации будет доступна в следующей версии!');
+            alert('🚀 Функция публикации будет доступна в следующей версии!');
         }
 
-        // Show Templates
-        function showTemplates() {
-            // Already visible in sidebar
-        }
-
-        // Show My Sites
-        async function showMySites() {
+        // Load My Sites
+        async function loadMySites() {
             if (!currentUser) {
-                showLogin();
+                document.getElementById('mySitesContent').innerHTML = '<p>Войдите в систему для просмотра ваших сайтов</p>';
                 return;
             }
             
@@ -775,41 +870,78 @@
                 
                 if (response.ok) {
                     const sites = data.sites;
+                    const content = document.getElementById('mySitesContent');
+                    
                     if (sites.length === 0) {
-                        alert('У вас пока нет сохраненных сайтов');
+                        content.innerHTML = '<p class="empty-sites">У вас пока нет сохраненных премиум сайтов</p>';
                     } else {
-                        const siteList = sites.map(site => 
-                            `${site.name} (${new Date(site.created_at).toLocaleDateString()})`
-                        ).join('\n');
-                        alert('Ваши сайты:\n\n' + siteList);
+                        content.innerHTML = sites.map(site => `
+                            <div class="site-card">
+                                <div class="site-info">
+                                    <div class="site-name">
+                                        <i class="fas fa-crown"></i> ${site.name}
+                                    </div>
+                                    <div class="site-date">${new Date(site.created_at).toLocaleDateString()}</div>
+                                </div>
+                                <div class="site-actions">
+                                    <button class="btn btn-secondary" onclick="editSite(${site.id})">
+                                        <i class="fas fa-edit"></i> Редактировать
+                                    </button>
+                                    <button class="btn btn-primary" onclick="publishSite(${site.id})">
+                                        <i class="fas fa-globe"></i> Опубликовать
+                                    </button>
+                                </div>
+                            </div>
+                        `).join('');
                     }
                 } else {
-                    alert('Ошибка при загрузке сайтов');
+                    document.getElementById('mySitesContent').innerHTML = '<p>Ошибка при загрузке сайтов</p>';
                 }
             } catch (error) {
                 console.error('Error loading sites:', error);
-                alert('Ошибка при загрузке сайтов');
+                document.getElementById('mySitesContent').innerHTML = '<p>Ошибка при загрузке сайтов</p>';
             }
         }
 
-        // Show Help
-        function showHelp() {
-            alert(`ProThemesRU - Помощь
+        // Load Admin Data
+        async function loadAdminData() {
+            if (!currentUser || currentUser.role !== 'admin') {
+                document.querySelector('.admin-content').innerHTML = '<p>Доступ запрещен. Требуются права администратора.</p>';
+                return;
+            }
+            
+            try {
+                const response = await fetch(`${API_BASE}/admin/dashboard`, {
+                    headers: {
+                        'Authorization': `Bearer ${currentUser.token}`
+                    }
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    const dashboard = data.dashboard;
+                    document.getElementById('adminUsersCount').textContent = dashboard.total_users;
+                    document.getElementById('adminSitesCount').textContent = dashboard.total_sites;
+                    document.getElementById('adminTemplatesCount').textContent = dashboard.total_templates;
+                    document.getElementById('adminPaymentsCount').textContent = dashboard.pro_users;
+                } else {
+                    alert('Ошибка при загрузке данных админ-панели');
+                }
+            } catch (error) {
+                console.error('Error loading admin data:', error);
+                alert('Ошибка при загрузке данных админ-панели');
+            }
+        }
 
-🎨 Как создать сайт:
-1. Выберите шаблон из списка слева
-2. Добавляйте новые элементы кнопкой "Добавить элемент"
-3. Редактируйте элементы, нажимая на иконку карандаша
-4. Сохраните сайт кнопкой "Сохранить"
-
-🔧 Функции:
-- Визуальный конструктор
-- Готовые шаблоны
-- Редактирование элементов
-- Сохранение проектов
-- Публикация сайтов
-
-📞 Поддержка: @ProThemesRU_Bot`);
+        // Export Data
+        function exportData() {
+            if (!currentUser || currentUser.role !== 'admin') {
+                alert('Доступ запрещен');
+                return;
+            }
+            
+            alert('📊 Функция экспорта данных будет доступна в следующей версии!');
         }
 
         // Show Login
@@ -861,13 +993,18 @@
                             token: result.access_token
                         };
                         closeModal('loginModal');
-                        alert('Успешный вход!');
+                        alert('👑 Добро пожаловать в мир премиума!');
+                        
+                        // Show admin link if user is admin
+                        if (currentUser.role === 'admin') {
+                            document.getElementById('adminLink').style.display = 'inline-block';
+                        }
                     } else {
-                        alert('Ошибка входа: ' + result.error);
+                        alert('❌ Ошибка входа: ' + result.error);
                     }
                 } catch (error) {
                     console.error('Login error:', error);
-                    alert('Ошибка при входе');
+                    alert('❌ Ошибка при входе');
                 }
             });
 
@@ -899,13 +1036,18 @@
                             token: result.access_token
                         };
                         closeModal('registerModal');
-                        alert('Регистрация успешна!');
+                        alert('👑 Регистрация успешна! Добро пожаловать в элиту!');
+                        
+                        // Show admin link if user is admin
+                        if (currentUser.role === 'admin') {
+                            document.getElementById('adminLink').style.display = 'inline-block';
+                        }
                     } else {
-                        alert('Ошибка регистрации: ' + result.error);
+                        alert('❌ Ошибка регистрации: ' + result.error);
                     }
                 } catch (error) {
                     console.error('Register error:', error);
-                    alert('Ошибка при регистрации');
+                    alert('❌ Ошибка при регистрации');
                 }
             });
 

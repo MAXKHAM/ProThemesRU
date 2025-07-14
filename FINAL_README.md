@@ -64,7 +64,7 @@ ProThemesRU - это современная платформа для созда
 
 1. **Клонируйте репозиторий**
 ```bash
-git clone https://github.com/MAXKHAM/ProThemesRU.git
+git clone https://github.com/your-username/ProThemesRU.git
 cd ProThemesRU
 ```
 
@@ -218,4 +218,4 @@ MIT License - см. файл [LICENSE](LICENSE)
 
 ---
 
-**ProThemesRU** - Создавайте профессиональные сайты легко и быстро! 🚀
+**ProThemesRU** - Создавайте профессиональные сайты легко и быстро! 🚀 

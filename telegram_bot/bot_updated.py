@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-ProThemesRU - Финальная версия Telegram бота
-Полнофункциональный бот для создания сайтов
+ProThemesRU - Обновленная версия Telegram бота
+Полнофункциональный бот для создания сайтов с поддержкой переменных окружения
 """
 
 import os
@@ -12,17 +12,16 @@ from datetime import datetime
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import Application, CommandHandler, MessageHandler, CallbackQueryHandler, filters, ContextTypes
 
+# Импортируем конфигурацию
+from config import config
+
 # Настройка логирования
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-    level=logging.INFO
+    level=getattr(logging, config.LOG_LEVEL),
+    filename=config.LOG_FILE
 )
 logger = logging.getLogger(__name__)
-
-# Конфигурация
-BOT_TOKEN = os.environ.get('BOT_TOKEN')
-WEBHOOK_URL = os.environ.get('WEBHOOK_URL')
-API_BASE_URL = os.environ.get('API_BASE_URL', 'https://your-site.vercel.app')
 
 # Имитация базы данных пользователей
 users_db = {}
@@ -30,11 +29,21 @@ projects_db = {}
 
 class ProThemesRUBot:
     def __init__(self):
-        self.application = Application.builder().token(BOT_TOKEN).build()
+        """Инициализация бота"""
+        if not config.TELEGRAM_BOT_TOKEN or config.TELEGRAM_BOT_TOKEN == 'your_bot_token_here':
+            raise ValueError("TELEGRAM_BOT_TOKEN не установлен! Проверьте переменные окружения.")
+        
+        self.application = Application.builder().token(config.TELEGRAM_BOT_TOKEN).build()
         self.setup_handlers()
+        
+        logger.info("ProThemesRU Bot инициализирован")
+        logger.info(f"API Base URL: {config.API_BASE_URL}")
+        logger.info(f"Webhook URL: {config.WEBHOOK_URL}")
+        logger.info(f"Environment: {config.ENVIRONMENT}")
     
     def setup_handlers(self):
         """Настройка обработчиков команд"""
+        # Основные команды
         self.application.add_handler(CommandHandler("start", self.start_command))
         self.application.add_handler(CommandHandler("help", self.help_command))
         self.application.add_handler(CommandHandler("templates", self.templates_command))
@@ -42,12 +51,15 @@ class ProThemesRUBot:
         self.application.add_handler(CommandHandler("profile", self.profile_command))
         self.application.add_handler(CommandHandler("projects", self.projects_command))
         self.application.add_handler(CommandHandler("support", self.support_command))
+        self.application.add_handler(CommandHandler("referral", self.referral_command))
         
         # Обработчики для inline кнопок
         self.application.add_handler(CallbackQueryHandler(self.button_callback))
         
         # Обработчик текстовых сообщений
         self.application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, self.handle_message))
+        
+        logger.info("Обработчики команд настроены")
     
     async def start_command(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         """Обработка команды /start"""
@@ -61,7 +73,8 @@ class ProThemesRUBot:
             'first_name': user.first_name,
             'last_name': user.last_name,
             'joined_at': datetime.now().isoformat(),
-            'projects': []
+            'projects': [],
+            'referral_code': f"REF{chat_id}"
         }
         
         welcome_text = f"""
@@ -82,6 +95,7 @@ class ProThemesRUBot:
 /create - Создать новый сайт
 /profile - Ваш профиль
 /projects - Ваши проекты
+/referral - Реферальная программа
 /support - Поддержка
 
 🎯 Начните с просмотра шаблонов: /templates
@@ -91,15 +105,17 @@ class ProThemesRUBot:
             [InlineKeyboardButton("📋 Шаблоны", callback_data="templates")],
             [InlineKeyboardButton("🚀 Создать сайт", callback_data="create")],
             [InlineKeyboardButton("👤 Профиль", callback_data="profile")],
+            [InlineKeyboardButton("💰 Рефералы", callback_data="referral")],
             [InlineKeyboardButton("❓ Помощь", callback_data="help")]
         ]
         reply_markup = InlineKeyboardMarkup(keyboard)
         
         await update.message.reply_text(welcome_text, reply_markup=reply_markup)
+        logger.info(f"Пользователь {user.username} ({chat_id}) запустил бота")
     
     async def help_command(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         """Обработка команды /help"""
-        help_text = """
+        help_text = f"""
 📚 Справка по ProThemesRU
 
 🔧 Основные команды:
@@ -109,6 +125,7 @@ class ProThemesRUBot:
 /create - Создать новый сайт
 /profile - Ваш профиль и настройки
 /projects - Список ваших проектов
+/referral - Реферальная программа
 /support - Связаться с поддержкой
 
 🎨 Шаблоны:
@@ -120,15 +137,15 @@ class ProThemesRUBot:
 
 💰 Реферальная программа:
 • Приглашайте друзей
-• Получайте комиссию 10% от первого заказа
-• Минимальная сумма вывода: 1000₽
+• Получайте комиссию {config.REFERRAL_COMMISSION*100}% от первого заказа
+• Минимальная сумма вывода: {config.MIN_WITHDRAWAL}₽
 
 📞 Поддержка:
-• Email: support@prothemesru.com
-• Telegram: @ProThemesRU_Support
+• Email: {config.SUPPORT_EMAIL}
+• Telegram: {config.SUPPORT_TELEGRAM}
 • Время работы: 24/7
 
-🌐 Сайт: https://prothemesru.vercel.app
+🌐 Сайт: {config.WEBSITE_URL}
         """
         
         keyboard = [
@@ -145,21 +162,13 @@ class ProThemesRUBot:
     
     async def show_templates(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         """Показать доступные шаблоны"""
-        templates = {
-            '01': {'name': 'Gaming Template', 'price': 5000, 'category': 'gaming', 'description': 'Современный дизайн для игровых сайтов'},
-            '02': {'name': 'Business Template', 'price': 3000, 'category': 'business', 'description': 'Профессиональный дизайн для бизнеса'},
-            '03': {'name': 'Portfolio Template', 'price': 4000, 'category': 'portfolio', 'description': 'Стильное портфолио для творческих людей'},
-            '04': {'name': 'E-commerce Template', 'price': 6000, 'category': 'ecommerce', 'description': 'Полнофункциональный интернет-магазин'},
-            '05': {'name': 'Blog Template', 'price': 2500, 'category': 'blog', 'description': 'Красивый блог для контент-мейкеров'}
-        }
-        
         text = "🎨 Доступные шаблоны:\n\n"
         
         keyboard = []
-        for template_id, template in templates.items():
+        for template_id, template in config.TEMPLATES.items():
             text += f"📋 {template['name']}\n"
             text += f"💰 Цена: {template['price']}₽\n"
-            text += f"📝 {template['description']}\n\n"
+            text += f"📝 Категория: {template['category']}\n\n"
             
             keyboard.append([InlineKeyboardButton(
                 f"Выбрать {template['name']}", 
@@ -173,6 +182,46 @@ class ProThemesRUBot:
             await update.callback_query.edit_message_text(text, reply_markup=reply_markup)
         else:
             await update.message.reply_text(text, reply_markup=reply_markup)
+    
+    async def referral_command(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
+        """Обработка команды /referral"""
+        chat_id = update.effective_chat.id
+        user = users_db.get(chat_id, {})
+        
+        if not user:
+            await update.message.reply_text("❌ Профиль не найден. Используйте /start для регистрации.")
+            return
+        
+        referral_code = user.get('referral_code', f"REF{chat_id}")
+        
+        text = f"""
+💰 Реферальная программа
+
+🔗 Ваша реферальная ссылка:
+https://t.me/ProThemesRUBot?start=ref_{referral_code}
+
+📊 Статистика:
+👥 Приглашено: 0 человек
+💵 Заработано: 0₽
+🎯 До вывода: {config.MIN_WITHDRAWAL}₽
+
+💡 Как это работает:
+1. Отправьте ссылку друзьям
+2. Они регистрируются по вашей ссылке
+3. Вы получаете {config.REFERRAL_COMMISSION*100}% от их первого заказа
+4. Выводите заработанные деньги
+
+📞 Вопросы? Обратитесь в поддержку: {config.SUPPORT_TELEGRAM}
+        """
+        
+        keyboard = [
+            [InlineKeyboardButton("📤 Поделиться ссылкой", switch_inline_query=f"ref_{referral_code}")],
+            [InlineKeyboardButton("📊 Статистика", callback_data="referral_stats")],
+            [InlineKeyboardButton("🏠 Главное меню", callback_data="start")]
+        ]
+        reply_markup = InlineKeyboardMarkup(keyboard)
+        
+        await update.message.reply_text(text, reply_markup=reply_markup)
     
     async def create_command(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         """Обработка команды /create"""
@@ -216,7 +265,7 @@ class ProThemesRUBot:
 📊 Проектов создано: {len(user.get('projects', []))}
 
 💰 Реферальная программа:
-🔗 Ваша ссылка: https://t.me/ProThemesRUBot?start=ref_{chat_id}
+🔗 Ваша ссылка: https://t.me/ProThemesRUBot?start=ref_{user.get('referral_code', f'REF{chat_id}')}
 👥 Приглашено: 0 человек
 💵 Заработано: 0₽
 
@@ -227,7 +276,7 @@ class ProThemesRUBot:
         
         keyboard = [
             [InlineKeyboardButton("📊 Статистика", callback_data="statistics")],
-            [InlineKeyboardButton("💰 Рефералы", callback_data="referrals")],
+            [InlineKeyboardButton("💰 Рефералы", callback_data="referral")],
             [InlineKeyboardButton("⚙️ Настройки", callback_data="settings")],
             [InlineKeyboardButton("🏠 Главное меню", callback_data="start")]
         ]
@@ -270,21 +319,21 @@ class ProThemesRUBot:
     
     async def support_command(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         """Обработка команды /support"""
-        text = """
+        text = f"""
 📞 Поддержка ProThemesRU
 
 🆘 Если у вас возникли вопросы или проблемы:
 
-📧 Email: support@prothemesru.com
-💬 Telegram: @ProThemesRU_Support
-🌐 Сайт: https://prothemesru.vercel.app
+📧 Email: {config.SUPPORT_EMAIL}
+💬 Telegram: {config.SUPPORT_TELEGRAM}
+🌐 Сайт: {config.WEBSITE_URL}
 
 ⏰ Время работы: 24/7
 
 📋 Часто задаваемые вопросы:
 • Как создать сайт? - Используйте /create
 • Как выбрать шаблон? - Используйте /templates
-• Как работает реферальная программа? - Используйте /help
+• Как работает реферальная программа? - Используйте /referral
 
 🔧 Техническая поддержка:
 • Проблемы с ботом
@@ -294,8 +343,8 @@ class ProThemesRUBot:
         """
         
         keyboard = [
-            [InlineKeyboardButton("📧 Написать в поддержку", url="https://t.me/ProThemesRU_Support")],
-            [InlineKeyboardButton("🌐 Открыть сайт", url="https://prothemesru.vercel.app")],
+            [InlineKeyboardButton("📧 Написать в поддержку", url=f"https://t.me/{config.SUPPORT_TELEGRAM.replace('@', '')}")],
+            [InlineKeyboardButton("🌐 Открыть сайт", url=config.WEBSITE_URL)],
             [InlineKeyboardButton("🏠 Главное меню", callback_data="start")]
         ]
         reply_markup = InlineKeyboardMarkup(keyboard)
@@ -321,6 +370,8 @@ class ProThemesRUBot:
             await self.profile_command(update, context)
         elif data == "support":
             await self.support_command(update, context)
+        elif data == "referral":
+            await self.referral_command(update, context)
         elif data.startswith("select_template_"):
             template_id = data.split("_")[-1]
             await self.select_template(update, context, template_id)
@@ -333,15 +384,7 @@ class ProThemesRUBot:
     
     async def select_template(self, update: Update, context: ContextTypes.DEFAULT_TYPE, template_id: str):
         """Выбор шаблона"""
-        templates = {
-            '01': {'name': 'Gaming Template', 'price': 5000},
-            '02': {'name': 'Business Template', 'price': 3000},
-            '03': {'name': 'Portfolio Template', 'price': 4000},
-            '04': {'name': 'E-commerce Template', 'price': 6000},
-            '05': {'name': 'Blog Template', 'price': 2500}
-        }
-        
-        template = templates.get(template_id)
+        template = config.TEMPLATES.get(template_id)
         if not template:
             await update.callback_query.edit_message_text("❌ Шаблон не найден")
             return
@@ -399,7 +442,7 @@ class ProThemesRUBot:
     
     async def create_constructor_site(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         """Создание сайта через конструктор"""
-        text = """
+        text = f"""
 🔧 Конструктор сайтов
 
 Создайте сайт с нуля через визуальный редактор!
@@ -415,8 +458,8 @@ class ProThemesRUBot:
         """
         
         keyboard = [
-            [InlineKeyboardButton("🌐 Открыть конструктор", url="https://prothemesru.vercel.app/constructor")],
-            [InlineKeyboardButton("📖 Инструкция", url="https://prothemesru.vercel.app/help")],
+            [InlineKeyboardButton("🌐 Открыть конструктор", url=f"{config.WEBSITE_URL}/constructor")],
+            [InlineKeyboardButton("📖 Инструкция", url=f"{config.WEBSITE_URL}/help")],
             [InlineKeyboardButton("🏠 Главное меню", callback_data="start")]
         ]
         reply_markup = InlineKeyboardMarkup(keyboard)
@@ -425,7 +468,7 @@ class ProThemesRUBot:
     
     async def create_custom_site(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         """Создание кастомного сайта"""
-        text = """
+        text = f"""
 🎨 Кастомная разработка
 
 Создадим сайт специально для вас!
@@ -443,8 +486,8 @@ class ProThemesRUBot:
         """
         
         keyboard = [
-            [InlineKeyboardButton("📞 Связаться", url="https://t.me/ProThemesRU_Support")],
-            [InlineKeyboardButton("📧 Email", url="mailto:support@prothemesru.com")],
+            [InlineKeyboardButton("📞 Связаться", url=f"https://t.me/{config.SUPPORT_TELEGRAM.replace('@', '')}")],
+            [InlineKeyboardButton("📧 Email", url=f"mailto:{config.SUPPORT_EMAIL}")],
             [InlineKeyboardButton("🏠 Главное меню", callback_data="start")]
         ]
         reply_markup = InlineKeyboardMarkup(keyboard)
@@ -462,7 +505,7 @@ class ProThemesRUBot:
         elif "спасибо" in text.lower():
             await update.message.reply_text("Пожалуйста! 😊 Если нужна помощь, используйте /help")
         elif "сайт" in text.lower():
-            await update.message.reply_text("🌐 Наш сайт: https://prothemesru.vercel.app\n\nСоздавайте сайты легко и быстро!")
+            await update.message.reply_text(f"🌐 Наш сайт: {config.WEBSITE_URL}\n\nСоздавайте сайты легко и быстро!")
         else:
             await update.message.reply_text(
                 "Не понимаю команду. Используйте /help для просмотра доступных команд."
@@ -471,20 +514,28 @@ class ProThemesRUBot:
     def run(self):
         """Запуск бота"""
         print("🤖 ProThemesRU Bot запускается...")
-        print(f"🔗 Webhook URL: {WEBHOOK_URL}")
+        print(f"🔗 API Base URL: {config.API_BASE_URL}")
+        print(f"🔗 Webhook URL: {config.WEBHOOK_URL}")
+        print(f"🌍 Environment: {config.ENVIRONMENT}")
+        print(f"🔧 Debug: {config.DEBUG}")
         print("✅ Бот готов к работе!")
         
         # Запуск бота
-        self.application.run_polling()
+        if config.ENABLE_WEBHOOK:
+            print("🔗 Запуск в режиме webhook...")
+            # Здесь будет код для webhook
+        else:
+            print("🔄 Запуск в режиме polling...")
+            self.application.run_polling()
 
 def main():
     """Главная функция"""
-    if not BOT_TOKEN:
-        print("❌ ОШИБКА: BOT_TOKEN не установлен!")
-        return
-    
-    bot = ProThemesRUBot()
-    bot.run()
+    try:
+        bot = ProThemesRUBot()
+        bot.run()
+    except Exception as e:
+        logger.error(f"Ошибка запуска бота: {e}")
+        print(f"❌ Ошибка запуска бота: {e}")
 
 if __name__ == '__main__':
     main() 
